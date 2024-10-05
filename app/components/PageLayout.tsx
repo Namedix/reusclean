@@ -1,5 +1,5 @@
 import {Footer} from '~/components/Footer';
-import {Header} from '~/components/Header';
+import Header from './Header';
 
 interface PageLayoutProps {
   children?: React.ReactNode;
