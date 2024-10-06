@@ -1,3 +1,3 @@
-import reus from "./reus.svg";
+import reus from './reus.svg';
 
-export { reus };
+export {reus};
