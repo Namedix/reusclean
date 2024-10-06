@@ -12,9 +12,7 @@ const Header = () => {
     <header className="w-full bg-white ">
       <div className="md:container animate-fade-in-up">
         <div
-          className={` ${
-            openNavigation ? `grid-cols-1` : `grid-cols-2`
-          } transition-all grid w-full items-center px-5 border-b-[1px] border-neutral-200 gap-4 p-4`}
+          className={`flex-row md:flex transition-all w-full items-center px-5 border-b-[1px] border-neutral-200 gap-4 p-4`}
         >
           <div className="grow">
             <Link to="/" className="block items-center">
@@ -23,7 +21,7 @@ const Header = () => {
           </div>
           <nav
             className={`${
-              openNavigation ? `pb-4` : `hidden max-h-0`
+              openNavigation ? `pb-4 mt-6` : `hidden max-h-0`
             } md:flex left-0 right-0 bottom-0 items-center justify-center md:static md:opacity-100 md:max-h-max md:mx-auto transition-all duration-200 overflow-hidden`}
           >
             <div className="relative z-2 flex flex-col justify-center gap-6 md:flex-row">
@@ -34,7 +32,10 @@ const Header = () => {
               <Link to="/#faq">FAQ</Link>
             </div>
           </nav>
-          <button onClick={toggleNavigation}>
+          <button
+            className="absolute p-4 right-4 md:hidden top-5"
+            onClick={toggleNavigation}
+          >
             <MenuSvg openNavigation={openNavigation} />
           </button>
         </div>
