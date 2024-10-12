@@ -20,7 +20,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({context, request}: LoaderFunctionArgs) {
-  const {cart, storefront} = context;
+  const {storefront} = context;
   const [{product}] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
       variables: {
@@ -49,12 +49,11 @@ export async function loader({context, request}: LoaderFunctionArgs) {
 
   return {
     product,
-    cart: cart.get(),
   };
 }
 
 export default function Homepage() {
-  const {product, cart} = useLoaderData<typeof loader>();
+  const {product} = useLoaderData<typeof loader>();
   return (
     <div className="home">
       <Granties className="hidden md:block" />

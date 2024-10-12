@@ -543,6 +543,48 @@ export type ProductVariantsQuery = {
   }>;
 };
 
+export type ProductCardFragment = Pick<
+  StorefrontAPI.Product,
+  'id' | 'title'
+> & {
+  priceRange: {
+    minVariantPrice: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
+  };
+  media: {
+    edges: Array<{
+      node: {image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>};
+    }>;
+  };
+};
+
+export type GetAllProductsQueryVariables = StorefrontAPI.Exact<{
+  first: StorefrontAPI.Scalars['Int']['input'];
+  after?: StorefrontAPI.InputMaybe<StorefrontAPI.Scalars['String']['input']>;
+}>;
+
+export type GetAllProductsQuery = {
+  products: {
+    edges: Array<{
+      node: Pick<StorefrontAPI.Product, 'id' | 'title'> & {
+        priceRange: {
+          minVariantPrice: Pick<
+            StorefrontAPI.MoneyV2,
+            'amount' | 'currencyCode'
+          >;
+        };
+        media: {
+          edges: Array<{
+            node: {
+              image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+            };
+          }>;
+        };
+      };
+    }>;
+    pageInfo: Pick<StorefrontAPI.PageInfo, 'hasNextPage' | 'endCursor'>;
+  };
+};
+
 interface GeneratedQueryTypes {
   '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: HeaderQuery;
@@ -567,6 +609,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  #graphql\n  fragment ProductVariants on Product {\n    variants(first: 250) {\n      nodes {\n        ...ProductVariant\n      }\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n  }\n\n\n  query ProductVariants(\n    $country: CountryCode\n    $language: LanguageCode\n    $handle: String!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...ProductVariants\n    }\n  }\n': {
     return: ProductVariantsQuery;
     variables: ProductVariantsQueryVariables;
+  };
+  '#graphql\n  #graphql\n  fragment ProductCard on Product {\n    id\n    title\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    media(first: 10) {\n      edges {\n        node {\n          ... on MediaImage {\n            image {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query getAllProducts($first: Int!, $after: String) {\n    products(first: $first, after: $after) {\n      edges {\n        node {\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        endCursor\n      }\n    }\n  }\n': {
+    return: GetAllProductsQuery;
+    variables: GetAllProductsQueryVariables;
   };
 }
 
