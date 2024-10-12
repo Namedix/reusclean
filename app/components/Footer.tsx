@@ -5,12 +5,12 @@ export const Footer = () => {
     <footer className="text-center text-neutral-600 lg:text-left container mt-8">
       {/* <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. --> */}
       <div className="w-full py-6 md:py-10 text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-start justify-between pb-12 text-start">
+        <div className="flex flex-col md:flex-row items-start gap-12 md:gap-0 justify-between pb-12 text-start">
           <div className="grow hidden md:block">
             <img src={reus} alt="reus" height={60} width={60} />
           </div>
           <div className="flex flex-col gap-8 md:w-[250px]">
-            <div className="text-color-text text-lg">Reus</div>
+            <div className="text-color-text text-lg font-semibold">Reus</div>
             <div className="flex flex-col text-color-blue gap-2">
               <div>Hoes does it work?</div>
               <div>Benefits</div>
@@ -20,7 +20,7 @@ export const Footer = () => {
             </div>
           </div>
           <div className="flex flex-col gap-8 md:w-[250px]">
-            <div className="text-color-text text-lg">Zasoby</div>
+            <div className="text-color-text text-lg font-bold">Zasoby</div>
             <div className="flex flex-col text-color-blue gap-2">
               <div>FAQ</div>
               <div>Learn Center</div>
