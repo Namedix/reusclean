@@ -13,7 +13,6 @@ import {
   type ShouldRevalidateFunction,
   useMatches,
 } from '@remix-run/react';
-import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
@@ -50,7 +49,7 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', type: 'image/svg+xml', href: './public/assets/reus.svg'},
   ];
 }
 
