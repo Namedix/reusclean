@@ -12,7 +12,7 @@ const comments = [
     author: 'Basia',
     location: 'Katowice',
     rating: '5/5',
-    avatarSrc: './public/assets/avatar.png',
+    avatarSrc: './assets/Avatar.png',
   },
   {
     title: 'Super',
@@ -21,7 +21,7 @@ const comments = [
     author: 'Artur',
     location: 'Gdańsk',
     rating: '4.5/5',
-    avatarSrc: './public/assets/avatar2.png',
+    avatarSrc: './assets/Avatar2.png',
   },
   {
     title: 'Polecam',
@@ -30,7 +30,7 @@ const comments = [
     author: 'Marta',
     location: 'Kraków',
     rating: '5/5',
-    avatarSrc: './public/assets/avatar3.png',
+    avatarSrc: './assets/Avatar3.png',
   },
 ];
 

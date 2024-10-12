@@ -25,12 +25,7 @@ const Header = ({cart}: HeaderProps) => {
         >
           <div className="grow">
             <Link to="/" className="block items-center">
-              <img
-                src="./public/assets/reus.svg"
-                width={50}
-                height={50}
-                alt="reus"
-              />
+              <img src="./assets/reus.svg" width={50} height={50} alt="reus" />
             </Link>
           </div>
           <nav

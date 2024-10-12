@@ -27,15 +27,15 @@ const BigImages = () => {
         <AnimateOnAppear>
           <img
             className="w-full mt-4 rounded-md"
-            src="./public/assets/reusHorizontal.jpg"
+            src="./assets/reusHorizontal.jpg"
             alt="reusHorizontal"
           />
         </AnimateOnAppear>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
           {[
-            './public/assets/kitchen.jpeg',
-            './public/assets/bathroom.jpeg',
-            './public/assets/universal.jpeg',
+            './assets/kitchen.jpeg',
+            './assets/bathroom.jpeg',
+            './assets/universal.jpeg',
           ].map((src, index) => (
             <AnimateOnAppear key={src}>
               <img className="rounded-md" src={src} alt={`Image${index}`} />

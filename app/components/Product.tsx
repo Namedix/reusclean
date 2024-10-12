@@ -102,10 +102,10 @@ const ProductView = ({product}: ProductViewPreps) => {
           <div className="flex items-center space-x-2 animate-fade-in-up-delay-1">
             <div className="flex -space-x-2">
               {[
-                './public/assets/Avatar.png',
-                './public/assets/Avatar2.png',
-                './public/assets/Avatar3.png',
-                './public/assets/Avatar4.png',
+                './assets/Avatar.png',
+                './assets/Avatar2.png',
+                './assets/Avatar3.png',
+                './assets/Avatar4.png',
               ].map((src, index) => (
                 <img
                   key={src}

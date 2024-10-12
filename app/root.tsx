@@ -49,7 +49,7 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: './public/assets/reus.svg'},
+    {rel: 'icon', type: 'image/svg+xml', href: './assets/reus.svg'},
   ];
 }
 

@@ -11,24 +11,24 @@ const HowToUse = () => {
       tag: 'Chlup',
       description:
         'Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus',
-      icon: './public/assets/step1.png',
-      slide: './public/assets/howToUse1.gif',
+      icon: './assets/step1.png',
+      slide: './assets/howToUse1.gif',
     },
     {
       title: '2. Tabletka',
       tag: 'Plum...',
       description:
         'Do butelki wrzuć tabletkę z wybranym środkiem czystości i poczekaj aż całkowicie sięrozpuści. Nie zakręcaj butelki!',
-      icon: './public/assets/step2.png',
-      slide: './public/assets/howToUse2.gif',
+      icon: './assets/step2.png',
+      slide: './assets/howToUse2.gif',
     },
     {
       title: '3. Produkt gotowy!',
       tag: 'Wstrząśnij przed użyciem',
       description:
         'Gdy tabletka całkowicie się rozpuszczą zakręć butelkę. Twój produkt jest gotowy doużytku.',
-      icon: './public/assets/step3.png',
-      slide: './public/assets/howToUse3.gif',
+      icon: './assets/step3.png',
+      slide: './assets/howToUse3.gif',
     },
   ];
 
