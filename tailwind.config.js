@@ -76,11 +76,11 @@ export default {
     },
   },
   plugins: [
-    plugin(function ({addBase, addComponents, addUtilities}) {
+    plugin(function ({addBase, addComponents}) {
       addBase({});
       addComponents({
         '.container': {
-          '@apply max-w-[1200px] mx-auto px-3 md:px-16 lg:px-20': {},
+          '@apply max-w-[1400px] mx-auto px-6 md:px-16 lg:px-20': {},
         },
         '.h1': {
           '@apply font-semibold text-[2.5rem] leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem]':

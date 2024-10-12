@@ -1,6 +1,5 @@
-import {Footer} from '~/components/Footer';
+import {Footer} from './Footer';
 import Header from './Header';
-import type {CartReturn} from '@shopify/hydrogen';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 interface PageLayoutProps {
