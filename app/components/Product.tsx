@@ -17,6 +17,8 @@ import type {
   Product,
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
+import {CartForm} from '@shopify/hydrogen';
+import {AddToCartButton} from './AddToCartButton';
 
 interface ProductViewPreps {
   product: Product;
@@ -94,7 +96,7 @@ const ProductView = ({product}: ProductViewPreps) => {
             onSlideChange={handleSlideChange}
           >
             {product?.images?.edges?.map((edge, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={edge.node.id}>
                 <img src={edge.node.url} alt={`Slide ${index + 1}`} />
               </SwiperSlide>
             ))}
@@ -162,10 +164,18 @@ const ProductView = ({product}: ProductViewPreps) => {
             />
           </div>
           <div className="pt-4 animate-fade-in-up-delay-5">
-            <button className="w-full py-4 px-4 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 flex items-center justify-center space-x-4 relative overflow-hidden">
-              <FaShoppingCart className="text-xl" />
-              <span className="font-semibold">Dodaj do koszyka</span>
-            </button>
+            <AddToCartButton
+              lines={
+                selectedVariant
+                  ? [
+                      {
+                        merchandiseId: selectedVariant.id,
+                        quantity: 1,
+                      },
+                    ]
+                  : []
+              }
+            />
           </div>
           <div className="pt-2 animate-fade-in-up-delay-5">
             <AnimatedPaymentMethods />

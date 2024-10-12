@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
+import React, {Suspense, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {reus} from '../assets';
 import MenuSvg from '~/assets/MenuSvg';
+import {ShoppingBagIcon} from '@heroicons/react/24/outline';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
+import {Await} from '@remix-run/react';
+import Cart from '~/routes/cart';
 
-const Header = () => {
+interface HeaderProps {
+  cart: Promise<CartApiQueryFragment | null>;
+}
+
+const Header = ({cart}: HeaderProps) => {
   const [openNavigation, setOpenNavigation] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+
   const toggleNavigation = () => {
     setOpenNavigation(!openNavigation);
   };
@@ -32,14 +42,31 @@ const Header = () => {
               <Link to="/#faq">FAQ</Link>
             </div>
           </nav>
-          <button
-            className="absolute p-4 right-4 md:hidden top-5"
-            onClick={toggleNavigation}
-          >
-            <MenuSvg openNavigation={openNavigation} />
-          </button>
+          <div className="absolute top-7 right-4 md:relative md:top-0 md:right-0 md:pl-4">
+            <div className="flex gap-4 items-center">
+              <button
+                onClick={() => setOpenCart(!openCart)}
+                className=" flex items-center text-color-textLight"
+              >
+                <ShoppingBagIcon className="h-5 w-5 text-color-text" />
+                <Suspense fallback={<p>0</p>}>
+                  <Await resolve={cart}>
+                    {(cart) => (
+                      <span className="ml-1 text-sm font-medium text-color-text flex items-center">
+                        {cart?.totalQuantity ?? 0}
+                      </span>
+                    )}
+                  </Await>
+                </Suspense>
+              </button>
+              <button className="md:hidden" onClick={toggleNavigation}>
+                <MenuSvg openNavigation={openNavigation} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+      <Cart open={openCart} setOpen={setOpenCart} />
     </header>
   );
 };

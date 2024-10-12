@@ -7,6 +7,7 @@ import type {
   Product,
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
+import {AddToCartButton} from './AddToCartButton';
 
 interface CallToAction {
   product: Product;
@@ -77,10 +78,21 @@ const CallToAction = ({product}: CallToAction) => {
             </button>
           ))}
         </div>
-        <button className="w-full mt-2 mb-4 py-4 px-4 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 flex items-center justify-center space-x-4 relative overflow-hidden">
-          <FaShoppingCart className="text-xl" />
-          <span className="font-semibold">Dodaj do koszyka</span>
-        </button>
+        <div className="w-full mt-2 mb-4">
+          <AddToCartButton
+            lines={
+              selectedVariant
+                ? [
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: 1,
+                    },
+                  ]
+                : []
+            }
+          />
+        </div>
+
         <AnimatedPaymentMethods />
       </div>
     </AnimateOnAppear>

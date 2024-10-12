@@ -1,15 +1,14 @@
 import {type FetcherWithComponents} from '@remix-run/react';
 import {CartForm, type OptimisticCartLineInput} from '@shopify/hydrogen';
+import {FaShoppingCart, FaSpinner} from 'react-icons/fa';
 
 export function AddToCartButton({
   analytics,
-  children,
   disabled,
   lines,
   onClick,
 }: {
   analytics?: unknown;
-  children: React.ReactNode;
   disabled?: boolean;
   lines: Array<OptimisticCartLineInput>;
   onClick?: () => void;
@@ -24,11 +23,19 @@ export function AddToCartButton({
             value={JSON.stringify(analytics)}
           />
           <button
+            className="w-full py-4 px-4 h-14 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 flex items-center justify-center space-x-4 relative overflow-hidden"
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
           >
-            {children}
+            {fetcher.state === 'submitting' ? (
+              <FaSpinner className="animate-spin" />
+            ) : (
+              <>
+                <FaShoppingCart className="text-xl" />
+                <span className="font-semibold">Dodaj do koszyka</span>
+              </>
+            )}
           </button>
         </>
       )}

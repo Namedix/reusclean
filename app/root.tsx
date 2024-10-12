@@ -1,5 +1,9 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {
+  defer,
+  SerializeFrom,
+  type LoaderFunctionArgs,
+} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -10,6 +14,7 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
   type ShouldRevalidateFunction,
+  useMatches,
 } from '@remix-run/react';
 import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
@@ -51,6 +56,11 @@ export function links() {
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
   ];
 }
+
+export const useRootLoaderData = () => {
+  const [root] = useMatches();
+  return root?.data as SerializeFrom<typeof loader>;
+};
 
 export async function loader(args: LoaderFunctionArgs) {
   const deferredData = loadDeferredData(args);
@@ -102,7 +112,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
             shop={data.shop}
             consent={data.consent}
           >
-            <PageLayout {...data}>{children}</PageLayout>
+            <PageLayout cart={data.cart}>{children}</PageLayout>
           </Analytics.Provider>
         ) : (
           children
