@@ -53,7 +53,7 @@ const CallToAction = ({product}: CallToAction) => {
     <AnimateOnAppear>
       <div className="flex flex-col items-center p-6 max-w-md mx-auto">
         <img
-          src="./app/assets/bottle.jpg"
+          src="./public/assets/bottle.jpg"
           alt="Zestaw startowy"
           className="w-full max-w-[200px] h-auto mb-4"
         />

@@ -1,9 +1,6 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {
-  defer,
-  SerializeFrom,
-  type LoaderFunctionArgs,
-} from '@shopify/remix-oxygen';
+import {defer} from '@shopify/remix-oxygen';
+import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,

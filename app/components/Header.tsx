@@ -1,6 +1,5 @@
 import React, {Suspense, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {reus} from '../assets';
 import MenuSvg from '~/assets/MenuSvg';
 import {ShoppingBagIcon} from '@heroicons/react/24/outline';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
@@ -26,7 +25,12 @@ const Header = ({cart}: HeaderProps) => {
         >
           <div className="grow">
             <Link to="/" className="block items-center">
-              <img src={reus} width={50} height={50} alt="reus" />
+              <img
+                src="./public/assets/reus.svg"
+                width={50}
+                height={50}
+                alt="reus"
+              />
             </Link>
           </div>
           <nav

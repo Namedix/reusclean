@@ -72,10 +72,6 @@ const ProductView = ({product}: ProductViewPreps) => {
     setSelectedVariant(newVariant);
   };
 
-  const addToCart = async (variant: ProductVariant) => {
-    console.log('Adding to cart:', variant);
-  };
-
   return (
     <div className="container mt-4 md:pt-8" id="starter-set">
       <div className="md:grid md:grid-cols-2 gap-12">
@@ -106,10 +102,10 @@ const ProductView = ({product}: ProductViewPreps) => {
           <div className="flex items-center space-x-2 animate-fade-in-up-delay-1">
             <div className="flex -space-x-2">
               {[
-                './app/assets/Avatar.png',
-                './app/assets/Avatar2.png',
-                './app/assets/Avatar3.png',
-                './app/assets/Avatar4.png',
+                './public/assets/Avatar.png',
+                './public/assets/Avatar2.png',
+                './public/assets/Avatar3.png',
+                './public/assets/Avatar4.png',
               ].map((src, index) => (
                 <img
                   key={src}
