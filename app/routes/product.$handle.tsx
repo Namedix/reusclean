@@ -164,9 +164,11 @@ const ProductPage = () => {
       </div>
       <Granties />
       <Opinions opinions={opinions} />
-      <div className="text-2xl font-semibold container mt-4">
-        Customers also purchased
-      </div>
+      <AnimateOnAppear>
+        <div className="text-2xl font-semibold container mt-8">
+          Klienci kupili również
+        </div>
+      </AnimateOnAppear>
       {product.collections?.nodes?.[0] && (
         <Products
           colCount={4}
