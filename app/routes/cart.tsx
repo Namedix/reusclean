@@ -104,7 +104,7 @@ export default function Cart({open, setOpen}: CartProps) {
     <Dialog
       open={open}
       onClose={() => setOpen(false)}
-      className="relative z-10"
+      className="relative z-20"
     >
       <DialogBackdrop
         transition
@@ -218,7 +218,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+              <div className="border-t border-gray-200 px-4 pt-4 pb-2 sm:px-6">
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <p>Suma częściowa</p>
                   <p>{cart?.cost.subtotalAmount.amount}zł</p>
@@ -226,7 +226,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                 <p className="mt-0.5 text-sm text-gray-500">
                   Koszty wysyłki i podatki obliczone przy kasie.
                 </p>
-                <div className="mt-6">
+                <div className="mt-4">
                   <button
                     onClick={handleCheckout}
                     className="w-full flex items-center justify-center rounded-md border border-transparent bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50 disabled:bg-indigo-300"
