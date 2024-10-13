@@ -28,7 +28,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
     storefront.query(PRODUCT_QUERY, {
       variables: {
         handle: 'zestaw-startowy',
-        selectedOptions: getSelectedProductOptions(request),
       },
     }),
     storefront.query(COLLECTION_QUERY, {
@@ -40,18 +39,6 @@ export async function loader({context, request}: LoaderFunctionArgs) {
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
-  }
-
-  const firstVariant = product.variants.nodes[0];
-  const firstVariantIsDefault = Boolean(
-    firstVariant.selectedOptions.find(
-      (option: SelectedOption) =>
-        option.name === 'Title' && option.value === 'Default Title',
-    ),
-  );
-
-  if (firstVariantIsDefault) {
-    product.selectedVariant = firstVariant;
   }
 
   return {

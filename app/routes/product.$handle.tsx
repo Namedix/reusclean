@@ -1,15 +1,11 @@
 import {useLoaderData} from '@remix-run/react';
 import type {LoaderFunctionArgs} from '@remix-run/server-runtime';
-import {getSelectedProductOptions} from '@shopify/hydrogen';
-import type {
-  ProductVariant,
-  SelectedOption,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {ProductVariant} from '@shopify/hydrogen/storefront-api-types';
 import type {MetaFunction} from '@shopify/remix-oxygen';
 import React, {useRef, useState} from 'react';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import AnimatedTicker from '~/components/AnimatedTicker';
-import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
+import {PRODUCT_WITH_COLLECTION_QUERY} from '~/models/networking/ProductQuery';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
 import 'swiper/css';
@@ -22,6 +18,8 @@ import Granties from '~/components/Granties';
 import Opinions from '~/components/Opinions';
 import {opinions} from '~/models/opinion';
 import AnimateOnAppear from '~/components/AnimateOnAppear';
+import Products from '~/components/Products';
+import type {ProductCardFragment} from 'storefrontapi.generated';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Reus | ${data?.product.title ?? ''}`}];
@@ -36,28 +34,15 @@ export async function loader({context, request, params}: LoaderFunctionArgs) {
   }
 
   const [{product}] = await Promise.all([
-    storefront.query(PRODUCT_QUERY, {
+    storefront.query(PRODUCT_WITH_COLLECTION_QUERY, {
       variables: {
         handle,
-        selectedOptions: getSelectedProductOptions(request),
       },
     }),
   ]);
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
-  }
-
-  const firstVariant = product.variants.nodes[0];
-  const firstVariantIsDefault = Boolean(
-    firstVariant.selectedOptions.find(
-      (option: SelectedOption) =>
-        option.name === 'Title' && option.value === 'Default Title',
-    ),
-  );
-
-  if (firstVariantIsDefault) {
-    product.selectedVariant = firstVariant;
   }
 
   return {
@@ -67,7 +52,7 @@ export async function loader({context, request, params}: LoaderFunctionArgs) {
 
 const ProductPage = () => {
   const {product} = useLoaderData<typeof loader>();
-
+  console.log(product);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
       if (product?.variants?.nodes?.length > 0) {
@@ -81,7 +66,7 @@ const ProductPage = () => {
   const handleButtonClick = (variant: ProductVariant) => {
     setSelectedVariant(variant);
     const slideIndex = product.variants.nodes.findIndex(
-      (node: ProductVariant) => node === variant,
+      (node) => node === variant,
     );
     if (swiperRef.current) {
       swiperRef.current.slideTo(slideIndex);
@@ -141,7 +126,7 @@ const ProductPage = () => {
               {product.options[0].name}
             </div>
             <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
-              {product?.variants?.nodes?.map((variant: ProductVariant) => (
+              {product?.variants?.nodes?.map((variant) => (
                 <button
                   key={variant.id}
                   className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
@@ -179,6 +164,17 @@ const ProductPage = () => {
       </div>
       <Granties />
       <Opinions opinions={opinions} />
+      <div className="text-2xl font-semibold container mt-4">
+        Customers also purchased
+      </div>
+      {product.collections?.nodes?.[0] && (
+        <Products
+          colCount={4}
+          products={product.collections.nodes[0].products.edges
+            .map((edge: any) => edge.node)
+            .filter((node: ProductCardFragment) => node.id !== product.id)}
+        />
+      )}
     </div>
   );
 };

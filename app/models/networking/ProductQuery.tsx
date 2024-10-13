@@ -1,3 +1,5 @@
+import {PRODUCT_CARD_FRAGMENT} from './CollectionQuery';
+
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
     availableForSale
@@ -54,9 +56,6 @@ export const PRODUCT_FRAGMENT = `#graphql
       }
     }
   }
-    selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
-      ...ProductVariant
-    }
     variants(first: 4) {
       nodes {
         ...ProductVariant
@@ -75,7 +74,6 @@ export const PRODUCT_QUERY = `#graphql
     $country: CountryCode
     $handle: String!
     $language: LanguageCode
-    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ...Product
@@ -113,27 +111,42 @@ export const COLLECTION_FRAGMENT = `#graphql
     id
     title
     handle
-    # Add any other fields you need for collections
   }
 ` as const;
 
 export const PRODUCT_WITH_COLLECTION_QUERY = `#graphql
   ${PRODUCT_FRAGMENT}
   ${COLLECTION_FRAGMENT}
-  query ProductWithCollection(
-    $country: CountryCode
-    $language: LanguageCode
-    $handle: String!
-    $selectedOptions: [SelectedOptionInput!]!
-  ) @inContext(country: $country, language: $language) {
+  query ProductWithCollection($handle: String!) {
     product(handle: $handle) {
       ...Product
       collections(first: 1) {
         nodes {
           ...Collection
           products(first: 10) {
-            nodes {
-              ...Product
+            edges {
+                node {
+                id
+                title
+                handle
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                media(first: 10) {
+                  edges {
+                    node {
+                      ... on MediaImage {
+                        image {
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

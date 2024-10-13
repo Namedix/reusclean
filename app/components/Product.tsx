@@ -14,7 +14,10 @@ import type {
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import {AddToCartButton} from './AddToCartButton';
-
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-cards';
 interface ProductViewPreps {
   product: Product;
 }
