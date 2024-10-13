@@ -1,3 +1,4 @@
+import {Link} from '@remix-run/react';
 import AnimateOnAppear from './AnimateOnAppear';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 
@@ -16,26 +17,28 @@ const Products = ({products, colCount}: PorductsProps) => {
           } gap-4`}
         >
           {products.map((product) => (
-            <div
-              className="from-yellow-50 items-center justify-center"
-              key={product.id}
-            >
-              <img
-                src={product.media.edges[0].node.image?.url}
-                alt={`${product.title}`}
-                className="rounded-xl"
-              />
+            <Link to={`/product/${product.handle}`} key={product.id}>
               <div
-                className={`text-center text-color-text mt-4 ${
-                  colCount > 4 ? `md:text-sm` : ``
-                }`}
+                className="from-yellow-50 items-center justify-center"
+                key={product.id}
               >
-                {product.title}
+                <img
+                  src={product.media.edges[0].node.image?.url}
+                  alt={`${product.title}`}
+                  className="rounded-xl"
+                />
+                <div
+                  className={`text-center text-color-text mt-4 ${
+                    colCount > 4 ? `md:text-sm` : ``
+                  }`}
+                >
+                  {product.title}
+                </div>
+                <div className="text-center text-color-textLight font-semibold  mt-2">
+                  {product.priceRange.minVariantPrice.amount}zł
+                </div>
               </div>
-              <div className="text-center text-color-textLight font-semibold  mt-2">
-                {product.priceRange.minVariantPrice.amount}zł
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

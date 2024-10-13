@@ -3,7 +3,7 @@ import AnimateOnAppear from './AnimateOnAppear';
 const BigImages = () => {
   return (
     <div className="container">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 md:mt-24">
         <div className="flex-row space-y-2">
           <AnimateOnAppear>
             <div className="font-semibold text-2xl">

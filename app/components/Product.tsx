@@ -8,7 +8,7 @@ import 'swiper/css/effect-cards';
 import {EffectCards, Navigation, Pagination} from 'swiper/modules';
 import {useRef, useState} from 'react';
 import CheckmarkText from './CheckmarkText';
-import {FaList, FaShieldAlt, FaShoppingCart, FaTruck} from 'react-icons/fa'; // Add this import
+import {FaList, FaShieldAlt, FaTruck} from 'react-icons/fa'; // Add this import
 import AnimatedPaymentMethods from './AnimatedPaymentMethods';
 import CommentSection from './CommentSection';
 import ExpandableCard from './ExpandableCard';
@@ -17,7 +17,6 @@ import type {
   Product,
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
-import {CartForm} from '@shopify/hydrogen';
 import {AddToCartButton} from './AddToCartButton';
 
 interface ProductViewPreps {

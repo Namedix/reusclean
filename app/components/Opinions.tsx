@@ -30,7 +30,7 @@ const Opinions: React.FC<{opinions: Opinion[]}> = ({opinions}) => {
   const displayedOpinions = isSmallScreen ? opinions.slice(0, 4) : opinions;
 
   return (
-    <div className="container columns-1 md:columns-3 gap-6 space-y-6 pt-10">
+    <div className="container columns-1 md:columns-3 gap-6 space-y-6 pt-6 md:pt-10">
       {displayedOpinions.map((opinion, index) => (
         <AnimateOnAppear key={index}>
           <div
