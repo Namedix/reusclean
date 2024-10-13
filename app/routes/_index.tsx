@@ -83,7 +83,7 @@ export default function Homepage() {
       {collection && (
         <Products
           colCount={4}
-          products={collection.products.edges.map((edge) => edge.node)}
+          products={collection.products.edges.map((edge: any) => edge.node)}
         />
       )}
       <SectionStarter

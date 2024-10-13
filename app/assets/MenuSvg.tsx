@@ -1,34 +1,18 @@
-interface MenuSvg {
+import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
+
+interface MenuSvgProps {
   openNavigation: boolean;
 }
 
-const MenuSvg = ({openNavigation}: MenuSvg) => {
+const MenuSvg: React.FC<MenuSvgProps> = ({openNavigation}) => {
   return (
-    <svg
-      className="overflow-visible"
-      width="20"
-      height="12"
-      viewBox="0 0 20 12"
-    >
-      <rect
-        className="transition-all origin-center"
-        y={openNavigation ? '5' : '0'}
-        width="20"
-        height="2"
-        rx="1"
-        fill="#2A2A2A"
-        transform={`rotate(${openNavigation ? '45' : '0'})`}
-      />
-      <rect
-        className="transition-all origin-center"
-        y={openNavigation ? '5' : '10'}
-        width="20"
-        height="2"
-        rx="1"
-        fill="#2A2A2A"
-        transform={`rotate(${openNavigation ? '-45' : '0'})`}
-      />
-    </svg>
+    <div className="h-7 w-7">
+      {openNavigation ? (
+        <XMarkIcon className="h-7 w-7 transition-all text-color-textLight" />
+      ) : (
+        <Bars3Icon className="h-7 w-7 transition-all text-color-textLight" />
+      )}
+    </div>
   );
 };
 
