@@ -6,14 +6,9 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import type {MetaFunction} from '@shopify/remix-oxygen';
-import React, {useRef} from 'react';
-import {FaShieldAlt, FaList, FaTruck} from 'react-icons/fa';
+import React, {useRef, useState} from 'react';
 import {AddToCartButton} from '~/components/AddToCartButton';
-import AnimatedPaymentMethods from '~/components/AnimatedPaymentMethods';
 import AnimatedTicker from '~/components/AnimatedTicker';
-import CheckmarkText from '~/components/CheckmarkText';
-import CommentSection from '~/components/CommentSection';
-import ExpandableCard from '~/components/ExpandableCard';
 import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
@@ -26,9 +21,10 @@ import {EffectCards, Navigation, Pagination} from 'swiper/modules';
 import Granties from '~/components/Granties';
 import Opinions from '~/components/Opinions';
 import {opinions} from '~/models/opinion';
+import AnimateOnAppear from '~/components/AnimateOnAppear';
 
-export const meta: MetaFunction = () => {
-  return [{title: 'Reus | Zestaw startowy'}];
+export const meta: MetaFunction<typeof loader> = ({data}) => {
+  return [{title: `Reus | ${data?.product.title ?? ''}`}];
 };
 
 export async function loader({context, request, params}: LoaderFunctionArgs) {
@@ -71,12 +67,21 @@ export async function loader({context, request, params}: LoaderFunctionArgs) {
 
 const ProductPage = () => {
   const {product} = useLoaderData<typeof loader>();
+
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
+    () => {
+      if (product?.variants?.nodes?.length > 0) {
+        return product.variants.nodes[0] as ProductVariant;
+      }
+      return null;
+    },
+  );
   const swiperRef = useRef<SwiperType | null>(null);
 
   const handleButtonClick = (variant: ProductVariant) => {
-    // setSelectedVariant(variant);
+    setSelectedVariant(variant);
     const slideIndex = product.variants.nodes.findIndex(
-      (node) => node === variant,
+      (node: ProductVariant) => node === variant,
     );
     if (swiperRef.current) {
       swiperRef.current.slideTo(slideIndex);
@@ -84,8 +89,10 @@ const ProductPage = () => {
   };
 
   const handleSlideChange = (swiper: SwiperType) => {
-    const newVariant = product.variants.nodes[swiper.activeIndex];
-    // setSelectedVariant(newVariant);
+    const newVariant = product.variants.nodes[
+      swiper.activeIndex
+    ] as ProductVariant;
+    setSelectedVariant(newVariant);
   };
 
   return (
@@ -108,7 +115,7 @@ const ProductPage = () => {
               }}
               onSlideChange={handleSlideChange}
             >
-              {product?.images?.edges?.map((edge, index) => (
+              {product?.images?.edges?.map((edge: any, index: number) => (
                 <SwiperSlide key={edge.node.url}>
                   <img src={edge.node.url} alt={`Slide ${index + 1}`} />
                 </SwiperSlide>
@@ -120,50 +127,46 @@ const ProductPage = () => {
               <h1 className="text-2xl font-semibold">{product?.title}</h1>
             </div>
 
-            <div className="flex items-center space-x-2 animate-fade-in-up-delay-3">
+            <div className="flex items-center space-x-2 animate-fade-in-up-delay-3 text-lg">
               <span className="font-bold">
-                {product?.selectedVariant?.price.amount}zł
+                {selectedVariant?.price?.amount}zł
               </span>
-              <span className="text-gray-500 line-through">
-                {product?.selectedVariant?.compareAtPrice?.amount} zł
-              </span>
-              <AnimatedTicker />
+              {selectedVariant?.compareAtPrice && (
+                <span className="text-gray-500 line-through">
+                  {selectedVariant.compareAtPrice.amount} zł
+                </span>
+              )}
             </div>
-            <div className="mt-2" />
+            <div className="font-semibold text-sm animate-fade-in-up-delay-2">
+              {product.options[0].name}
+            </div>
             <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
-              {product?.variants?.nodes?.map((variant) => (
+              {product?.variants?.nodes?.map((variant: ProductVariant) => (
                 <button
                   key={variant.id}
-                  // className={getButtonStyle(variant)}
-                  // onClick={() => handleButtonClick(variant)}
+                  className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
+                    selectedVariant === variant
+                      ? 'bg-color-blue text-white'
+                      : 'bg-white text-color-text border hover:bg-gray-50'
+                  } px-4 py-3 text-sm font-medium uppercase shadow-sm focus:outline-none sm:flex-1 sm:py-6`}
+                  onClick={() => handleButtonClick(variant as ProductVariant)}
                 >
                   {variant.title}
                 </button>
               ))}
             </div>
             <div className="mt-4" />
-
-            <div className="mt-8 space-y-4">
-              <CheckmarkText
-                className="animate-fade-in-up-delay-4"
-                text={`Brak jednorazowego plastiku gdy re-używasz!`}
-              />
-              <CheckmarkText
-                className="animate-fade-in-up-delay-4.5"
-                text={`Działa! Sprawdziliśmy to z największymi konkurentami.`}
-              />
-              <CheckmarkText
-                className="animate-fade-in-up-delay-5"
-                text={`Nasze produkty powstają ze składników roślinnych.`}
-              />
-            </div>
+            <AnimateOnAppear>
+              <div className="font-semibold text-sm">Opis:</div>
+              <div className="mt-2">{product.description}</div>
+            </AnimateOnAppear>
             <div className="pt-4 animate-fade-in-up-delay-5">
               <AddToCartButton
                 lines={
-                  product?.selectedVariant
+                  selectedVariant
                     ? [
                         {
-                          merchandiseId: product?.selectedVariant.id,
+                          merchandiseId: selectedVariant.id,
                           quantity: 1,
                         },
                       ]

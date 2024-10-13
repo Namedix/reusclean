@@ -1,10 +1,6 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
-import 'swiper/css';
 import '../styles/app.css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-cards';
 import {EffectCards, Navigation, Pagination} from 'swiper/modules';
 import {useRef, useState} from 'react';
 import CheckmarkText from './CheckmarkText';
@@ -124,13 +120,16 @@ const ProductView = ({product}: ProductViewPreps) => {
           </div>
 
           <div className="flex items-center space-x-2 animate-fade-in-up-delay-3">
-            <span className="font-bold">{selectedVariant?.price.amount}zł</span>
-            <span className="text-gray-500 line-through">
-              {selectedVariant?.compareAtPrice?.amount} zł
+            <span className="font-bold text-lg">
+              {selectedVariant?.price.amount}zł
             </span>
+            {selectedVariant?.compareAtPrice?.amount && (
+              <span className="text-gray-500 line-through text-lg">
+                {selectedVariant.compareAtPrice.amount} zł
+              </span>
+            )}
             <AnimatedTicker />
           </div>
-          <div className="mt-2" />
           <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
             {product?.variants?.nodes?.map((variant) => (
               <button

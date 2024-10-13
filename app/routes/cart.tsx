@@ -193,6 +193,8 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                                 </p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">
+                                {line.merchandise.selectedOptions[0].name}
+                                :&nbsp;
                                 {line.merchandise.title}
                               </p>
                             </div>

@@ -13,7 +13,6 @@ import Faq from '~/components/Faq';
 import Opinions from '~/components/Opinions';
 import CallToAction from '~/components/CallToAction';
 import {opinions} from '~/models/opinion';
-import PRODUCT_CARD_FRAGMENT from './products';
 import Products from '~/components/Products';
 import ProductView from '~/components/Product';
 import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';

@@ -86,7 +86,7 @@ export const PRODUCT_QUERY = `#graphql
 
 const PRODUCT_VARIANTS_FRAGMENT = `#graphql
   fragment ProductVariants on Product {
-    variants(first: 250) {
+    variants(first: 8) {
       nodes {
         ...ProductVariant
       }
@@ -104,6 +104,40 @@ export const VARIANTS_QUERY = `#graphql
   ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ...ProductVariants
+    }
+  }
+` as const;
+
+export const COLLECTION_FRAGMENT = `#graphql
+  fragment Collection on Collection {
+    id
+    title
+    handle
+    # Add any other fields you need for collections
+  }
+` as const;
+
+export const PRODUCT_WITH_COLLECTION_QUERY = `#graphql
+  ${PRODUCT_FRAGMENT}
+  ${COLLECTION_FRAGMENT}
+  query ProductWithCollection(
+    $country: CountryCode
+    $language: LanguageCode
+    $handle: String!
+    $selectedOptions: [SelectedOptionInput!]!
+  ) @inContext(country: $country, language: $language) {
+    product(handle: $handle) {
+      ...Product
+      collections(first: 1) {
+        nodes {
+          ...Collection
+          products(first: 10) {
+            nodes {
+              ...Product
+            }
+          }
+        }
+      }
     }
   }
 ` as const;
