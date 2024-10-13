@@ -5,7 +5,6 @@ import {ShoppingBagIcon, UsersIcon} from '@heroicons/react/24/outline';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {Await} from '@remix-run/react';
 import Cart from '~/routes/cart';
-import Headroom from 'react-headroom';
 
 interface HeaderProps {
   cart: Promise<CartApiQueryFragment | null>;
