@@ -30,21 +30,21 @@ export default {
         },
       },
       animation: {
-        'fade-in-up': 'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1)',
+        'fade-in-up': 'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1)',
         'fade-in-up-delay-1':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.1s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.1s both',
         'fade-in-up-delay-2':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.2s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.2s both',
         'fade-in-up-delay-3':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.3s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.3s both',
         'fade-in-up-delay-4':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.4s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.4s both',
         'fade-in-up-delay-4.5':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.45s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.45s both',
         'fade-in-up-delay-5':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.5s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.5s both',
         'fade-in-up-delay-6':
-          'fade-in-up 1.5s cubic-bezier(0.67, 0.01, 0.18, 1) 0.6s both',
+          'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.6s both',
       },
       transitionTimingFunction: {
         'custom-ease': 'cubic-bezier(0.67, 0.01, 0.18, 1)',
