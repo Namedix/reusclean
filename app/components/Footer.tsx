@@ -1,3 +1,6 @@
+import {Link} from '@remix-run/react';
+import reus from '../assets/reus.svg';
+
 export const Footer = () => {
   return (
     <footer className="text-center text-neutral-600 lg:text-left container mt-8">
@@ -5,12 +8,12 @@ export const Footer = () => {
       <div className="w-full py-6 md:py-10 text-center md:text-left">
         <div className="flex flex-col md:flex-row items-start gap-12 md:gap-0 justify-between pb-12 text-start">
           <div className="grow hidden md:block">
-            <img src="../assets/reus.svg" alt="reus" height={60} width={60} />
+            <img src={reus} alt="reus" height={60} width={60} />
           </div>
           <div className="flex flex-col gap-8 md:w-[250px]">
             <div className="text-color-text text-lg font-semibold">Reus</div>
             <div className="flex flex-col text-color-blue gap-2">
-              <div>Hoes does it work?</div>
+              <Link to="/blogs">Blog</Link>
               <div>Benefits</div>
               <div>Investing Strategies</div>
               <div>Pricing</div>
