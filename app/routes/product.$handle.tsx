@@ -52,7 +52,6 @@ export async function loader({context, request, params}: LoaderFunctionArgs) {
 
 const ProductPage = () => {
   const {product} = useLoaderData<typeof loader>();
-  console.log(product);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     () => {
       if (product?.variants?.nodes?.length > 0) {

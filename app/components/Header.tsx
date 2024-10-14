@@ -5,7 +5,6 @@ import {ShoppingBagIcon, UsersIcon} from '@heroicons/react/24/outline';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {Await} from '@remix-run/react';
 import Cart from '~/routes/cart';
-import reus from '../assets/reus.svg';
 
 interface HeaderProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -43,7 +42,7 @@ const Header = ({cart}: HeaderProps) => {
           </button>
           <div className="flex items-center justify-center md:justify-start md:grow">
             <Link to="/" className="flex items-center">
-              <img src={reus} width={50} height={50} alt="reus" />
+              <img src="/assets/reus.svg" width={50} height={50} alt="reus" />
             </Link>
           </div>
           <nav
