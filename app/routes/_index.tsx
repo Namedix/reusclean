@@ -22,12 +22,12 @@ export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
 };
 
-export async function loader({context, request}: LoaderFunctionArgs) {
+export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
   const [{product}, {collection}] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
       variables: {
-        handle: 'zestaw-startowy',
+        handle: 'zestaw-startowy-1',
       },
     }),
     storefront.query(COLLECTION_QUERY, {

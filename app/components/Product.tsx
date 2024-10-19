@@ -1,10 +1,15 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
-import '../styles/app.css';
-import {EffectCards, Navigation, Pagination} from 'swiper/modules';
+import {EffectCards, Navigation} from 'swiper/modules';
 import {useRef, useState} from 'react';
 import CheckmarkText from './CheckmarkText';
-import {FaList, FaShieldAlt, FaTruck} from 'react-icons/fa'; // Add this import
+import {
+  FaList,
+  FaShieldAlt,
+  FaTruck,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa';
 import AnimatedPaymentMethods from './AnimatedPaymentMethods';
 import CommentSection from './CommentSection';
 import ExpandableCard from './ExpandableCard';
@@ -17,7 +22,6 @@ import {AddToCartButton} from './AddToCartButton';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-cards';
 interface ProductViewPreps {
   product: Product;
 }
@@ -27,6 +31,8 @@ const ProductView = ({product}: ProductViewPreps) => {
     product.variants.nodes[0],
   );
   const swiperRef = useRef<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const getButtonStyle = (variant: ProductVariant) => {
     const baseStyle =
@@ -57,17 +63,12 @@ const ProductView = ({product}: ProductViewPreps) => {
 
   const handleButtonClick = (variant: ProductVariant) => {
     setSelectedVariant(variant);
-    const slideIndex = product.variants.nodes.findIndex(
-      (node) => node === variant,
+    const slideIndex = product?.images?.edges?.findIndex(
+      (edge) => edge.node.url === variant.image?.url,
     );
-    if (swiperRef.current) {
+    if (swiperRef.current && slideIndex !== -1) {
       swiperRef.current.slideTo(slideIndex);
     }
-  };
-
-  const handleSlideChange = (swiper: SwiperType) => {
-    const newVariant = product.variants.nodes[swiper.activeIndex];
-    setSelectedVariant(newVariant);
   };
 
   return (
@@ -76,24 +77,40 @@ const ProductView = ({product}: ProductViewPreps) => {
         <div className="md:sticky md:top-20 md:self-start animate-fade-in-up">
           <Swiper
             className="rounded-xl custom-swiper md:mt-12"
-            modules={[Navigation, Pagination, EffectCards]}
+            modules={[Navigation, EffectCards]}
             spaceBetween={0}
             slidesPerView={1}
             navigation={{
-              enabled: true,
+              nextEl: '.custom-swiper-button-next',
+              prevEl: '.custom-swiper-button-prev',
             }}
-            color={'FFFFFF'}
-            pagination={{clickable: true}}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            onSlideChange={handleSlideChange}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
           >
             {product?.images?.edges?.map((edge, index) => (
               <SwiperSlide key={edge.node.id}>
                 <img src={edge.node.url} alt={`Slide ${index + 1}`} />
               </SwiperSlide>
             ))}
+            <div
+              className={`custom-swiper-button-prev ${
+                isBeginning ? 'opacity-30' : 'opacity-100'
+              }`}
+            >
+              <FaChevronLeft />
+            </div>
+            <div
+              className={`custom-swiper-button-next ${
+                isEnd ? 'opacity-30' : 'opacity-100'
+              }`}
+            >
+              <FaChevronRight />
+            </div>
           </Swiper>
         </div>
         <div className="flex flex-col space-y-2 md:space-y-4 mt-2 md:mt-0">

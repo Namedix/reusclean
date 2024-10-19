@@ -40,6 +40,10 @@ export function links() {
   return [
     {rel: 'stylesheet', href: appStyles},
     {
+      rel: 'stylesheet',
+      href: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+    },
+    {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
     },

@@ -49,7 +49,7 @@ export const PRODUCT_FRAGMENT = `#graphql
       name
       values
     }
-  images(first: 10) {
+  images(first: 20) {
     edges {
       node {
         url
