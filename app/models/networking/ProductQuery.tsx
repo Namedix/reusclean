@@ -5,11 +5,9 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
     availableForSale
     compareAtPrice {
       amount
-      currencyCode
     }
     id
     image {
-      __typename
       id
       url
       altText
@@ -34,6 +32,15 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       amount
       currencyCode
     }
+    metafields(
+      identifiers: [
+        {key: "composition", namespace: "custom"},
+        {key: "trade_item_description", namespace: "import_information"}
+      ]
+    ) {
+      key
+      value
+    }
   }
 ` as const;
 
@@ -49,14 +56,16 @@ export const PRODUCT_FRAGMENT = `#graphql
       name
       values
     }
-  images(first: 20) {
-    edges {
-      node {
-        url
+    images(sortKey: POSITION, first: 20) {
+      edges {
+        node {
+          id
+          url
+          altText
+        }
       }
     }
-  }
-    variants(first: 4) {
+    variants(first: 250) {
       nodes {
         ...ProductVariant
       }

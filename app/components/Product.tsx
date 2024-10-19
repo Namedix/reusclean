@@ -15,6 +15,8 @@ import CommentSection from './CommentSection';
 import ExpandableCard from './ExpandableCard';
 import AnimatedTicker from './AnimatedTicker';
 import type {
+  Maybe,
+  Metafield,
   Product,
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
@@ -22,6 +24,7 @@ import {AddToCartButton} from './AddToCartButton';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import {RichText} from '@shopify/hydrogen';
 interface ProductViewPreps {
   product: Product;
 }
@@ -71,6 +74,8 @@ const ProductView = ({product}: ProductViewPreps) => {
     }
   };
 
+  console.log('Selected Variant:', selectedVariant);
+  console.log(`Product:`, product);
   return (
     <div className="container mt-4 md:pt-8" id="starter-set">
       <div className="md:grid md:grid-cols-2 gap-12">
@@ -90,11 +95,29 @@ const ProductView = ({product}: ProductViewPreps) => {
             onSlideChange={(swiper) => {
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
+
+              // Find the variant that matches the current slide's image
+              const currentSlideImage =
+                product?.images?.edges[swiper.activeIndex]?.node.url;
+              const matchingVariant = product?.variants?.nodes.find(
+                (variant) => variant.image?.url === currentSlideImage,
+              );
+
+              // Update the selected variant if a match is found
+              if (matchingVariant) {
+                setSelectedVariant(matchingVariant);
+              }
             }}
           >
             {product?.images?.edges?.map((edge, index) => (
               <SwiperSlide key={edge.node.id}>
-                <img src={edge.node.url} alt={`Slide ${index + 1}`} />
+                <div className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={edge.node.url}
+                    alt={`Slide ${index + 1}`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               </SwiperSlide>
             ))}
             <div
@@ -139,12 +162,12 @@ const ProductView = ({product}: ProductViewPreps) => {
             <h1 className="text-2xl font-semibold">{product?.title}</h1>
           </div>
 
-          <div className="flex items-center space-x-2 animate-fade-in-up-delay-3">
-            <span className="font-bold text-lg">
-              {selectedVariant?.price.amount}zł
+          <div className="flex items-center space-x-2 animate-fade-in-up-delay-3 text-lg">
+            <span className="font-bold">
+              {selectedVariant?.price?.amount}zł
             </span>
-            {selectedVariant?.compareAtPrice?.amount && (
-              <span className="text-gray-500 line-through text-lg">
+            {selectedVariant?.compareAtPrice && (
+              <span className="text-gray-500 line-through">
                 {selectedVariant.compareAtPrice.amount} zł
               </span>
             )}
@@ -199,35 +222,38 @@ const ProductView = ({product}: ProductViewPreps) => {
           </div>
           <div className="mt-8 space-y-2 text-sm text-color-textLight group">
             <ExpandableCard
+              className="animate-fade-in-up-delay-5"
+              title="Opis"
+              icon={<FaList />}
+            >
+              <div className="px-2">
+                {selectedVariant?.metafields?.find(
+                  (metafield: Maybe<Metafield>) =>
+                    metafield?.key === 'trade_item_description',
+                )?.value ?? ''}
+              </div>
+            </ExpandableCard>
+            <ExpandableCard
               className="animate-fade-in-up-delay-3"
-              title="Jak używać"
+              title="Sposób użycia"
               icon={<FaShieldAlt />}
             >
-              <p>
-                Gotowe płyn uniwersalny Lessly jest równie skuteczne jak
-                standardowe i popularne środki czystości. Siła natury bez
-                kompromisów.
-              </p>
-              <p>skutecznie usuwa kurz, roztocza i drobne zabrudzenia</p>
-              <p>
-                bezpieczna dla domowych powierzchni jak szkło, kamień, drewno
-              </p>
-              <p>do codziennych, mniej wymagających porządków</p>
-              <h3 className="font-semibold mt-4">Jak przygotować?</h3>
-              <ol className="list-decimal list-inside mt-2">
+              <ol className="list-decimal pl-5 space-y-2">
                 <li>
-                  Wlej ciepłą wodę do butelki a następnie wsyp zawartość
-                  saszetki.
+                  Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus.
                 </li>
+
                 <li>
-                  Poczekaj, aż proszek się rozpuści - zazwyczaj trwa to około 1
-                  minuty.
+                  Do butelki wrzuć tabletkę z wybranym środkiem czystości i
+                  poczekaj aż całkowicie się rozpuści. Nie zakręcaj butelki!
                 </li>
-                <li>Zakręć butelkę i gotowe.</li>
+
+                <li>
+                  Gdy tabletka całkowicie się rozpuści, zakręć butelkę. Twój
+                  produkt jest gotowy do użytku.
+                </li>
               </ol>
-              <p className="mt-2">
-                Zawsze postępuj zgodnie z instrukcją na odwrocie saszetki.
-              </p>
+              <p>Wstrząśnij przed użyciem.</p>
             </ExpandableCard>
 
             <ExpandableCard
@@ -235,17 +261,46 @@ const ProductView = ({product}: ProductViewPreps) => {
               title="Składniki"
               icon={<FaList />}
             >
-              {/* Add content for ingredients */}
-              <p>Lista składników produktu...</p>
+              <RichText
+                className="px-2"
+                data={
+                  selectedVariant?.metafields?.find(
+                    (metafield: Maybe<Metafield>) =>
+                      metafield?.key === 'composition',
+                  )?.value ?? ''
+                }
+              />
             </ExpandableCard>
 
             <ExpandableCard
-              className="animate-fade-in-up-delay-5"
-              title="Wysyłka i zwroty"
+              className="animate-fade-in-up-delay-6"
+              title="Dostawa i płatność"
               icon={<FaTruck />}
             >
-              {/* Add content for shipping and returns */}
-              <p>Informacje o wysyłce i zwrotach...</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>
+                  Ekspresowa wysyłka – Zamówienia złożone do 12:00 wysyłamy w
+                  ten sam dzień
+                </li>
+
+                <li>
+                  Do pakowania używamy 100% eko rozwiązań. Karton z recyklingu
+                  wypełniamy skropakiem, który jest biodegradowalny i
+                  kompostowalny
+                </li>
+
+                <li>
+                  Elastyczna dostawa – zamawiaj do automatu paczkowego, punktu
+                  odbioru lub z dostawą do domu
+                </li>
+
+                <li>Darmowa dostawa - do zamówień powyżej 79 zł</li>
+
+                <li>
+                  Płać wygodnie. Akceptujemy płatności kartką kredytową, BLIK,
+                  Apple Pay, Przelewy24
+                </li>
+              </ul>
             </ExpandableCard>
           </div>
         </div>

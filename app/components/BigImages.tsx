@@ -7,19 +7,23 @@ const BigImages = () => {
         <div className="flex-row space-y-2">
           <AnimateOnAppear>
             <div className="font-semibold text-2xl">
-              Twoje nowe produkty do mycia i sprzątania
+              Rewolucyjne podejście do sprzątania
             </div>
           </AnimateOnAppear>
           <AnimateOnAppear>
             <div className="font-medium text-lg  text-color-textLight">
-              Piękne butelki wielokrotnego użytku i naturalne koncentraty.
+              Uniwersalne butelki wielokrotnego użytku i naturalne koncentraty
+              czyszczące w formie wygodnej tabletki.
             </div>
           </AnimateOnAppear>
         </div>
         <AnimateOnAppear>
           <div className="font-medium text-lg  text-color-textLight">
-            Ty pomożesz dbać o środowisko naturalne a reus pomoże ci zadbać o
-            domowy budżet. Bezpieczne i skuteczne koncentraty w dobrej cenie.
+            Ekonomia i ekologia w jednym. Jeden zestaw tabletek starcza na wiele
+            tygodni, co oznacza mniej zakupów i więcej oszczędności.
+            <br />
+            Łatwe przechowywanie. Małe i poręczne tabletki zajmują mniej miejsca
+            niż tradycyjne środki czystości.
           </div>
         </AnimateOnAppear>
       </div>

@@ -39,7 +39,7 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({
             isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="px-4 py-2 bg-color-gray">{children}</div>
+          <div className="px-2 py-2 bg-color-gray">{children}</div>
         </div>
       </div>
     </AnimateOnAppear>
