@@ -8,7 +8,6 @@ interface Opinion {
   profile: {
     imageUrl: string;
     name: string;
-    city: string;
   };
   rate: number;
 }
@@ -56,9 +55,6 @@ const Opinions: React.FC<{opinions: Opinion[]}> = ({opinions}) => {
               />
               <div className="flex flex-col">
                 <span className="font-semibold">{opinion.profile.name}</span>
-                <span className="text-sm text-gray-600">
-                  {opinion.profile.city}
-                </span>
               </div>
               <span className="ml-auto font-bold text-color-blue">
                 {opinion.rate}/5

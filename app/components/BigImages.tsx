@@ -30,16 +30,16 @@ const BigImages = () => {
       <div className="flex flex-col space-y-3">
         <AnimateOnAppear>
           <img
-            className="w-full mt-4 rounded-md"
-            src="./assets/reusHorizontal.jpg"
+            className="w-full mt-4 rounded-md h-full object-contain"
+            src="./assets/horizontal.gif"
             alt="reusHorizontal"
           />
         </AnimateOnAppear>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
           {[
-            './assets/kitchen.jpeg',
-            './assets/bathroom.jpeg',
-            './assets/universal.jpeg',
+            './assets/windowComposition.jpeg',
+            './assets/allProducts.jpeg',
+            './assets/kitchenComposition.jpeg',
           ].map((src, index) => (
             <AnimateOnAppear key={src}>
               <img className="rounded-md" src={src} alt={`Image${index}`} />

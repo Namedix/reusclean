@@ -64,9 +64,9 @@ export default function Homepage() {
       <HowToUse />
       <SectionStarter
         id="products"
-        tag="Koncentraty"
-        title="Koncentraty w super cenie"
-        description="Wybieraj z całego naszego asortymentu dostosowanego pod ciebie!"
+        tag="Koncentraty czyszczące"
+        title="Tabletki w super cenie"
+        description="Wybieraj z całego naszego asortymentu dostosowanego pod Ciebie!"
       />
       {collection && (
         <Products

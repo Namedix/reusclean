@@ -5,41 +5,47 @@ interface Opinion {
   profile: {
     imageUrl: string;
     name: string;
-    city: string;
   };
   rate: number;
 }
 
 export const opinions: Opinion[] = [
   {
-    image: '../assets/bathroom.jpeg',
+    image: '../assets/productOpinion1.jpg',
     description:
-      'Zdecydowanie na plus, tylko nie wiem czy można używać do podłogi',
+      'Ekologiczne środki czystości zaskoczyły mnie swoją skutecznością. Zapach zielonej herbaty jest baaardzo delikatny, a świadomość, że nie używam jednorazowego plastiku, jest dla mnie dodatkowym plusem. Na pewno zostanę stałą klientką!',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
-      city: 'Warsaw',
+      imageUrl: '../assets/Avatar2.png',
+      name: 'Kasia',
     },
     rate: 5,
   },
   {
     description:
-      'Mega! Uzywam już ponad 2 miesiące, głownie w kuchi i jestem zadolona. Polecam Wam',
+      'Na początku byłam sceptyczna, ale miło się zaskoczyłam. Te środki czystości działają tak samo dobrze, jak tradycyjne produkty, ale zyskujesz coś więcej – spokój, że nie szkodzisz planecie. Zdecydowanie polecam każdemu, kto chce wprowadzić do swojego domu zrównoważone rozwiązania.',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
-      city: 'Warsaw',
+      imageUrl: '../assets/Avatar2.png',
+      name: 'Paulina',
     },
     rate: 5,
   },
   {
-    title: 'Mega zapach',
+    title: 'Świetny wybór dla naszej rodziny!',
     description:
-      'Nowe formulacje są super. Ładniej pachną i lepiej czyszczą. No i się nie grudkują jak poprzednie wąskie saszetki. Brawo i już zupełnie mnie do siebie przekonaliście',
+      'Od kiedy zaczęliśmy używać tabletek czyszczących od Reus, mamy pewność, że nasz dom jest czysty, a jednocześnie bezpieczny dla naszych dzieci i zwierząt. Uwielbiam fakt, że mają naturalny skład i nie zawierają szkodliwych substancji chemicznych.',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
-      city: 'Warsaw',
+      imageUrl: '../assets/Avatar4.png',
+      name: 'Piotr z Rodziną',
+    },
+    rate: 5,
+  },
+  {
+    title: 'Super pomysł z butelką',
+    description:
+      'Butelka sprawia wrażenie solidnej i wytrzymałej, jakby miała posłużyć przez wiele lat. Cieszę się, że nie muszę już kupować mnóstwa detergentów i wyrzucać ich opakowań po krótkim czasie. Podoba mi się także pomysł uniwersalnego designu – po wykorzystaniu płynu do łazienki rozpuściłam tabletkę do kuchni, i gotowe! 😀',
+    profile: {
+      imageUrl: '../assets/Avatar3.png',
+      name: 'Alicja',
     },
     rate: 5,
   },
@@ -47,20 +53,8 @@ export const opinions: Opinion[] = [
     description:
       'Używam uniwersalnego głównie do sprzątania kuchni i spisuje się bardzo dobrze. Nawet kilka razy użyłam do umycia naczyń i też zadziałało.',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
-      city: 'Warsaw',
-    },
-    rate: 5,
-  },
-  {
-    title: 'Prawie idealne',
-    description:
-      'Już trochę ich używam i wszystko jest super, ale jednak na jakiś wielki kamień lub mega zabrudzenia to pewniej sie czuje uzywając ciffa, ale na codzien używam reus-a. Ładnie pachną i polecam koleżankom.',
-    profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
-      city: 'Warsaw',
+      imageUrl: '../assets/Avatar3.png',
+      name: 'Alicja',
     },
     rate: 5,
   },
@@ -71,7 +65,6 @@ export const opinions: Opinion[] = [
     profile: {
       imageUrl: '../assets/Avatar.png',
       name: 'Jan Kowalski',
-      city: 'Warsaw',
     },
     rate: 5,
   },
@@ -81,18 +74,16 @@ export const opinions: Opinion[] = [
     profile: {
       imageUrl: '../assets/Avatar.png',
       name: 'Jan Kowalski',
-      city: 'Warsaw',
     },
     rate: 5,
   },
   {
-    image: '../assets/bathroom.jpeg',
+    image: '../assets/productOpinion2.png',
     description:
       'Mega! Uzywam już ponad 2 miesiące, głownie w kuchi i jestem zadolona. Polecam Wam',
     profile: {
       imageUrl: '../assets/Avatar.png',
       name: 'Jan Kowalski',
-      city: 'Warsaw',
     },
     rate: 5,
   },
@@ -103,7 +94,6 @@ export const opinions: Opinion[] = [
     profile: {
       imageUrl: '../assets/Avatar.png',
       name: 'Jan Kowalski',
-      city: 'Warsaw',
     },
     rate: 5,
   },

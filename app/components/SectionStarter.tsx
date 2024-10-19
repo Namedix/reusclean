@@ -9,7 +9,7 @@ interface SectionStarterProps {
 
 const SectionStarter = ({tag, title, description, id}: SectionStarterProps) => {
   return (
-    <div className="container mt-20" id={id}>
+    <div className="container mt-12 md:mt-20" id={id}>
       <AnimateOnAppear>
         <div className="flex flex-col text-center justify-center items-center w-full">
           <div className="text-[12px] font-bold text-color-blue">{tag}</div>

@@ -10,7 +10,7 @@ const HowToUse = () => {
       title: '1. Woda',
       tag: 'Chlup',
       description:
-        'Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus',
+        'Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus.',
       icon: './assets/step1.png',
       slide: './assets/howToUse1.gif',
     },
@@ -18,7 +18,7 @@ const HowToUse = () => {
       title: '2. Tabletka',
       tag: 'Plum...',
       description:
-        'Do butelki wrzuć tabletkę z wybranym środkiem czystości i poczekaj aż całkowicie sięrozpuści. Nie zakręcaj butelki!',
+        'Do butelki wrzuć tabletkę z wybranym środkiem czystości i poczekaj aż całkowicie się rozpuści. Nie zakręcaj butelki!',
       icon: './assets/step2.png',
       slide: './assets/howToUse2.gif',
     },
@@ -26,7 +26,7 @@ const HowToUse = () => {
       title: '3. Produkt gotowy!',
       tag: 'Wstrząśnij przed użyciem',
       description:
-        'Gdy tabletka całkowicie się rozpuszczą zakręć butelkę. Twój produkt jest gotowy doużytku.',
+        'Gdy tabletka całkowicie się rozpuści zakręć butelkę. Twój produkt jest gotowy do użycia.',
       icon: './assets/step3.png',
       slide: './assets/howToUse3.gif',
     },
@@ -63,7 +63,7 @@ const HowToUse = () => {
   }, []);
 
   return (
-    <div className="flex container gap-12 mt-[2rem] md:mt-[0rem]">
+    <div className="flex container gap-12 mt-[4rem] md:mt-[0rem]">
       <div className="hidden md:block md:sticky md:top-0 md:self-start w-2/5">
         <VerticalImageDisplay
           slides={sections.map((section) => section.slide)}
@@ -162,21 +162,26 @@ const ContentSection: React.FC<ContentSectionProps> = ({
 }) => {
   return (
     <div className="max-w-md">
+      <div className="flex gap-4">
+        <div className="mb-4">
+          <img
+            src={icon}
+            alt={title}
+            className="w-14 h-14 p-4 bg-white rounded-lg shadow-lg shadow-neutral-300"
+          />
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-color-text">{title}</h2>
+          <p className="text-color-textLight text-lg">{tag}</p>
+        </div>
+      </div>
+
+      <p className="text-color-textLight mt-2">{description}</p>
       <img
         src={slide}
         alt={slide}
         className="w-full h-full object-cove rounded-md my-[2rem] md:hidden"
       />
-      <div className="mb-4">
-        <img
-          src={icon}
-          alt={title}
-          className="w-14 h-14 p-4 bg-white rounded-lg shadow-lg shadow-neutral-300"
-        />
-      </div>
-      <h2 className="text-2xl font-bold text-color-text">{title}</h2>
-      <p className="text-color-textLight text-lg">{tag}</p>
-      <p className="text-color-textLight mt-2">{description}</p>
     </div>
   );
 };
