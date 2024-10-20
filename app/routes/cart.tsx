@@ -4,16 +4,16 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/react';
-import {XMarkIcon} from '@heroicons/react/24/outline';
+import {
+  XMarkIcon,
+  TruckIcon,
+  ShoppingBagIcon,
+} from '@heroicons/react/24/outline';
 import {Await} from '@remix-run/react';
 import type {ActionFunctionArgs} from '@remix-run/server-runtime';
 import {json} from '@remix-run/server-runtime';
-import type {CartQueryDataReturn, CartReturn} from '@shopify/hydrogen';
+import type {CartQueryDataReturn} from '@shopify/hydrogen';
 import {CartForm} from '@shopify/hydrogen';
-import type {
-  CartLineInput,
-  CartLineUpdateInput,
-} from '@shopify/hydrogen/storefront-api-types';
 import {Suspense} from 'react';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import AnimatedPaymentMethods from '~/components/AnimatedPaymentMethods';
@@ -134,6 +134,15 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
     window.location.href = cart?.checkoutUrl ?? '';
   };
 
+  const freeShippingThreshold = 75; // 75 PLN
+  const subtotal = parseFloat(cart?.cost.subtotalAmount.amount || '0');
+  const progressPercentage = Math.min(
+    (subtotal / freeShippingThreshold) * 100,
+    100,
+  );
+
+  const isCartEmpty = !cart || cart.lines.nodes.length === 0;
+
   return (
     <div className="fixed inset-0 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
@@ -146,7 +155,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
               <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                 <div className="flex items-start justify-between">
                   <DialogTitle className="text-lg font-medium text-gray-900">
-                    Koszyk • {cart?.totalQuantity}
+                    Koszyk {!isCartEmpty && `• ${cart?.totalQuantity}`}
                   </DialogTitle>
                   <div className="ml-3 flex h-7 items-center">
                     <button
@@ -160,97 +169,159 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                     </button>
                   </div>
                 </div>
-                <div className="checkout-ticker-container rounded-md flex items-center mt-4 max-w-full">
-                  <div className="checkout-ticker-content flex items-center space-x-4">
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                    <span className="text-color-blue">Ekspresowa wysyłka</span>
-                  </div>
-                </div>
-                <div className="mt-8">
-                  <div className="flow-root">
-                    <ul className="-my-6 divide-y divide-gray-200">
-                      {cart?.lines.nodes.map((line) => (
-                        <li key={line.id} className="flex py-6">
-                          <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                            <img
-                              src={line.merchandise.image?.url}
-                              alt={line.merchandise.product?.title}
-                              className="h-full w-full object-cover object-center"
-                            />
-                          </div>
 
-                          <div className="ml-4 flex flex-1 flex-col">
-                            <div>
-                              <div className="flex justify-between text-base font-medium text-gray-900">
-                                <h3>{line.merchandise.product?.title}</h3>
-                                <p className="ml-4">
-                                  {Number(line.merchandise.price.amount) *
-                                    line.quantity}
-                                </p>
-                              </div>
-                              <p className="mt-1 text-sm text-gray-500">
-                                {line.merchandise.selectedOptions[0].name}
-                                :&nbsp;
-                                {line.merchandise.title}
-                              </p>
-                            </div>
-                            <div className="flex flex-1 items-end justify-between text-sm">
-                              <div>
-                                <label
-                                  htmlFor={`quantity-${line.id}`}
-                                  className="mr-2"
-                                >
-                                  Ilość: {line.quantity}
-                                </label>
-                              </div>
-
-                              <div className="flex">
-                                <CartLineDeleteButton lineIds={[line.id]} />
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-200 px-4 pt-4 pb-2 sm:px-6">
-                <div className="flex justify-between text-base font-medium text-gray-900">
-                  <p>Suma częściowa</p>
-                  <p>{cart?.cost.subtotalAmount.amount}zł</p>
-                </div>
-                <p className="mt-0.5 text-sm text-gray-500">
-                  Koszty wysyłki i podatki obliczone przy kasie.
-                </p>
-                <div className="mt-4">
-                  <button
-                    onClick={handleCheckout}
-                    className="w-full flex items-center justify-center rounded-md border border-transparent bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50 disabled:bg-indigo-300"
-                  >
-                    Do kasy
-                  </button>
-                </div>
-                <div className="my-4 flex justify-center text-center text-sm text-gray-500">
-                  <p>
-                    lub{' '}
+                {isCartEmpty ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <ShoppingBagIcon className="h-16 w-16 text-gray-400 mb-4" />
+                    <h2 className="text-lg font-medium text-gray-900 mb-2">
+                      Twój koszyk jest pusty
+                    </h2>
+                    <p className="text-sm text-gray-500 mb-6">
+                      Wygląda na to, że nie dodałeś jeszcze żadnych produktów do
+                      koszyka.
+                    </p>
                     <button
-                      type="button"
                       onClick={() => setOpen(false)}
-                      className="font-medium text-color-blue hover:text-color-blue/50"
+                      className="rounded-md bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50"
                     >
                       Kontynuuj zakupy
-                      <span aria-hidden="true"> &rarr;</span>
                     </button>
-                  </p>
-                </div>
-                <AnimatedPaymentMethods />
+                  </div>
+                ) : (
+                  <>
+                    <div className="checkout-ticker-container rounded-md flex items-center mt-4 max-w-full">
+                      <div className="checkout-ticker-content flex items-center space-x-4">
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          Postęp do darmowej wysyłki
+                        </span>
+                        <span className="text-sm font-medium text-gray-700">
+                          {subtotal.toFixed(2)} / {freeShippingThreshold} PLN
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          className="bg-color-blue h-2.5 rounded-full"
+                          style={{width: `${progressPercentage}%`}}
+                        ></div>
+                      </div>
+                      <div className="flex items-center justify-end mt-2">
+                        <TruckIcon className="h-5 w-5 text-gray-400 mr-1" />
+                        <span className="text-sm text-gray-500">
+                          {subtotal >= freeShippingThreshold
+                            ? 'Darmowa wysyłka!'
+                            : `Dodaj jeszcze ${(
+                                freeShippingThreshold - subtotal
+                              ).toFixed(2)} PLN dla darmowej wysyłki`}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-8">
+                      <div className="flow-root">
+                        <ul className="-my-6 divide-y divide-gray-200">
+                          {cart?.lines.nodes.map((line) => (
+                            <li key={line.id} className="flex py-6">
+                              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                <img
+                                  src={line.merchandise.image?.url}
+                                  alt={line.merchandise.product?.title}
+                                  className="h-full w-full object-cover object-center"
+                                />
+                              </div>
+
+                              <div className="ml-4 flex flex-1 flex-col">
+                                <div>
+                                  <div className="flex justify-between text-base font-medium text-gray-900">
+                                    <h3>{line.merchandise.product?.title}</h3>
+                                    <p className="ml-4">
+                                      {Number(line.merchandise.price.amount) *
+                                        line.quantity}
+                                    </p>
+                                  </div>
+                                  <p className="mt-1 text-sm text-gray-500">
+                                    {line.merchandise.selectedOptions[0].name}
+                                    :&nbsp;
+                                    {line.merchandise.title}
+                                  </p>
+                                </div>
+                                <div className="flex flex-1 items-end justify-between text-sm">
+                                  <div>
+                                    <label
+                                      htmlFor={`quantity-${line.id}`}
+                                      className="mr-2"
+                                    >
+                                      Ilość: {line.quantity}
+                                    </label>
+                                  </div>
+
+                                  <div className="flex">
+                                    <CartLineDeleteButton lineIds={[line.id]} />
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
+
+              {!isCartEmpty && (
+                <div className="border-t border-gray-200 px-4 pt-4 pb-2 sm:px-6">
+                  <div className="flex justify-between text-base font-medium text-gray-900">
+                    <p>Suma częściowa</p>
+                    <p>{cart?.cost.subtotalAmount.amount}zł</p>
+                  </div>
+                  <p className="mt-0.5 text-sm text-gray-500">
+                    Koszty wysyłki i podatki obliczone przy kasie.
+                  </p>
+                  <div className="mt-4">
+                    <button
+                      onClick={handleCheckout}
+                      className="w-full flex items-center justify-center rounded-md border border-transparent bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50 disabled:bg-indigo-300"
+                    >
+                      Do kasy
+                    </button>
+                  </div>
+                  <div className="my-4 flex justify-center text-center text-sm text-gray-500">
+                    <p>
+                      lub{' '}
+                      <button
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        className="font-medium text-color-blue hover:text-color-blue/50"
+                      >
+                        Kontynuuj zakupy
+                        <span aria-hidden="true"> &rarr;</span>
+                      </button>
+                    </p>
+                  </div>
+                  <AnimatedPaymentMethods />
+                </div>
+              )}
             </div>
           </DialogPanel>
         </div>
