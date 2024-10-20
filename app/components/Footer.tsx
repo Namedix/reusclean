@@ -1,5 +1,11 @@
 import {Link} from '@remix-run/react';
 
+const policyMap = {
+  'privacy-policy': 'Polityka prywatności',
+  'terms-of-service': 'Regulamin',
+  'refund-policy': 'Polityka zwrotów',
+};
+
 export const Footer = () => {
   return (
     <footer className="text-center text-neutral-600 lg:text-left container mt-8">
@@ -35,21 +41,13 @@ export const Footer = () => {
             © 2024 – Reus • 🇵🇱 Made in Poland
           </span>
           <div className="flex justify-center md:justify-end gap-6">
-            <p className="mb-4">
-              <a href="/home" className="text-color-blue ">
-                Polityka prywatności
-              </a>
-            </p>
-            <p className="mb-4">
-              <a href="/home" className="text-color-blue ">
-                Cookies
-              </a>
-            </p>
-            <p className="mb-4">
-              <a href="/home" className="text-color-blue ">
-                Regulamin
-              </a>
-            </p>
+            {Object.entries(policyMap).map(([handle, title]) => (
+              <p key={handle} className="mb-4">
+                <Link to={`/policies/${handle}`} className="text-color-blue">
+                  {title}
+                </Link>
+              </p>
+            ))}
           </div>
         </div>
       </div>

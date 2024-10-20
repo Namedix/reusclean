@@ -1,5 +1,5 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {defer} from '@shopify/remix-oxygen';
+import {defer, json} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
@@ -12,9 +12,13 @@ import {
   isRouteErrorResponse,
   type ShouldRevalidateFunction,
   useMatches,
+  Link,
 } from '@remix-run/react';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
+import type {ShopPolicy} from '@shopify/hydrogen/customer-account-api-types';
+import {html} from 'framer-motion/client';
+import type {ShopPolicyWithDefault} from '@shopify/hydrogen/storefront-api-types';
 
 export type RootLoader = typeof loader;
 
@@ -94,7 +98,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
-
   return (
     <html lang="en">
       <head>
@@ -139,14 +142,28 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className="route-error">
-      <h1>Oops</h1>
-      <h2>{errorStatus}</h2>
-      {errorMessage && (
-        <fieldset>
-          <pre>{errorMessage}</pre>
-        </fieldset>
-      )}
-    </div>
+    <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <div className="text-center">
+        <p className="text-base font-semibold text-color-blue">404</p>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-color-text sm:text-5xl">
+          Nie znaleziono strony
+        </h1>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          Przepraszamy, nie mogliśmy znaleźć strony, której szukasz.
+        </p>
+        <div className="mt-10 flex items-center justify-center gap-x-6">
+          <Link
+            to="/"
+            className="rounded-md bg-color-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Wróć do strony głównej
+          </Link>
+          <Link to="/" className="text-sm font-semibold text-color-text">
+            Skontaktuj się z pomocą techniczną{' '}
+            <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }
