@@ -73,7 +73,7 @@ const HowToUse = () => {
       <div>
         {sections.map((section, index) => (
           <div
-            key={index}
+            key={section.title.replace(/\s+/g, '-').toLowerCase()}
             ref={(el) => (sectionRefs.current[index] = el)}
             className="md:h-[60vh] flex items-center"
           >
