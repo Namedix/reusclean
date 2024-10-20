@@ -11,7 +11,7 @@ export function PageLayout({children = null, cart}: PageLayoutProps) {
   return (
     <div>
       <Header cart={cart} />
-      <main className="mt-24">{children}</main>
+      <main className="mt-24 md:mt-32">{children}</main>
       <Footer />
     </div>
   );
