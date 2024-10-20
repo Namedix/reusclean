@@ -41,7 +41,11 @@ const Header = ({cart}: HeaderProps) => {
             <MenuSvg openNavigation={openNavigation} />
           </button>
           <div className="flex items-center justify-center md:justify-start md:grow">
-            <Link to="/" className="flex items-center">
+            <Link
+              to="/"
+              className="flex items-center"
+              onClick={toggleNavigation}
+            >
               <img src="/assets/reus.svg" width={50} height={50} alt="reus" />
             </Link>
           </div>
