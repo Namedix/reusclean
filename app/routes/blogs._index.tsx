@@ -73,7 +73,7 @@ export default function Blog() {
   );
 }
 
-function BlogItem({
+export function BlogItem({
   article,
   loading,
 }: {
@@ -122,7 +122,7 @@ function BlogItem({
 }
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog
-const BLOGS_QUERY = `#graphql
+export const BLOGS_QUERY = `#graphql
   query Blog(
     $language: LanguageCode
     $blogHandle: String!

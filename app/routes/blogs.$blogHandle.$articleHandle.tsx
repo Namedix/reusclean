@@ -104,7 +104,7 @@ export default function Article() {
 }
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog#field-blog-articlebyhandle
-const ARTICLE_QUERY = `#graphql
+export const ARTICLE_QUERY = `#graphql
   query Article(
     $articleHandle: String!
     $blogHandle: String!

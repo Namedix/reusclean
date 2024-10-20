@@ -66,6 +66,9 @@ const Header = ({cart}: HeaderProps) => {
               <Link onClick={toggleNavigation} to="/#faq">
                 FAQ
               </Link>
+              <Link onClick={toggleNavigation} to="/about">
+                O nas
+              </Link>
             </div>
           </nav>
           <div className="absolute top-7 right-4 md:relative md:top-0 md:right-0 md:pl-4">

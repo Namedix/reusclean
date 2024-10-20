@@ -38,9 +38,9 @@ export const Footer = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 justify-center border-t-2 border-neutral-200 py-8 gap-4">
           <span className="text-color-textLight">
-            © 2024 – Reus • 🇵🇱 Made in Poland
+            © 2024 – Reus • 🇵🇱 Stworzone w Polsce
           </span>
-          <div className="flex justify-center md:justify-end gap-6">
+          <div className="grid grid-cols-3 md:flex justify-center md:justify-end gap-2 md:gap-6">
             {Object.entries(policyMap).map(([handle, title]) => (
               <p key={handle} className="mb-4">
                 <Link to={`/policies/${handle}`} className="text-color-blue">
