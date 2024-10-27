@@ -25,6 +25,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import {RichText} from '@shopify/hydrogen';
+import {Link} from '@remix-run/react';
 interface ProductViewPreps {
   product: Product;
 }
@@ -151,9 +152,9 @@ const ProductView = ({product}: ProductViewPreps) => {
                 />
               ))}
             </div>
-            <span className="text-color-blue text-xs">
+            <Link className="text-color-blue text-xs" to="/#opinions">
               +50 pozytywnych opinii
-            </span>
+            </Link>
           </div>
 
           <div className="pb-2 border-b-[1px] border-gray-200 animate-fade-in-up-delay-2">

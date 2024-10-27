@@ -44,7 +44,7 @@ const Header = ({cart}: HeaderProps) => {
             <Link
               to="/"
               className="flex items-center"
-              onClick={toggleNavigation}
+              onClick={() => setOpenNavigation(false)}
             >
               <img src="/assets/reus.svg" width={50} height={50} alt="reus" />
             </Link>
