@@ -17,6 +17,13 @@ export const Footer = () => {
             <img src="/assets/reus.svg" alt="reus" height={60} width={60} />
             <p className="mt-4 mb-2 text-color-text">Znajdziesz nas</p>
             <SocialIcons className="hidden md:flex" />
+            <p className="mt-4 mb-2 text-color-text">Bądźmy w kontakcie</p>
+            <a
+              href="mailto:info@reusclean.com"
+              className="text-color-blue hover:underline"
+            >
+              info@reusclean.com
+            </a>
           </div>
           <div className="flex flex-col gap-8 md:w-[250px]">
             <div className="text-color-text text-lg font-semibold">Reus</div>
