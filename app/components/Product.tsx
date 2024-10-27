@@ -188,15 +188,19 @@ const ProductView = ({product}: ProductViewPreps) => {
           <div className="mt-8 space-y-4">
             <CheckmarkText
               className="animate-fade-in-up-delay-4"
-              text={`Brak jednorazowego plastiku gdy re-używasz!`}
+              text={`Koniec z jednorazowym plastikiem!`}
             />
             <CheckmarkText
               className="animate-fade-in-up-delay-4.5"
-              text={`Działa! Sprawdziliśmy to z największymi konkurentami.`}
+              text={`Roślinne składniki są w 100% biodegradowalne`}
             />
             <CheckmarkText
               className="animate-fade-in-up-delay-5"
-              text={`Nasze produkty powstają ze składników roślinnych.`}
+              text={`Delikatny zapach zielonej herbaty`}
+            />
+            <CheckmarkText
+              className="animate-fade-in-up-delay-5"
+              text={`Wyjątkowo skuteczne w walce z codziennymi zabrudzeniami`}
             />
           </div>
           <div className="pt-4 animate-fade-in-up-delay-5">
