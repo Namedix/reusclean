@@ -77,7 +77,7 @@ const ProductView = ({product}: ProductViewPreps) => {
   console.log('Selected Variant:', selectedVariant);
   console.log(`Product:`, product);
   return (
-    <div className="container mt-4 md:pt-8" id="starter-set">
+    <div className="container mt-4" id="starter-set">
       <div className="md:grid md:grid-cols-2 gap-12">
         <div className="md:sticky md:top-20 md:self-start animate-fade-in-up">
           <Swiper
