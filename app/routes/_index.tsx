@@ -57,15 +57,15 @@ export default function Homepage() {
       <BigImages />
       <SectionStarter
         id="how-it-work"
-        tag="Jak to działa?"
-        title="Dlaczego Reus jest taki super?"
-        description="Butelki na całe życie i dokupujesz tylko koncentraty"
+        tag="Jak to zrobić?"
+        title="Przygotowanie płynu jest dziecinnie proste!"
+        description="Jedna butelka starczy Ci na całe życie, a dzięki wygodnym tabletkom zaoszczędzisz miejsce w szafie!"
       />
       <HowToUse />
       <SectionStarter
         id="products"
-        tag="Koncentraty czyszczące"
-        title="Tabletki w super cenie"
+        tag="Tabletki czyszczące"
+        title="Refille w super cenie"
         description="Wybieraj z całego naszego asortymentu dostosowanego pod Ciebie!"
       />
       {collection && (
