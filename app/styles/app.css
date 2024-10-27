@@ -129,16 +129,18 @@
 }
 
 .ticker-container {
-  background-color: #e6f3ff; /* Light blue background */
+  background-color: #e6f3ff;
   overflow: hidden;
-  width: 200px; /* Adjust as needed */
+  width: 200px;
   height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .ticker-content {
   display: inline-flex;
   white-space: nowrap;
-  animation: ticker 15s linear infinite;
+  animation: ticker 40s linear infinite;
 }
 
 .checkout-ticker-container {
@@ -150,7 +152,7 @@
 .checkout-ticker-content {
   display: inline-flex;
   white-space: nowrap;
-  animation: ticker 30s linear infinite;
+  animation: ticker 60s linear infinite;
 }
 
 @keyframes ticker {

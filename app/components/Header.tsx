@@ -23,6 +23,15 @@ const Header = ({cart}: HeaderProps) => {
     window.open('https://reusclean.com/account', '_blank');
   };
 
+  useEffect(() => {
+    const handleOpenCart = () => setOpenCart(true);
+    window.addEventListener('openCart', handleOpenCart);
+
+    return () => {
+      window.removeEventListener('openCart', handleOpenCart);
+    };
+  }, []);
+
   return (
     <header
       className={`

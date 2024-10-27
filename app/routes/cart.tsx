@@ -255,8 +255,11 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <h3>{line.merchandise.product?.title}</h3>
                                     <p className="ml-4">
-                                      {Number(line.merchandise.price.amount) *
-                                        line.quantity}
+                                      {(
+                                        Number(line.merchandise.price.amount) *
+                                        line.quantity
+                                      ).toFixed(2)}{' '}
+                                      PLN
                                     </p>
                                   </div>
                                   <p className="mt-1 text-sm text-gray-500">
@@ -314,7 +317,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                         onClick={() => setOpen(false)}
                         className="font-medium text-color-blue hover:text-color-blue/50"
                       >
-                        Kontynuuj zakupy
+                        Kontynuj zakupy
                         <span aria-hidden="true"> &rarr;</span>
                       </button>
                     </p>
