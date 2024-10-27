@@ -56,7 +56,7 @@ export const Footer = () => {
             <SocialIcons className="grid grid-cols-3" />
           </div>
         </div>
-        <div>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-sm text-color-textLight">
               Projekt współfinansowany ze środków Unii Europejskiej w ramach
@@ -72,6 +72,49 @@ export const Footer = () => {
                 src="/assets/europeanFundsLogo.jpg"
                 alt="Fundusze Europejskie"
                 className="h-12 object-contain"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-4 text-center">
+            <p className="text-sm text-color-textLight">
+              Bezpieczne płatności obsługuje Przelewy24
+            </p>
+            <div className="flex gap-4 items-center flex-wrap justify-center">
+              <img
+                src="/assets/googlepay.png"
+                alt="Visa"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/paypal.png"
+                alt="Mastercard"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/maestro.png"
+                alt="BLIK"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/mastercard.png"
+                alt="BLIK"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/stripe.png"
+                alt="Przelewy24"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/visa.png"
+                alt="Przelewy24"
+                className="h-8 object-contain"
+              />
+              <img
+                src="/assets/applepay.png"
+                alt="Przelewy24"
+                className="h-8 object-contain"
               />
             </div>
           </div>
