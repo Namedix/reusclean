@@ -74,8 +74,6 @@ const ProductView = ({product}: ProductViewPreps) => {
     }
   };
 
-  console.log('Selected Variant:', selectedVariant);
-  console.log(`Product:`, product);
   return (
     <div className="container mt-4" id="starter-set">
       <div className="md:grid md:grid-cols-2 gap-12">

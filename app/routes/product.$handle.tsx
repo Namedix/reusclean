@@ -20,6 +20,7 @@ import {opinions} from '~/models/opinion';
 import AnimateOnAppear from '~/components/AnimateOnAppear';
 import Products from '~/components/Products';
 import type {ProductCardFragment} from 'storefrontapi.generated';
+import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Reus | ${data?.product.title ?? ''}`}];
@@ -52,7 +53,9 @@ export async function loader({context, request, params}: LoaderFunctionArgs) {
 
 const ProductPage = () => {
   const {product} = useLoaderData<typeof loader>();
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | any>(
     () => {
       if (product?.variants?.nodes?.length > 0) {
         return product.variants.nodes[0] as ProductVariant;
@@ -64,19 +67,12 @@ const ProductPage = () => {
 
   const handleButtonClick = (variant: ProductVariant) => {
     setSelectedVariant(variant);
-    const slideIndex = product.variants.nodes.findIndex(
-      (node) => node === variant,
+    const slideIndex = product?.images?.edges?.findIndex(
+      (edge) => edge.node.url === variant.image?.url,
     );
-    if (swiperRef.current) {
+    if (swiperRef.current && slideIndex !== -1) {
       swiperRef.current.slideTo(slideIndex);
     }
-  };
-
-  const handleSlideChange = (swiper: SwiperType) => {
-    const newVariant = product.variants.nodes[
-      swiper.activeIndex
-    ] as ProductVariant;
-    setSelectedVariant(newVariant);
   };
 
   return (
@@ -86,24 +82,58 @@ const ProductPage = () => {
           <div className="md:sticky md:top-20 md:self-start animate-fade-in-up">
             <Swiper
               className="rounded-xl custom-swiper md:mt-12"
-              modules={[Navigation, Pagination, EffectCards]}
+              modules={[Navigation, EffectCards]}
               spaceBetween={0}
               slidesPerView={1}
               navigation={{
-                enabled: true,
+                nextEl: '.custom-swiper-button-next',
+                prevEl: '.custom-swiper-button-prev',
               }}
-              color={'FFFFFF'}
-              pagination={{clickable: true}}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              onSlideChange={handleSlideChange}
+              onSlideChange={(swiper) => {
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
+
+                // Find the variant that matches the current slide's image
+                const currentSlideImage =
+                  product?.images?.edges[swiper.activeIndex]?.node.url;
+                const matchingVariant = product?.variants?.nodes.find(
+                  (variant) => variant.image?.url === currentSlideImage,
+                );
+
+                // Update the selected variant if a match is found
+                if (matchingVariant) {
+                  setSelectedVariant(matchingVariant);
+                }
+              }}
             >
-              {product?.images?.edges?.map((edge: any, index: number) => (
-                <SwiperSlide key={edge.node.url}>
-                  <img src={edge.node.url} alt={`Slide ${index + 1}`} />
+              {product?.images?.edges?.map((edge, index) => (
+                <SwiperSlide key={edge.node.id}>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <img
+                      src={edge.node.url}
+                      alt={`Slide ${index + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
+              <div
+                className={`custom-swiper-button-prev ${
+                  isBeginning ? 'opacity-30' : 'opacity-100'
+                }`}
+              >
+                <FaChevronLeft />
+              </div>
+              <div
+                className={`custom-swiper-button-next ${
+                  isEnd ? 'opacity-30' : 'opacity-100'
+                }`}
+              >
+                <FaChevronRight />
+              </div>
             </Swiper>
           </div>
           <div className="flex flex-col space-y-2 md:space-y-4 mt-2 md:mt-0">
@@ -111,34 +141,75 @@ const ProductPage = () => {
               <h1 className="text-2xl font-semibold">{product?.title}</h1>
             </div>
 
-            <div className="flex items-center space-x-2 animate-fade-in-up-delay-3 text-lg">
-              <span className="font-bold">
-                {selectedVariant?.price?.amount}zł
-              </span>
-              {selectedVariant?.compareAtPrice && (
-                <span className="text-gray-500 line-through">
-                  {selectedVariant.compareAtPrice.amount} zł
+            <div className="flex flex-col space-y-2 animate-fade-in-up-delay-3">
+              <div className="flex items-center space-x-2 text-lg">
+                <span>Razem: </span>
+                <span className="font-bold">
+                  {Number(selectedVariant?.price?.amount).toFixed(2)}zł
                 </span>
+                {selectedVariant?.compareAtPrice && (
+                  <span className="text-gray-500 line-through">
+                    {Number(selectedVariant.compareAtPrice.amount).toFixed(2)}zł
+                  </span>
+                )}
+                {product.options[0].name.toLowerCase() === 'ilość' &&
+                  selectedVariant && (
+                    <span className="text-green-600">
+                      {(() => {
+                        const baseVariant = product.variants
+                          .nodes[0] as ProductVariant;
+                        const basePrice = Number(baseVariant.price.amount);
+                        const currentPrice = Number(
+                          selectedVariant.price.amount,
+                        );
+                        const quantity = Number(selectedVariant.title);
+
+                        if (quantity > 1) {
+                          const pricePerUnit = currentPrice / quantity;
+                          const discount =
+                            ((basePrice - pricePerUnit) / basePrice) * 100;
+                          return `(${discount.toFixed(0)}% zniżki)`;
+                        }
+                        return null;
+                      })()}
+                    </span>
+                  )}
+              </div>
+              {product.options[0].name.toLowerCase() === 'ilość' && (
+                <div className="text-lg">
+                  Cena za sztukę:{' '}
+                  {(
+                    Number(selectedVariant?.price?.amount) /
+                    Number(selectedVariant?.title)
+                  ).toFixed(2)}
+                  zł
+                </div>
               )}
             </div>
-            <div className="font-semibold text-sm animate-fade-in-up-delay-2">
-              {product.options[0].name}
-            </div>
-            <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
-              {product?.variants?.nodes?.map((variant) => (
-                <button
-                  key={variant.id}
-                  className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
-                    selectedVariant === variant
-                      ? 'bg-color-blue text-white'
-                      : 'bg-white text-color-text border hover:bg-gray-50'
-                  } px-4 py-3 text-sm font-medium uppercase shadow-sm focus:outline-none sm:flex-1 sm:py-6`}
-                  onClick={() => handleButtonClick(variant as ProductVariant)}
-                >
-                  {variant.title}
-                </button>
-              ))}
-            </div>
+            {product.variants?.nodes?.length > 1 && (
+              <>
+                <div className="font-semibold text-sm animate-fade-in-up-delay-2">
+                  {product.options[0].name}
+                </div>
+                <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
+                  {product.variants.nodes.map((variant) => (
+                    <button
+                      key={variant.id}
+                      className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
+                        selectedVariant === variant
+                          ? 'bg-color-blue text-white'
+                          : 'bg-white text-color-text border hover:bg-gray-50'
+                      } px-4 py-3 text-sm font-medium uppercase shadow-sm focus:outline-none sm:flex-1 sm:py-6`}
+                      onClick={() =>
+                        handleButtonClick(variant as ProductVariant)
+                      }
+                    >
+                      {variant.title}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
             <div className="mt-4" />
             <AnimateOnAppear>
               <div className="font-semibold text-sm">Opis:</div>

@@ -11,7 +11,7 @@ interface GrantiesProps {
 const Granties = ({className}: GrantiesProps) => {
   return (
     <AnimateOnAppear>
-      <div className={`container mt-2 ${className} overflow-hidden`}>
+      <div className={`container mt-4 md:mt-8 ${className} overflow-hidden`}>
         <div className="bg-color-gray grid grid-cols-1 md:grid-cols-3 justify-start rounded-md p-4 gap-4 md:px-8">
           <AnimateOnAppear>
             <Grantie
