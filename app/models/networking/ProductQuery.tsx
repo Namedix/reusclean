@@ -35,7 +35,7 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
     metafields(
       identifiers: [
         {key: "composition", namespace: "custom"},
-        {key: "trade_item_description", namespace: "import_information"}
+        {key: "package_description", namespace: "custom"}
       ]
     ) {
       key

@@ -83,9 +83,9 @@ export default function Homepage() {
       <Opinions opinions={opinions} />
       <SectionStarter
         id="faq"
-        tag="Opinie"
-        title="Wyślij nam swoje pytania"
-        description="Poniżej te które często są zadawane!"
+        tag="Dla ciekawych"
+        title="Pytania i odpowiedzi"
+        description="Poniżej te które często słyszymy!"
       />
       <Faq />
       {product && <CallToAction product={product as Product} />}

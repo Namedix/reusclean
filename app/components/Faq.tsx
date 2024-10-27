@@ -46,23 +46,23 @@ const FaqItem: React.FC<FaqItem & {index: number}> = ({
 const Faq: React.FC = () => {
   const faqItems: FaqItem[] = [
     {
-      question: 'Czy musze kupić waszą butelkę?',
+      question: 'Czy tabletki Reus są skuteczne w czyszczeniu?',
       answer:
-        'Zamiast kupować nowe środki czyszczące w butelkach i wyrzucać je, gdy są puste, dlaczego nie zatrzymać butelki i dodać do nich jedną z naszych saszetek czyszczących? To jeden ze sposobów, w jaki wszyscy możemy zmniejszyć problem tworzyw sztucznych, przed którym stoi obecnie nasz świat. Jeśli potrzebujesz butelek, możemy dostarczyć butelki wykonane z plastiku pochodzącego z recyklingu, które możesz przechowywać i napełniać zamiast wyrzucać.',
+        'Tak! Nasze tabletki zostały zaprojektowane, aby zapewniać efektywne czyszczenie bez szkodliwych chemikaliów. Nadają się do codziennego sprzątania kuchni, łazienki, szyb i wielu innych powierzchni.',
       userAvatar: './assets/Avatar.png',
       botAvatar: './assets/Avatar4.png',
     },
     {
-      question: 'Czy produkty lub opakowania reus wykorzystują plastik?',
+      question: 'Czy butelka Reus jest wielokrotnego użytku?',
       answer:
-        'Nasze kapsułki i opakowania są ekologiczne, nie używamy plastiku, a ty możesz ponownie używać swoich butelek, co pomaga zmniejszyć odpady plastikowe.',
+        'Tak! Nasza butelka została zaprojektowana tak, abyś mógł używać jej wielokrotnie. Po rozpuszczeniu tabletki możesz napełniać butelkę i używać jej do różnych środków czystości dzięki dołączonym naklejkom (uniwersalny, łazienka, kuchnia, szyby), które pomagają oznaczyć zawartość.',
       userAvatar: './assets/Avatar2.png',
       botAvatar: './assets/Avatar4.png',
     },
     {
-      question: 'Jakiego rodzaju butelki potrzebuję?',
+      question: 'Na jak długo starcza płyn Reus?',
       answer:
-        'Butelka o pojemności do 750 ml z dołączonym dozownikiem z atomizerem będzie odpowiednia. Możesz również użyć mniejszej butelki o pojemności 300 ml, jeśli chcesz bardziej skoncentrowanego roztworu. Nasze opakowanie sugeruje użycie butelki o pojemności 500 ml, aby ułatwić, ale możesz śmiało eksperymentować.',
+        'Jedna tabletka Reus rozpuszczona w 500 ml wody starcza na tyle samo co popularne środki czystości i zależy od intensywności użytkowania.',
       userAvatar: './assets/Avatar.png',
       botAvatar: './assets/Avatar4.png',
     },

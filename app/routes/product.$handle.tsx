@@ -68,7 +68,7 @@ const ProductPage = () => {
   const handleButtonClick = (variant: ProductVariant) => {
     setSelectedVariant(variant);
     const slideIndex = product?.images?.edges?.findIndex(
-      (edge) => edge.node.url === variant.image?.url,
+      (edge: {node: {url: string}}) => edge.node.url === variant.image?.url,
     );
     if (swiperRef.current && slideIndex !== -1) {
       swiperRef.current.slideTo(slideIndex);
@@ -100,7 +100,8 @@ const ProductPage = () => {
                 const currentSlideImage =
                   product?.images?.edges[swiper.activeIndex]?.node.url;
                 const matchingVariant = product?.variants?.nodes.find(
-                  (variant) => variant.image?.url === currentSlideImage,
+                  (variant: ProductVariant) =>
+                    variant.image?.url === currentSlideImage,
                 );
 
                 // Update the selected variant if a match is found
@@ -109,17 +110,19 @@ const ProductPage = () => {
                 }
               }}
             >
-              {product?.images?.edges?.map((edge, index) => (
-                <SwiperSlide key={edge.node.id}>
-                  <div className="w-full h-full flex items-center justify-center">
-                    <img
-                      src={edge.node.url}
-                      alt={`Slide ${index + 1}`}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
+              {product?.images?.edges?.map(
+                (edge: {node: {id: string; url: string}}, index: number) => (
+                  <SwiperSlide key={edge.node.id}>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={edge.node.url}
+                        alt={`Slide ${index + 1}`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ),
+              )}
               <div
                 className={`custom-swiper-button-prev ${
                   isBeginning ? 'opacity-30' : 'opacity-100'
@@ -192,7 +195,7 @@ const ProductPage = () => {
                   {product.options[0].name}
                 </div>
                 <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
-                  {product.variants.nodes.map((variant) => (
+                  {product.variants.nodes.map((variant: ProductVariant) => (
                     <button
                       key={variant.id}
                       className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
