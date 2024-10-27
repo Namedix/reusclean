@@ -224,57 +224,43 @@ const ProductView = ({product}: ProductViewPreps) => {
             <CommentSection />
           </div>
           <div className="mt-8 space-y-2 text-sm text-color-textLight group">
-            <ExpandableCard
-              className="animate-fade-in-up-delay-5"
-              title="Opis"
-              icon={<FaList />}
-            >
-              <div className="px-2">
-                {selectedVariant?.metafields?.find(
-                  (metafield: Maybe<Metafield>) =>
-                    metafield?.key === 'trade_item_description',
-                )?.value ?? ''}
-              </div>
-            </ExpandableCard>
-            <ExpandableCard
-              className="animate-fade-in-up-delay-3"
-              title="Sposób użycia"
-              icon={<FaShieldAlt />}
-            >
-              <ol className="list-decimal pl-5 space-y-2">
-                <li>
-                  Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus.
-                </li>
+            {selectedVariant?.metafields?.some(
+              (metafield) => metafield?.key === 'package_description',
+            ) && (
+              <ExpandableCard
+                className="animate-fade-in-up-delay-5"
+                title="Zestaw zawiera"
+                icon={<FaList />}
+              >
+                <RichText
+                  className="px-2"
+                  data={
+                    selectedVariant?.metafields?.find(
+                      (metafield) => metafield?.key === 'package_description',
+                    )?.value ?? ''
+                  }
+                />
+              </ExpandableCard>
+            )}
 
-                <li>
-                  Do butelki wrzuć tabletkę z wybranym środkiem czystości i
-                  poczekaj aż całkowicie się rozpuści. Nie zakręcaj butelki!
-                </li>
-
-                <li>
-                  Gdy tabletka całkowicie się rozpuści, zakręć butelkę. Twój
-                  produkt jest gotowy do użytku.
-                </li>
-              </ol>
-              <p>Wstrząśnij przed użyciem.</p>
-            </ExpandableCard>
-
-            <ExpandableCard
-              className="animate-fade-in-up-delay-4"
-              title="Składniki"
-              icon={<FaList />}
-            >
-              <RichText
-                className="px-2"
-                data={
-                  selectedVariant?.metafields?.find(
-                    (metafield: Maybe<Metafield>) =>
-                      metafield?.key === 'composition',
-                  )?.value ?? ''
-                }
-              />
-            </ExpandableCard>
-
+            {selectedVariant?.metafields?.some(
+              (metafield) => metafield?.key === 'composition',
+            ) && (
+              <ExpandableCard
+                className="animate-fade-in-up-delay-4"
+                title="Składniki"
+                icon={<FaList />}
+              >
+                <RichText
+                  className="px-2"
+                  data={
+                    selectedVariant?.metafields?.find(
+                      (metafield) => metafield?.key === 'composition',
+                    )?.value ?? ''
+                  }
+                />
+              </ExpandableCard>
+            )}
             <ExpandableCard
               className="animate-fade-in-up-delay-6"
               title="Dostawa i płatność"
@@ -300,7 +286,7 @@ const ProductView = ({product}: ProductViewPreps) => {
                 <li>Darmowa dostawa - do zamówień powyżej 79 zł</li>
 
                 <li>
-                  Płać wygodnie. Akceptujemy płatności kartką kredytową, BLIK,
+                  Płać wygodnie. Akceptujemy szybkie płatności kartą, BLIK,
                   Apple Pay, Przelewy24
                 </li>
               </ul>

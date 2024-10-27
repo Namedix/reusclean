@@ -56,6 +56,27 @@ export const Footer = () => {
             <SocialIcons className="grid grid-cols-3" />
           </div>
         </div>
+
+        <div>
+          <div className="flex flex-col items-center gap-4 text-center">
+            <p className="text-sm text-color-textLight">
+              Projekt współfinansowany ze środków Unii Europejskiej w ramach
+              Europejskiego Funduszu Rozwoju Regionalnego
+            </p>
+            <div className="flex gap-6 items-center">
+              <img
+                src="/assets/coofinanceWithEU.png"
+                alt="Współfinansowane przez Unię Europejską"
+                className="h-12 object-contain"
+              />
+              <img
+                src="/assets/europeanFundsLogo.jpg"
+                alt="Fundusze Europejskie"
+                className="h-12 object-contain"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
