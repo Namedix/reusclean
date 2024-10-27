@@ -28,12 +28,15 @@ import {RichText} from '@shopify/hydrogen';
 import {Link} from '@remix-run/react';
 interface ProductViewPreps {
   product: Product;
+  selectedVariant: ProductVariant;
+  setSelectedVariant: (variant: ProductVariant) => void;
 }
 
-const ProductView = ({product}: ProductViewPreps) => {
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(
-    product.variants.nodes[0],
-  );
+const ProductView = ({
+  product,
+  selectedVariant,
+  setSelectedVariant,
+}: ProductViewPreps) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -215,6 +218,11 @@ const ProductView = ({product}: ProductViewPreps) => {
                     ]
                   : []
               }
+              onAddToCartComplete={() => {
+                if (product?.variants?.nodes?.[0]) {
+                  setSelectedVariant(product.variants.nodes[0]);
+                }
+              }}
             />
           </div>
           <div className="pt-2 animate-fade-in-up-delay-5">

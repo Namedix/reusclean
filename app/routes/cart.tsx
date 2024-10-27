@@ -299,7 +299,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                     <p>{cart?.cost.subtotalAmount.amount}zł</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
-                    Koszty wysyłki i podatki obliczone przy kasie.
+                    Koszty wysyłki obliczone przy kasie.
                   </p>
                   <div className="mt-4">
                     <button

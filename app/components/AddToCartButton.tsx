@@ -8,11 +8,13 @@ export function AddToCartButton({
   disabled,
   lines,
   onClick,
+  onAddToCartComplete,
 }: {
   analytics?: unknown;
   disabled?: boolean;
   lines: Array<OptimisticCartLineInput>;
   onClick?: () => void;
+  onAddToCartComplete?: () => void;
 }) {
   const [hasHandled, setHasHandled] = useState(false);
 
@@ -20,6 +22,7 @@ export function AddToCartButton({
     // Dispatch custom event when item is added
     window.dispatchEvent(new Event('openCart'));
     onClick?.();
+    onAddToCartComplete?.();
     setHasHandled(true);
   };
 

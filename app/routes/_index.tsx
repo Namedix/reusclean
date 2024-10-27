@@ -3,6 +3,7 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {getSelectedProductOptions} from '@shopify/hydrogen';
 import type {
   Product,
+  ProductVariant,
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import Granties from '~/components/Granties';
@@ -17,6 +18,7 @@ import Products from '~/components/Products';
 import ProductView from '~/components/Product';
 import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
 import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
+import {useState, useEffect} from 'react';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -49,10 +51,28 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function Homepage() {
   const {product, collection} = useLoaderData<typeof loader>();
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(
+    // Add fallback to first variant if no variant is selected
+    product?.variants?.nodes[0] || null,
+  );
+
+  // Add useEffect to set first variant when product changes or selectedVariant is null
+  useEffect(() => {
+    if (product?.variants?.nodes[0] && !selectedVariant) {
+      setSelectedVariant(product.variants.nodes[0]);
+    }
+  }, [product, selectedVariant]);
+
   return (
     <div className="home">
       <Granties className="hidden md:block" />
-      {product && <ProductView product={product as Product} />}
+      {product && (
+        <ProductView
+          product={product as Product}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
+      )}
       <Granties className="block md:hidden" />
       <BigImages />
       <SectionStarter
@@ -88,7 +108,13 @@ export default function Homepage() {
         description="Poniżej te które często słyszymy!"
       />
       <Faq />
-      {product && <CallToAction product={product as Product} />}
+      {product && (
+        <CallToAction
+          product={product as Product}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
+      )}
       <Granties />
     </div>
   );
