@@ -23,9 +23,9 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 const ProductsView = () => {
   const {products} = useLoaderData<typeof loader>();
-  const productCards: ProductCardFragment[] = products.edges.map(
-    (edge: any) => edge.node,
-  );
+  const productCards: ProductCardFragment[] = products.edges
+    .filter((edge: any) => edge.node.handle !== 'zestaw-startowy-1')
+    .map((edge: any) => edge.node);
 
   return (
     <div className="container">

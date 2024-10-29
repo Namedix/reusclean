@@ -263,9 +263,17 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                                     </p>
                                   </div>
                                   <p className="mt-1 text-sm text-gray-500">
-                                    {line.merchandise.selectedOptions[0].name}
-                                    :&nbsp;
-                                    {line.merchandise.title}
+                                    {line.merchandise.selectedOptions[0]
+                                      .name !== 'Title' && (
+                                      <>
+                                        {
+                                          line.merchandise.selectedOptions[0]
+                                            .name
+                                        }
+                                        :&nbsp;
+                                        {line.merchandise.title}
+                                      </>
+                                    )}
                                   </p>
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
@@ -296,7 +304,9 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                 <div className="border-t border-gray-200 px-4 pt-4 pb-2 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Suma częściowa</p>
-                    <p>{cart?.cost.subtotalAmount.amount}zł</p>
+                    <p>
+                      {Number(cart?.cost.subtotalAmount.amount).toFixed(2)}zł
+                    </p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
                     Koszty wysyłki obliczone przy kasie.

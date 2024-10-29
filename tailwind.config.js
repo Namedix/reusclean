@@ -28,6 +28,10 @@ export default {
             transform: 'translateY(0)',
           },
         },
+        scroll: {
+          '0%': {transform: 'translateX(-50%)'},
+          '100%': {transform: 'translateX(0)'},
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1)',
@@ -45,6 +49,7 @@ export default {
           'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.5s both',
         'fade-in-up-delay-6':
           'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.6s both',
+        scroll: 'scroll 20s linear infinite',
       },
       transitionTimingFunction: {
         'custom-ease': 'cubic-bezier(0.67, 0.01, 0.18, 1)',
