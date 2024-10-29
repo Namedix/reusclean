@@ -53,8 +53,8 @@ export const opinions: Opinion[] = [
     description:
       'Świetny, ekologiczny produkt, który działa skutecznie i jest w normalnej cenie. Czego chcieć więcej?',
     profile: {
-      imageUrl: '../assets/Avatar3.png',
-      name: 'Alicja',
+      imageUrl: '../assets/Avatar2.png',
+      name: 'Filo',
     },
     rate: 5,
   },
@@ -63,8 +63,8 @@ export const opinions: Opinion[] = [
     description:
       'Czyści NAPRAWDĘ DOBRZE. Mogę potwierdzić, że zapach zielonej herbaty jest na prawdę delikatny, a sam produkt czyści NAPRAWDĘ dobrze. Dzisiaj umyłam okna, podłogi i blaty - efekty były 👌 Jak miło nie wdychać chemikaliów podczas sprzątania 😅',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
+      imageUrl: '../assets/Avatar3.png',
+      name: 'Marta',
     },
     rate: 5,
   },
@@ -73,7 +73,7 @@ export const opinions: Opinion[] = [
       'Sprzątam nimi cały dom. Wanna, umywalki, prysznic, blaty, kurze, szyby… nadają i sprawdzają się w każdej potrzebie. Super pomysł, żeby skoncentrować to w rozpuszczalnej tabletce. Będę kupować regularnie.',
     profile: {
       imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
+      name: 'Tomasz',
     },
     rate: 5,
   },
@@ -82,8 +82,8 @@ export const opinions: Opinion[] = [
     description:
       'W końcu nie muszę dźwigać hektolitrów płynów czyszczących ze sklepu. Zamawiam i kurier dostarcza mi paczkę pod same drzwi <3',
     profile: {
-      imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
+      imageUrl: '../assets/Avatar2.png',
+      name: 'Agnieszka',
     },
     rate: 5,
   },
@@ -93,7 +93,7 @@ export const opinions: Opinion[] = [
       'Cieszę się, że w końcu ktoś zaproponował racjonalną cenę za rozwiązanie w postaci refili. Z kodem promocyjnym wyszło mnie taniej niż w 🐞',
     profile: {
       imageUrl: '../assets/Avatar.png',
-      name: 'Jan Kowalski',
+      name: 'Michał',
     },
     rate: 5,
   },

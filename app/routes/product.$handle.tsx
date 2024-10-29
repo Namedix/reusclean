@@ -4,7 +4,6 @@ import type {ProductVariant} from '@shopify/hydrogen/storefront-api-types';
 import type {MetaFunction} from '@shopify/remix-oxygen';
 import React, {useRef, useState} from 'react';
 import {AddToCartButton} from '~/components/AddToCartButton';
-import AnimatedTicker from '~/components/AnimatedTicker';
 import {PRODUCT_WITH_COLLECTION_QUERY} from '~/models/networking/ProductQuery';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import type {Swiper as SwiperType} from 'swiper';
@@ -13,20 +12,22 @@ import '../styles/app.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards';
-import {EffectCards, Navigation, Pagination} from 'swiper/modules';
+import {EffectCards, Navigation} from 'swiper/modules';
 import Granties from '~/components/Granties';
 import Opinions from '~/components/Opinions';
 import {opinions} from '~/models/opinion';
 import AnimateOnAppear from '~/components/AnimateOnAppear';
 import Products from '~/components/Products';
 import type {ProductCardFragment} from 'storefrontapi.generated';
-import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
+import {FaBox, FaChevronLeft, FaChevronRight, FaList} from 'react-icons/fa';
+import ExpandableCard from '~/components/ExpandableCard';
+import {RichText} from '@shopify/hydrogen';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Reus | ${data?.product.title ?? ''}`}];
 };
 
-export async function loader({context, request, params}: LoaderFunctionArgs) {
+export async function loader({context, params}: LoaderFunctionArgs) {
   const {storefront} = context;
   const {handle} = params;
 
@@ -214,10 +215,12 @@ const ProductPage = () => {
               </>
             )}
             <div className="mt-4" />
-            <AnimateOnAppear>
-              <div className="font-semibold text-sm">Opis:</div>
-              <div className="mt-2">{product.description}</div>
-            </AnimateOnAppear>
+            <div className="font-semibold text-sm animate-fade-in-up-delay-4">
+              Opis:
+            </div>
+            <div className="mt-2 animate-fade-in-up-delay-4">
+              {product.description}
+            </div>
             <div className="pt-4 animate-fade-in-up-delay-5">
               <AddToCartButton
                 lines={
@@ -231,6 +234,44 @@ const ProductPage = () => {
                     : []
                 }
               />
+            </div>
+            <div>
+              {product?.metafields?.some(
+                (metafield) => metafield?.key === 'composition',
+              ) && (
+                <ExpandableCard
+                  className="animate-fade-in-up-delay-4 mt-4"
+                  title="Skład"
+                  icon={<FaList />}
+                >
+                  <RichText
+                    className="px-2"
+                    data={
+                      product?.metafields?.find(
+                        (metafield) => metafield?.key === 'composition',
+                      )?.value ?? ''
+                    }
+                  />
+                </ExpandableCard>
+              )}
+              {selectedVariant?.metafields?.some(
+                (metafield) => metafield?.key === 'package_description',
+              ) && (
+                <ExpandableCard
+                  className="animate-fade-in-up-delay-5 mt-4"
+                  title="Zestaw zawiera"
+                  icon={<FaBox />}
+                >
+                  <RichText
+                    className="px-2"
+                    data={
+                      selectedVariant?.metafields?.find(
+                        (metafield) => metafield?.key === 'package_description',
+                      )?.value ?? ''
+                    }
+                  />
+                </ExpandableCard>
+              )}
             </div>
           </div>
         </div>

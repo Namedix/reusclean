@@ -1,10 +1,8 @@
 import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
-import {getSelectedProductOptions} from '@shopify/hydrogen';
 import type {
   Product,
   ProductVariant,
-  SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import Granties from '~/components/Granties';
 import BigImages from '~/components/BigImages';

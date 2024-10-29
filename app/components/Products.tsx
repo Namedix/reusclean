@@ -35,7 +35,8 @@ const Products = ({products, colCount}: PorductsProps) => {
                   {product.title}
                 </div>
                 <div className="text-center text-color-textLight font-semibold  mt-2">
-                  {product.priceRange.minVariantPrice.amount}zł
+                  {Number(product.priceRange.minVariantPrice.amount).toFixed(2)}
+                  zł
                 </div>
               </div>
             </Link>

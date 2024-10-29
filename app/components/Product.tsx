@@ -9,6 +9,7 @@ import {
   FaTruck,
   FaChevronLeft,
   FaChevronRight,
+  FaBox,
 } from 'react-icons/fa';
 import AnimatedPaymentMethods from './AnimatedPaymentMethods';
 import CommentSection from './CommentSection';
@@ -70,11 +71,11 @@ const ProductView = ({
 
   const handleButtonClick = (variant: ProductVariant) => {
     setSelectedVariant(variant);
-    const slideIndex = product?.images?.edges?.findIndex(
-      (edge) => edge.node.url === variant.image?.url,
+    const variantIndex = product?.variants?.nodes?.findIndex(
+      (v) => v.id === variant.id,
     );
-    if (swiperRef.current && slideIndex !== -1) {
-      swiperRef.current.slideTo(slideIndex);
+    if (swiperRef.current && variantIndex !== -1) {
+      swiperRef.current.slideTo(variantIndex);
     }
   };
 
@@ -97,26 +98,18 @@ const ProductView = ({
             onSlideChange={(swiper) => {
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
-
-              // Find the variant that matches the current slide's image
-              const currentSlideImage =
-                product?.images?.edges[swiper.activeIndex]?.node.url;
-              const matchingVariant = product?.variants?.nodes.find(
-                (variant) => variant.image?.url === currentSlideImage,
-              );
-
-              // Update the selected variant if a match is found
-              if (matchingVariant) {
-                setSelectedVariant(matchingVariant);
+              const variant = product?.variants?.nodes[swiper.activeIndex];
+              if (variant) {
+                setSelectedVariant(variant);
               }
             }}
           >
-            {product?.images?.edges?.map((edge, index) => (
-              <SwiperSlide key={edge.node.id}>
+            {product?.variants?.nodes?.map((variant) => (
+              <SwiperSlide key={variant.image?.id}>
                 <div className="w-full h-full flex items-center justify-center">
                   <img
-                    src={edge.node.url}
-                    alt={`Slide ${index + 1}`}
+                    src={variant.image?.url}
+                    alt={variant.title}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -156,7 +149,7 @@ const ProductView = ({
               ))}
             </div>
             <Link className="text-color-blue text-xs" to="/#opinions">
-              +50 pozytywnych opinii
+              +17 pozytywnych opinii
             </Link>
           </div>
 
@@ -238,7 +231,7 @@ const ProductView = ({
               <ExpandableCard
                 className="animate-fade-in-up-delay-5"
                 title="Zestaw zawiera"
-                icon={<FaList />}
+                icon={<FaBox />}
               >
                 <RichText
                   className="px-2"
@@ -286,10 +279,7 @@ const ProductView = ({
                   kompostowalny
                 </li>
 
-                <li>
-                  Elastyczna dostawa – zamawiaj do automatu paczkowego, punktu
-                  odbioru lub z dostawą do domu
-                </li>
+                <li>Wygodna dostawa pod drzwi</li>
 
                 <li>Darmowa dostawa - do zamówień powyżej 79 zł</li>
 
