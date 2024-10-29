@@ -28,37 +28,27 @@ export const Footer = () => {
           <div className="flex flex-col gap-8 md:w-[250px]">
             <div className="text-color-text text-lg font-semibold">Reus</div>
             <div className="flex flex-col text-color-blue gap-2">
+              <Link to="/about">O Nas</Link>
+              <Link to="/products">Produkty</Link>
               <Link to="/blogs">Blog</Link>
-              <div>Benefits</div>
-              <div>Investing Strategies</div>
-              <div>Pricing</div>
-              <div>Security</div>
             </div>
           </div>
           <div className="flex flex-col gap-8 md:w-[250px]">
             <div className="text-color-text text-lg font-bold">Zasoby</div>
             <div className="flex flex-col text-color-blue gap-2">
-              <div>FAQ</div>
-              <div>Learn Center</div>
-              <div>More product</div>
-              <div>Help Center</div>
+              <Link to="/#faq">FAQ</Link>
+              <Link to="/policies/terms-of-service">Regulamin</Link>
+              <Link to="/policies/privacy-policy">Polityka prywatności</Link>
+              <Link to="/policies/refund-policy">Polityka zwrotów</Link>
+              <Link to="/policies/shipping-policy">Polityka wysyłki</Link>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 justify-center border-t-2 border-neutral-200 py-8 gap-4">
+        <div className="flex flex-col md:flex-row justify-center border-t-2 border-neutral-200 py-8 gap-4">
           <span className="text-color-textLight">
             © 2024 – Reus • 🇵🇱 Stworzone w Polsce
           </span>
-          <div className="grid grid-cols-3 md:flex justify-center md:justify-end gap-2 md:gap-6">
-            {Object.entries(policyMap).map(([handle, title]) => (
-              <p key={handle} className="mb-4">
-                <Link to={`/policies/${handle}`} className="text-color-blue">
-                  {title}
-                </Link>
-              </p>
-            ))}
-          </div>
           <div className="md:hidden flex justify-center">
             <SocialIcons className="grid grid-cols-3" />
           </div>
@@ -106,11 +96,6 @@ export const Footer = () => {
               <img
                 src="/assets/mastercard.png"
                 alt="BLIK"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/stripe.png"
-                alt="Przelewy24"
                 className="h-8 object-contain"
               />
               <img

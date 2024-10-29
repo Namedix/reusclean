@@ -64,22 +64,22 @@ const Header = ({cart}: HeaderProps) => {
             } md:flex left-0 right-0 bottom-0 items-center justify-center md:static md:opacity-100 md:max-h-max md:mx-auto transition-all duration-200 overflow-hidden`}
           >
             <div className="relative z-2 flex flex-col justify-center gap-6 md:flex-row pt-1">
-              <Link onClick={toggleNavigation} to="/#starter-set">
+              <Link onClick={() => setOpenNavigation(false)} to="/">
                 Zestaw startowy
               </Link>
-              <Link onClick={toggleNavigation} to="/products">
+              <Link onClick={() => setOpenNavigation(false)} to="/products">
                 Produkty
               </Link>
-              <Link onClick={toggleNavigation} to="/#how-it-work">
+              <Link onClick={() => setOpenNavigation(false)} to="/#how-it-work">
                 Jak działa?
               </Link>
-              <Link onClick={toggleNavigation} to="/#opinions">
+              <Link onClick={() => setOpenNavigation(false)} to="/#opinions">
                 Opinie
               </Link>
-              <Link onClick={toggleNavigation} to="/#faq">
+              <Link onClick={() => setOpenNavigation(false)} to="/#faq">
                 FAQ
               </Link>
-              <Link onClick={toggleNavigation} to="/about">
+              <Link onClick={() => setOpenNavigation(false)} to="/about">
                 O nas
               </Link>
             </div>

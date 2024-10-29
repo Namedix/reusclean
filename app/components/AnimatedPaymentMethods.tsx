@@ -5,7 +5,6 @@ const AnimatedPaymentMethods: React.FC = () => {
     {name: 'Apple Pay', src: '../assets/applepay.png'},
     {name: 'Maestro', src: '../assets/maestro.png'},
     {name: 'Google Pay', src: '../assets/googlepay.png'},
-    {name: 'Stripe', src: '../assets/stripe.png'},
   ];
 
   return (
