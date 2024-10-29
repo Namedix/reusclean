@@ -36,7 +36,7 @@ async function loadCriticalData({context, params}: LoaderFunctionArgs) {
 
 export default function Article() {
   const {article} = useLoaderData<typeof loader>();
-  const {title, image, contentHtml, author} = article;
+  const {title, image, contentHtml} = article;
 
   const publishedDate = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
@@ -49,36 +49,7 @@ export default function Article() {
       <div className="flex justify-between px-4 mx-auto ">
         <article className="mx-auto w-full format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
           <header className="mb-4 lg:mb-6 not-format">
-            <address className="flex items-center mb-6 not-italic">
-              <div className="inline-flex items-center mr-3 text-sm text-color-text">
-                {author && author.name && (
-                  <>
-                    <img
-                      className="mr-4 w-16 h-16 rounded-full"
-                      src="../../assets/Avatar4.png"
-                      alt={author.name}
-                    />
-                    <div>
-                      <a
-                        href="#blog"
-                        rel="author"
-                        className="text-xl font-bold text-color-text"
-                      >
-                        {author.name}
-                      </a>
-                      <p className="text-base text-gray-500 dark:text-gray-400">
-                        <time
-                          dateTime={article.publishedAt}
-                          title={publishedDate}
-                        >
-                          {publishedDate}
-                        </time>
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </address>
+            <address className="flex items-center mb-6 not-italic"></address>
             <h1 className="mb-4 text-3xl font-extrabold leading-tight text-color-text lg:mb-6 lg:text-4xl ">
               {title}
             </h1>
@@ -94,7 +65,7 @@ export default function Article() {
             </figure>
           )}
           <div
-            className="mt-8"
+            className="mt-8 blog-content"
             dangerouslySetInnerHTML={{__html: contentHtml}}
           />
         </article>

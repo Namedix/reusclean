@@ -221,3 +221,34 @@
     transform: translateX(0%);
   }
 }
+
+.blog-content {
+  /* Add your specific CMS styling here */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+  }
+
+  ul,
+  ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+  }
+}

@@ -53,7 +53,7 @@ export default function Policy() {
   const {policy} = useLoaderData<typeof loader>();
 
   return (
-    <div className="policy container mt-8">
+    <div className="policy container mt-8 blog-content">
       <div dangerouslySetInnerHTML={{__html: policy.body}} />
     </div>
   );
