@@ -10,25 +10,25 @@ const HowToUse = () => {
       title: '1. Woda',
       tag: 'Chlup',
       description:
-        'Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus',
-      icon: './app/assets/step1.png',
-      slide: './app/assets/howToUse1.gif',
+        'Nalej 500ml zimnej wody do butelki wielokrotnego użytku Reus.',
+      icon: './assets/step1.png',
+      slide: './assets/howToUse1.gif',
     },
     {
       title: '2. Tabletka',
       tag: 'Plum...',
       description:
-        'Do butelki wrzuć tabletkę z wybranym środkiem czystości i poczekaj aż całkowicie sięrozpuści. Nie zakręcaj butelki!',
-      icon: './app/assets/step2.png',
-      slide: './app/assets/howToUse2.gif',
+        'Do butelki wrzuć tabletkę z wybranym środkiem czystości i poczekaj aż całkowicie się rozpuści. Nie zakręcaj butelki!',
+      icon: './assets/step2.png',
+      slide: './assets/howToUse2.gif',
     },
     {
       title: '3. Produkt gotowy!',
       tag: 'Wstrząśnij przed użyciem',
       description:
-        'Gdy tabletka całkowicie się rozpuszczą zakręć butelkę. Twój produkt jest gotowy doużytku.',
-      icon: './app/assets/step3.png',
-      slide: './app/assets/howToUse3.gif',
+        'Gdy tabletka całkowicie się rozpuści zakręć butelkę. Twój produkt jest gotowy do użycia.',
+      icon: './assets/step3.png',
+      slide: './assets/howToUse3.gif',
     },
   ];
 
@@ -63,7 +63,7 @@ const HowToUse = () => {
   }, []);
 
   return (
-    <div className="flex container gap-12 mt-[2rem] md:mt-[0rem]">
+    <div className="flex container gap-12 mt-[4rem] md:mt-[0rem]">
       <div className="hidden md:block md:sticky md:top-0 md:self-start w-2/5">
         <VerticalImageDisplay
           slides={sections.map((section) => section.slide)}
@@ -73,7 +73,7 @@ const HowToUse = () => {
       <div>
         {sections.map((section, index) => (
           <div
-            key={index}
+            key={section.title.replace(/\s+/g, '-').toLowerCase()}
             ref={(el) => (sectionRefs.current[index] = el)}
             className="md:h-[60vh] flex items-center"
           >
@@ -162,21 +162,26 @@ const ContentSection: React.FC<ContentSectionProps> = ({
 }) => {
   return (
     <div className="max-w-md">
+      <div className="flex gap-4">
+        <div className="mb-4">
+          <img
+            src={icon}
+            alt={title}
+            className="w-14 h-14 p-4 bg-white rounded-lg shadow-lg shadow-neutral-300"
+          />
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-color-text">{title}</h2>
+          <p className="text-color-textLight text-lg">{tag}</p>
+        </div>
+      </div>
+
+      <p className="text-color-textLight mt-2">{description}</p>
       <img
         src={slide}
         alt={slide}
         className="w-full h-full object-cove rounded-md my-[2rem] md:hidden"
       />
-      <div className="mb-4">
-        <img
-          src={icon}
-          alt={title}
-          className="w-14 h-14 p-4 bg-white rounded-lg shadow-lg shadow-neutral-300"
-        />
-      </div>
-      <h2 className="text-2xl font-bold text-color-text">{title}</h2>
-      <p className="text-color-textLight text-lg">{tag}</p>
-      <p className="text-color-textLight mt-2">{description}</p>
     </div>
   );
 };

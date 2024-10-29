@@ -1,12 +1,12 @@
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
-import {getSelectedProductOptions, Image, Money} from '@shopify/hydrogen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {useLoaderData, type MetaFunction} from '@remix-run/react';
+import {getSelectedProductOptions} from '@shopify/hydrogen';
 import type {
   Product,
+  ProductVariant,
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import Granties from '~/components/Granties';
-import ProductView from '~/components/Product';
 import BigImages from '~/components/BigImages';
 import SectionStarter from '~/components/SectionStarter';
 import HowToUse from '~/components/HowToUse';
@@ -14,186 +14,108 @@ import Faq from '~/components/Faq';
 import Opinions from '~/components/Opinions';
 import CallToAction from '~/components/CallToAction';
 import {opinions} from '~/models/opinion';
+import Products from '~/components/Products';
+import ProductView from '~/components/Product';
+import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
+import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
+import {useState, useEffect} from 'react';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
 };
 
-export async function loader({context, request}: LoaderFunctionArgs) {
-  const {cart, storefront} = context;
-  const [{product}] = await Promise.all([
+export async function loader({context}: LoaderFunctionArgs) {
+  const {storefront} = context;
+  const [{product}, {collection}] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
       variables: {
-        handle: 'zestaw-startowy',
-        selectedOptions: getSelectedProductOptions(request),
+        handle: 'zestaw-startowy-1',
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
+    storefront.query(COLLECTION_QUERY, {
+      variables: {
+        id: 'gid://shopify/Collection/618393239878',
+      },
+    }),
   ]);
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
 
-  const firstVariant = product.variants.nodes[0];
-  const firstVariantIsDefault = Boolean(
-    firstVariant.selectedOptions.find(
-      (option: SelectedOption) =>
-        option.name === 'Title' && option.value === 'Default Title',
-    ),
-  );
-
-  if (firstVariantIsDefault) {
-    product.selectedVariant = firstVariant;
-  }
-
   return {
     product,
-    cart: cart.get(),
+    collection,
   };
 }
 
 export default function Homepage() {
-  const {product, cart} = useLoaderData<typeof loader>();
+  const {product, collection} = useLoaderData<typeof loader>();
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(
+    // Add fallback to first variant if no variant is selected
+    product?.variants?.nodes[0] || null,
+  );
+
+  // Add useEffect to set first variant when product changes or selectedVariant is null
+  useEffect(() => {
+    if (product?.variants?.nodes[0] && !selectedVariant) {
+      setSelectedVariant(product.variants.nodes[0]);
+    }
+  }, [product, selectedVariant]);
+
   return (
     <div className="home">
       <Granties className="hidden md:block" />
-      {product && <ProductView product={product as Product} />}
+      {product && (
+        <ProductView
+          product={product as Product}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
+      )}
       <Granties className="block md:hidden" />
       <BigImages />
       <SectionStarter
         id="how-it-work"
-        tag="Jak to działa?"
-        title="Dlaczego Reus jest taki super?"
-        description="Butelki na całe życie i dokupujesz tylko koncentraty"
+        tag="Jak to zrobić?"
+        title="Przygotowanie płynu jest dziecinnie proste!"
+        description="Jedna butelka starczy Ci na całe życie, a dzięki wygodnym tabletkom zaoszczędzisz miejsce w szafie!"
       />
       <HowToUse />
       <SectionStarter
         id="products"
-        tag="Koncentraty"
-        title="Koncentraty w super cenie"
-        description="Wybieraj z całego naszego asortymentu dostosowanego pod ciebie!"
+        tag="Tabletki czyszczące"
+        title="Refille w super cenie"
+        description="Wybieraj z całego naszego asortymentu dostosowanego pod Ciebie!"
+      />
+      {collection && (
+        <Products
+          colCount={4}
+          products={collection.products.edges.map((edge: any) => edge.node)}
+        />
+      )}
+      <SectionStarter
+        id="opinions"
+        tag="Opinie"
+        title="Przeczytaj prawdziwe recenzje klientów"
+        description="Uczciwe opinie zadowolonych użytkowników"
       />
       <Opinions opinions={opinions} />
       <SectionStarter
         id="faq"
-        tag="Opinie"
-        title="Wyślij nam swoje pytania"
-        description="Poniżej te które często są zadawane!"
+        tag="Dla ciekawych"
+        title="Pytania i odpowiedzi"
+        description="Poniżej te które często słyszymy!"
       />
       <Faq />
-      {product && <CallToAction product={product as Product} />}
+      {product && (
+        <CallToAction
+          product={product as Product}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
+      )}
       <Granties />
     </div>
   );
 }
-
-const PRODUCT_VARIANT_FRAGMENT = `#graphql
-  fragment ProductVariant on ProductVariant {
-    availableForSale
-    compareAtPrice {
-      amount
-      currencyCode
-    }
-    id
-    image {
-      __typename
-      id
-      url
-      altText
-      width
-      height
-    }
-    price {
-      amount
-      currencyCode
-    }
-    product {
-      title
-      handle
-    }
-    selectedOptions {
-      name
-      value
-    }
-    sku
-    title
-    unitPrice {
-      amount
-      currencyCode
-    }
-  }
-` as const;
-
-const PRODUCT_FRAGMENT = `#graphql
-  fragment Product on Product {
-    id
-    title
-    vendor
-    handle
-    descriptionHtml
-    description
-    options {
-      name
-      values
-    }
-  images(first: 10) {
-    edges {
-      node {
-        url
-      }
-    }
-  }
-    selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
-      ...ProductVariant
-    }
-    variants(first: 4) {
-      nodes {
-        ...ProductVariant
-      }
-    }
-    seo {
-      description
-      title
-    }
-  }
-  ${PRODUCT_VARIANT_FRAGMENT}
-` as const;
-
-const PRODUCT_QUERY = `#graphql
-  query Product(
-    $country: CountryCode
-    $handle: String!
-    $language: LanguageCode
-    $selectedOptions: [SelectedOptionInput!]!
-  ) @inContext(country: $country, language: $language) {
-    product(handle: $handle) {
-      ...Product
-    }
-  }
-  ${PRODUCT_FRAGMENT}
-` as const;
-
-const PRODUCT_VARIANTS_FRAGMENT = `#graphql
-  fragment ProductVariants on Product {
-    variants(first: 250) {
-      nodes {
-        ...ProductVariant
-      }
-    }
-  }
-  ${PRODUCT_VARIANT_FRAGMENT}
-` as const;
-
-const VARIANTS_QUERY = `#graphql
-  ${PRODUCT_VARIANTS_FRAGMENT}
-  query ProductVariants(
-    $country: CountryCode
-    $language: LanguageCode
-    $handle: String!
-  ) @inContext(country: $country, language: $language) {
-    product(handle: $handle) {
-      ...ProductVariants
-    }
-  }
-` as const;

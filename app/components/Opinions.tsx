@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import AnimateOnAppear from "./AnimateOnAppear";
+import React, {useEffect, useState} from 'react';
+import AnimateOnAppear from './AnimateOnAppear';
 
 interface Opinion {
   image?: string;
@@ -8,12 +8,11 @@ interface Opinion {
   profile: {
     imageUrl: string;
     name: string;
-    city: string;
   };
   rate: number;
 }
 
-const Opinions: React.FC<{ opinions: Opinion[] }> = ({ opinions }) => {
+const Opinions: React.FC<{opinions: Opinion[]}> = ({opinions}) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -22,17 +21,17 @@ const Opinions: React.FC<{ opinions: Opinion[] }> = ({ opinions }) => {
     };
 
     checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
+    window.addEventListener('resize', checkScreenSize);
 
-    return () => window.removeEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   const displayedOpinions = isSmallScreen ? opinions.slice(0, 4) : opinions;
 
   return (
-    <div className="container columns-1 md:columns-3 gap-6 space-y-6 pt-10">
+    <div className="container columns-1 md:columns-3 gap-6 space-y-6 pt-6 md:pt-10">
       {displayedOpinions.map((opinion, index) => (
-        <AnimateOnAppear>
+        <AnimateOnAppear key={index}>
           <div
             key={index}
             className="bg-gray-100 rounded-lg p-4 flex flex-col break-inside-avoid"
@@ -56,9 +55,6 @@ const Opinions: React.FC<{ opinions: Opinion[] }> = ({ opinions }) => {
               />
               <div className="flex flex-col">
                 <span className="font-semibold">{opinion.profile.name}</span>
-                <span className="text-sm text-gray-600">
-                  {opinion.profile.city}
-                </span>
               </div>
               <span className="ml-auto font-bold text-color-blue">
                 {opinion.rate}/5

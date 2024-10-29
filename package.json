@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "shopify hydrogen build --codegen",
-    "dev": "shopify hydrogen dev --codegen",
+    "dev": "shopify hydrogen dev --codegen --host",
     "preview": "shopify hydrogen preview --build",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "typecheck": "tsc --noEmit",
@@ -20,6 +20,7 @@
     "@remix-run/server-runtime": "^2.10.1",
     "@shopify/hydrogen": "2024.7.8",
     "@shopify/remix-oxygen": "^2.0.8",
+    "framer-motion": "^11.11.9",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "isbot": "^3.8.0",

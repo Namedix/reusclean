@@ -1,11 +1,10 @@
 const AnimatedPaymentMethods: React.FC = () => {
   const paymentMethods = [
-    {name: 'Visa', src: './app/assets/visa.png'},
-    {name: 'Mastercard', src: './app/assets/mastercard.png'},
-    {name: 'Apple Pay', src: './app/assets/applepay.png'},
-    {name: 'Maestro', src: './app/assets/maestro.png'},
-    {name: 'Google Pay', src: './app/assets/googlepay.png'},
-    {name: 'Stripe', src: './app/assets/stripe.png'},
+    {name: 'Visa', src: '../assets/visa.png'},
+    {name: 'Mastercard', src: '../assets/mastercard.png'},
+    {name: 'Apple Pay', src: '../assets/applepay.png'},
+    {name: 'Maestro', src: '../assets/maestro.png'},
+    {name: 'Google Pay', src: '../assets/googlepay.png'},
   ];
 
   return (

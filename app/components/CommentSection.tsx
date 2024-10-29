@@ -6,31 +6,28 @@ import 'swiper/css/autoplay';
 
 const comments = [
   {
-    title: 'Warto',
-    content:
-      'Naprawdę to działa. Długo nie mogłam uwierzyć, ale w końcu zobaczyłam reklamę na youtubie i się skusiłam. Nie żałuję',
-    author: 'Basia',
-    location: 'Katowice',
-    rating: '5/5',
-    avatarSrc: './app/assets/avatar.png',
-  },
-  {
-    title: 'Super',
-    content:
-      'Zamówiłem tylko uniwersalny. Żałuję, bo lepiej cenowo wychodzi zestaw z 3 butelkami. Wezmę następnym razem. Czysty zysk!',
-    author: 'Artur',
-    location: 'Gdańsk',
-    rating: '4.5/5',
-    avatarSrc: './app/assets/avatar2.png',
-  },
-  {
     title: 'Polecam',
     content:
-      'Używam od miesiąca i jestem bardzo zadowolona. Efekty widoczne od razu, a butelka wystarcza na długo.',
-    author: 'Marta',
-    location: 'Kraków',
+      'Jestem mile zaskoczona płynem do kuchni. Bez problemu czyści tłuste plamy po smażeniu obiadu.',
+    author: 'Basia',
     rating: '5/5',
-    avatarSrc: './app/assets/avatar3.png',
+    avatarSrc: './assets/Avatar2.png',
+  },
+  {
+    title: 'Sprytne rozwiązanie',
+    content:
+      'Mam małe mieszkanie i każde miejsce jest dla mnie na wagę złota. Fajnie, że komplet tabletek zajmuje mniej niż pudełko herbaty.',
+    author: 'Artur',
+    rating: '5/5',
+    avatarSrc: './assets/Avatar.png',
+  },
+  {
+    title: 'Działa',
+    content:
+      'Jako świeża mama nie wyobrażam sobie czyścić domu duszącymi środkami. Reus to świetna, naturalna alternatywa dla popularnych detergentów.',
+    author: 'Marta',
+    rating: '5/5',
+    avatarSrc: './assets/Avatar3.png',
   },
 ];
 
@@ -61,9 +58,7 @@ const CommentSection: React.FC = () => {
               />
               <div>
                 <p className="font-semibold">{comment.author}</p>
-                <p className="text-sm text-gray-500">
-                  {comment.location} {comment.rating}
-                </p>
+                <p className="text-sm text-gray-500">{comment.rating}</p>
               </div>
             </div>
           </div>
