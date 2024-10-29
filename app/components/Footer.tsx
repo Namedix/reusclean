@@ -16,7 +16,7 @@ export const Footer = () => {
           <div className="grow hidden md:block">
             <img src="/assets/reus.svg" alt="reus" height={60} width={60} />
             <p className="mt-4 mb-2 text-color-text">Znajdziesz nas</p>
-            <SocialIcons className="hidden md:flex" />
+            <SocialIcons className="hidden md:flex gap-4" />
             <p className="mt-4 mb-2 text-color-text">Bądźmy w kontakcie</p>
             <a
               href="mailto:info@reusclean.com"
@@ -50,7 +50,7 @@ export const Footer = () => {
             © 2024 – Reus • 🇵🇱 Stworzone w Polsce
           </span>
           <div className="md:hidden flex justify-center">
-            <SocialIcons className="grid grid-cols-3" />
+            <SocialIcons className="grid grid-cols-3 gap-4" />
           </div>
         </div>
         <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -123,7 +123,6 @@ const SocialIcons = ({className}: {className?: string}) => {
         href="https://www.facebook.com/61557257452370"
         target="_blank"
         rel="noopener noreferrer"
-        className="mr-4"
       >
         <svg
           className="w-6 h-6 text-color-blue"
