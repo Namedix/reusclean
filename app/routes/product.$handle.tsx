@@ -21,7 +21,7 @@ import Products from '~/components/Products';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import {FaBox, FaChevronLeft, FaChevronRight, FaList} from 'react-icons/fa';
 import ExpandableCard from '~/components/ExpandableCard';
-import {RichText} from '@shopify/hydrogen';
+import {Analytics, RichText} from '@shopify/hydrogen';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Reus | ${data?.product.title ?? ''}`}];
@@ -196,7 +196,7 @@ const ProductPage = () => {
                   {product.options[0].name}
                 </div>
                 <div className="grid grid-cols-4 gap-2 animate-fade-in-up-delay-2">
-                  {product.variants.nodes.map((variant: ProductVariant) => (
+                  {product.variants.nodes.map((variant) => (
                     <button
                       key={variant.id}
                       className={`group h-12 relative flex cursor-pointer items-center justify-center rounded-md ${
@@ -204,9 +204,7 @@ const ProductPage = () => {
                           ? 'bg-color-blue text-white'
                           : 'bg-white text-color-text border hover:bg-gray-50'
                       } px-4 py-3 text-sm font-medium uppercase shadow-sm focus:outline-none sm:flex-1 sm:py-6`}
-                      onClick={() =>
-                        handleButtonClick(variant as ProductVariant)
-                      }
+                      onClick={() => handleButtonClick(variant)}
                     >
                       {variant.title}
                     </button>
@@ -291,6 +289,21 @@ const ProductPage = () => {
             .filter((node: ProductCardFragment) => node.id !== product.id)}
         />
       )}
+      <Analytics.ProductView
+        data={{
+          products: [
+            {
+              id: product.id,
+              title: product.title,
+              price: selectedVariant?.price?.amount || '0',
+              vendor: product.vendor || '',
+              variantId: selectedVariant?.id || '',
+              variantTitle: selectedVariant?.title || '',
+              quantity: 1,
+            },
+          ],
+        }}
+      />
     </div>
   );
 };
