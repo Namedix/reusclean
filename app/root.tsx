@@ -80,6 +80,7 @@ export async function loader(args: LoaderFunctionArgs) {
       // localize the privacy banner
       country: 'PL',
       language: 'PL',
+      privacyPolicyUrl: '/policies/privacy-policy',
     },
   });
 }
