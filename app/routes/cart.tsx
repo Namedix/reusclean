@@ -134,7 +134,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
     window.location.href = cart?.checkoutUrl ?? '';
   };
 
-  const freeShippingThreshold = 75; // 75 PLN
+  const freeShippingThreshold = 79;
   const subtotal = parseFloat(cart?.cost.subtotalAmount.amount || '0');
   const progressPercentage = Math.min(
     (subtotal / freeShippingThreshold) * 100,

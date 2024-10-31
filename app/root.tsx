@@ -77,10 +77,8 @@ export async function loader(args: LoaderFunctionArgs) {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
       withPrivacyBanner: true,
-      // localize the privacy banner
       country: 'PL',
       language: 'PL',
-      privacyPolicyUrl: '/policies/privacy-policy',
     },
   });
 }
