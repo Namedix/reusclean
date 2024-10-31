@@ -16,9 +16,6 @@ import {
 } from '@remix-run/react';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
-import type {ShopPolicy} from '@shopify/hydrogen/customer-account-api-types';
-import {html} from 'framer-motion/client';
-import type {ShopPolicyWithDefault} from '@shopify/hydrogen/storefront-api-types';
 
 export type RootLoader = typeof loader;
 
@@ -81,8 +78,8 @@ export async function loader(args: LoaderFunctionArgs) {
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
       withPrivacyBanner: true,
       // localize the privacy banner
-      country: args.context.storefront.i18n.country,
-      language: args.context.storefront.i18n.language,
+      country: 'PL',
+      language: 'PL',
     },
   });
 }
