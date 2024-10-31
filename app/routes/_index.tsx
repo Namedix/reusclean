@@ -17,6 +17,7 @@ import ProductView from '~/components/Product';
 import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
 import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
 import {useState, useEffect} from 'react';
+import {Analytics} from '@shopify/hydrogen';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -50,11 +51,9 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function Homepage() {
   const {product, collection} = useLoaderData<typeof loader>();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(
-    // Add fallback to first variant if no variant is selected
     product?.variants?.nodes[0] || null,
   );
 
-  // Add useEffect to set first variant when product changes or selectedVariant is null
   useEffect(() => {
     if (product?.variants?.nodes[0] && !selectedVariant) {
       setSelectedVariant(product.variants.nodes[0]);
@@ -114,6 +113,21 @@ export default function Homepage() {
         />
       )}
       <Granties />
+      <Analytics.ProductView
+        data={{
+          products: [
+            {
+              id: product.id,
+              title: product.title,
+              price: selectedVariant?.price?.amount || '0',
+              vendor: product.vendor || '',
+              variantId: selectedVariant?.id || '',
+              variantTitle: selectedVariant?.title || '',
+              quantity: 1,
+            },
+          ],
+        }}
+      />
     </div>
   );
 }

@@ -13,7 +13,7 @@ import {Await} from '@remix-run/react';
 import type {ActionFunctionArgs} from '@remix-run/server-runtime';
 import {json} from '@remix-run/server-runtime';
 import type {CartQueryDataReturn} from '@shopify/hydrogen';
-import {CartForm} from '@shopify/hydrogen';
+import {Analytics, CartForm} from '@shopify/hydrogen';
 import {Suspense} from 'react';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import AnimatedPaymentMethods from '~/components/AnimatedPaymentMethods';
@@ -339,6 +339,7 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
           </DialogPanel>
         </div>
       </div>
+      <Analytics.CartView />
     </div>
   );
 };
