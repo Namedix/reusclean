@@ -32,6 +32,18 @@ export default {
           '0%': {transform: 'translateX(-50%)'},
           '100%': {transform: 'translateX(0)'},
         },
+        advantagesScroll: {
+          '0%': {transform: 'translateX(0)'},
+          '100%': {transform: 'translateX(calc(-200%/3))'},
+        },
+        marquee: {
+          '0%': {transform: 'translateX(0)'},
+          '100%': {transform: 'translateX(-33.33%)'},
+        },
+        marquee2: {
+          '0%': {transform: 'translateX(100%)'},
+          '100%': {transform: 'translateX(0%)'},
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1)',
@@ -50,6 +62,9 @@ export default {
         'fade-in-up-delay-6':
           'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1) 0.6s both',
         scroll: 'scroll 20s linear infinite',
+        advantagesScroll: 'advantagesScroll 10s linear infinite',
+        marquee: 'marquee 25s linear infinite',
+        marquee2: 'marquee2 40s linear infinite',
       },
       transitionTimingFunction: {
         'custom-ease': 'cubic-bezier(0.67, 0.01, 0.18, 1)',
