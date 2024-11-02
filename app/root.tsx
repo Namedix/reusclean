@@ -16,6 +16,9 @@ import {
 } from '@remix-run/react';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
+import {useState, useEffect} from 'react';
+import {CookieBanner} from '~/components/CookieBanner';
+import {html} from 'framer-motion/client';
 
 export type RootLoader = typeof loader;
 
@@ -76,9 +79,9 @@ export async function loader(args: LoaderFunctionArgs) {
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      withPrivacyBanner: true,
-      country: 'PL',
-      language: 'PL',
+      withPrivacyBanner: false,
+      country: args.context.storefront.i18n.country,
+      language: args.context.storefront.i18n.language,
     },
   });
 }
@@ -94,6 +97,24 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
+
+  const [consent, setConsent] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedConsent = localStorage.getItem('cookieConsent');
+      return savedConsent === 'true';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const savedConsent = localStorage.getItem('cookieConsent');
+    if (savedConsent) setConsent(savedConsent === 'true');
+  }, []);
+
+  const handleConsentChange = (userConsent: boolean) => {
+    setConsent(userConsent);
+    localStorage.setItem('cookieConsent', String(userConsent));
+  };
   return (
     <html lang="en">
       <head>
@@ -105,11 +126,16 @@ export function Layout({children}: {children?: React.ReactNode}) {
       <body>
         {data ? (
           <Analytics.Provider
+            canTrack={() => consent}
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
+            <CookieBanner
+              currentConsent={consent}
+              onConsentChange={handleConsentChange}
+            />
           </Analytics.Provider>
         ) : (
           children
