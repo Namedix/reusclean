@@ -18,6 +18,7 @@ import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
 import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
 import {useState, useEffect} from 'react';
 import {Analytics} from '@shopify/hydrogen';
+import AdvantagesSection from '~/components/AdvantagesSection';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -72,6 +73,8 @@ export default function Homepage() {
       )}
       <Granties className="block md:hidden" />
       <BigImages />
+      <AdvantagesSection />
+
       <SectionStarter
         id="how-it-work"
         tag="Jak to zrobić?"
