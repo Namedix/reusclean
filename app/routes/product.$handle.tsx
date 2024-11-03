@@ -216,9 +216,10 @@ const ProductPage = () => {
             <div className="font-semibold text-sm animate-fade-in-up-delay-4">
               Opis:
             </div>
-            <div className="mt-2 animate-fade-in-up-delay-4">
-              {product.description}
-            </div>
+            <div
+              className="mt-2 animate-fade-in-up-delay-4"
+              dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
+            />
             <div className="pt-4 animate-fade-in-up-delay-5">
               <AddToCartButton
                 lines={
