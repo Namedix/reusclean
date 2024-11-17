@@ -233,6 +233,34 @@ const ProductPage = () => {
                     : []
                 }
               />
+              {((selectedVariant &&
+                selectedVariant?.metafields?.some(
+                  (metafield) => metafield?.key === 'allegro',
+                )) ||
+                (!selectedVariant &&
+                  product?.metafields?.some(
+                    (metafield) => metafield?.key === 'allegro',
+                  ))) && (
+                <div className="text-center mt-4 text-sm">
+                  lub{' '}
+                  <a
+                    href={
+                      selectedVariant
+                        ? selectedVariant?.metafields?.find(
+                            (metafield) => metafield?.key === 'allegro',
+                          )?.value
+                        : product?.metafields?.find(
+                            (metafield) => metafield?.key === 'allegro',
+                          )?.value
+                    }
+                    className="text-[#FF5A00] hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    kup na Allegro
+                  </a>
+                </div>
+              )}
             </div>
             <div>
               {product?.metafields?.some(

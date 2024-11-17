@@ -217,6 +217,25 @@ const ProductView = ({
                 }
               }}
             />
+            {selectedVariant?.metafields?.some(
+              (metafield) => metafield?.key === 'allegro',
+            ) && (
+              <div className="text-center mt-4 text-sm">
+                lub{' '}
+                <a
+                  href={
+                    selectedVariant?.metafields?.find(
+                      (metafield) => metafield?.key === 'allegro',
+                    )?.value
+                  }
+                  className="text-[#FF5A00] hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  kup na Allegro
+                </a>
+              </div>
+            )}
           </div>
           <div className="pt-2 animate-fade-in-up-delay-5">
             <AnimatedPaymentMethods />

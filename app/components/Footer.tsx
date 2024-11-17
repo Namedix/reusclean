@@ -1,5 +1,6 @@
 import {Link} from '@remix-run/react';
 import {div} from 'framer-motion/client';
+import AnimateOnAppear from './AnimateOnAppear';
 
 const policyMap = {
   'privacy-policy': 'Polityka prywatności',
@@ -9,110 +10,112 @@ const policyMap = {
 
 export const Footer = () => {
   return (
-    <footer className="text-center text-neutral-600 lg:text-left container mt-8">
-      {/* <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. --> */}
-      <div className="w-full py-6 md:py-10 text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-start gap-12 md:gap-0 justify-between pb-12 text-start">
-          <div className="grow hidden md:block">
-            <img src="/assets/reus.svg" alt="reus" height={60} width={60} />
-            <p className="mt-4 mb-2 text-color-text">Znajdziesz nas</p>
-            <SocialIcons className="hidden md:flex gap-4" />
-            <p className="mt-4 mb-2 text-color-text">Bądźmy w kontakcie</p>
-            <a
-              href="mailto:info@reusclean.com"
-              className="text-color-blue hover:underline"
-            >
-              info@reusclean.com
-            </a>
-          </div>
-          <div className="flex flex-col gap-8 md:w-[250px]">
-            <div className="text-color-text text-lg font-semibold">Reus</div>
-            <div className="flex flex-col text-color-blue gap-2">
-              <Link to="/about">O Nas</Link>
-              <Link to="/products">Produkty</Link>
-              <Link to="/blogs">Blog</Link>
+    <AnimateOnAppear>
+      <footer className="text-center text-neutral-600 lg:text-left container mt-8">
+        {/* <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. --> */}
+        <div className="w-full py-6 md:py-10 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-start gap-12 md:gap-0 justify-between pb-12 text-start">
+            <div className="grow hidden md:block">
+              <img src="/assets/reus.svg" alt="reus" height={60} width={60} />
+              <p className="mt-4 mb-2 text-color-text">Znajdziesz nas</p>
+              <SocialIcons className="hidden md:flex gap-4" />
+              <p className="mt-4 mb-2 text-color-text">Bądźmy w kontakcie</p>
+              <a
+                href="mailto:info@reusclean.com"
+                className="text-color-blue hover:underline"
+              >
+                info@reusclean.com
+              </a>
             </div>
-          </div>
-          <div className="flex flex-col gap-8 md:w-[250px]">
-            <div className="text-color-text text-lg font-bold">Zasoby</div>
-            <div className="flex flex-col text-color-blue gap-2">
-              <Link to="/#faq">FAQ</Link>
-              <Link to="/policies/terms-of-service">Regulamin</Link>
-              <Link to="/policies/privacy-policy">Polityka prywatności</Link>
-              <Link to="/policies/refund-policy">Polityka zwrotów</Link>
-              <Link to="/policies/shipping-policy">Polityka wysyłki</Link>
+            <div className="flex flex-col gap-8 md:w-[250px]">
+              <div className="text-color-text text-lg font-semibold">Reus</div>
+              <div className="flex flex-col text-color-blue gap-2">
+                <Link to="/about">O Nas</Link>
+                <Link to="/products">Produkty</Link>
+                <Link to="/blogs">Blog</Link>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-center border-t-2 border-neutral-200 py-8 gap-4">
-          <span className="text-color-textLight">
-            © 2024 – Reus • 🇵🇱 Stworzone w Polsce
-          </span>
-          <div className="md:hidden flex justify-center">
-            <SocialIcons className="grid grid-cols-3 gap-4" />
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-sm text-color-textLight">
-              Projekt współfinansowany ze środków Unii Europejskiej w ramach
-              Funduszu Europejskiego.
-            </p>
-            <div className="flex gap-6 items-center">
-              <img
-                src="/assets/coofinanceWithEU.png"
-                alt="Współfinansowane przez Unię Europejską"
-                className="h-12 object-contain"
-              />
-              <img
-                src="/assets/europeanFundsLogo.jpg"
-                alt="Fundusze Europejskie"
-                className="h-12 object-contain"
-              />
+            <div className="flex flex-col gap-8 md:w-[250px]">
+              <div className="text-color-text text-lg font-bold">Zasoby</div>
+              <div className="flex flex-col text-color-blue gap-2">
+                <Link to="/#faq">FAQ</Link>
+                <Link to="/policies/terms-of-service">Regulamin</Link>
+                <Link to="/policies/privacy-policy">Polityka prywatności</Link>
+                <Link to="/policies/refund-policy">Polityka zwrotów</Link>
+                <Link to="/policies/shipping-policy">Polityka wysyłki</Link>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-sm text-color-textLight">
-              Bezpieczne płatności obsługuje Przelewy24
-            </p>
-            <div className="flex gap-4 items-center flex-wrap justify-center">
-              <img
-                src="/assets/googlepay.png"
-                alt="Visa"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/paypal.png"
-                alt="Mastercard"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/maestro.png"
-                alt="BLIK"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/mastercard.png"
-                alt="BLIK"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/visa.png"
-                alt="Przelewy24"
-                className="h-8 object-contain"
-              />
-              <img
-                src="/assets/applepay.png"
-                alt="Przelewy24"
-                className="h-8 object-contain"
-              />
+          <div className="flex flex-col md:flex-row justify-center border-t-2 border-neutral-200 py-8 gap-4">
+            <span className="text-color-textLight">
+              © 2024 – Reus • 🇵🇱 Stworzone w Polsce
+            </span>
+            <div className="md:hidden flex justify-center">
+              <SocialIcons className="grid grid-cols-3 gap-4" />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <p className="text-sm text-color-textLight">
+                Projekt współfinansowany ze środków Unii Europejskiej w ramach
+                Funduszu Europejskiego.
+              </p>
+              <div className="flex gap-6 items-center">
+                <img
+                  src="/assets/coofinanceWithEU.png"
+                  alt="Współfinansowane przez Unię Europejską"
+                  className="h-12 object-contain"
+                />
+                <img
+                  src="/assets/europeanFundsLogo.jpg"
+                  alt="Fundusze Europejskie"
+                  className="h-12 object-contain"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-4 text-center">
+              <p className="text-sm text-color-textLight">
+                Bezpieczne płatności obsługuje Przelewy24
+              </p>
+              <div className="flex gap-4 items-center flex-wrap justify-center">
+                <img
+                  src="/assets/googlepay.png"
+                  alt="Visa"
+                  className="h-8 object-contain"
+                />
+                <img
+                  src="/assets/paypal.png"
+                  alt="Mastercard"
+                  className="h-8 object-contain"
+                />
+                <img
+                  src="/assets/maestro.png"
+                  alt="BLIK"
+                  className="h-8 object-contain"
+                />
+                <img
+                  src="/assets/mastercard.png"
+                  alt="BLIK"
+                  className="h-8 object-contain"
+                />
+                <img
+                  src="/assets/visa.png"
+                  alt="Przelewy24"
+                  className="h-8 object-contain"
+                />
+                <img
+                  src="/assets/applepay.png"
+                  alt="Przelewy24"
+                  className="h-8 object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </AnimateOnAppear>
   );
 };
 

@@ -41,7 +41,7 @@ const advantages: Advantage[] = [
 const AdvantagesSection = () => {
   return (
     <AnimateOnAppear>
-      <div className="md:container mx-auto pt-8 px-4">
+      <div className="md:container mx-auto pt-12 px-4">
         <div className="relative w-full overflow-hidden">
           <div className="md:hidden absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10"></div>
           <div className="md:hidden absolute right-[-1px] top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10"></div>

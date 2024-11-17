@@ -55,15 +55,7 @@ const CallToAction = ({
     <AnimateOnAppear>
       <div className="flex flex-col items-center max-w-md mx-auto px-4">
         <img
-          src={`/assets/${
-            selectedVariant?.title === 'Kuchnia'
-              ? 'zestawStartowyKuchnia.png'
-              : selectedVariant?.title === 'Łazienka'
-              ? 'zestawStartowyŁazienka.png'
-              : selectedVariant?.title === 'Szyby'
-              ? 'zestawStartowySzyby.png'
-              : 'zestawStartowyUniversalny.png'
-          }`}
+          src={selectedVariant.image?.url}
           alt={`Zestaw startowy ${selectedVariant?.title}`}
           className="w-full max-w-[400px] h-auto mb-4 rounded-md"
         />
@@ -108,6 +100,25 @@ const CallToAction = ({
               }
             }}
           />
+          {selectedVariant?.metafields?.some(
+            (metafield) => metafield?.key === 'allegro',
+          ) && (
+            <div className="text-center mt-4 text-sm">
+              lub{' '}
+              <a
+                href={
+                  selectedVariant?.metafields?.find(
+                    (metafield) => metafield?.key === 'allegro',
+                  )?.value
+                }
+                className="text-[#FF5A00] hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                kup na Allegro
+              </a>
+            </div>
+          )}
         </div>
 
         <AnimatedPaymentMethods />
