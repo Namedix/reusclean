@@ -26,6 +26,14 @@ export const COLLECTION_QUERY = `#graphql
                 }
               }
             }
+            metafields(
+              identifiers: [
+                {key: "mintabprice", namespace: "custom"},
+              ]
+            ) {
+              key
+              value
+            }
           }
         }
       }
@@ -54,6 +62,14 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
           }
         }
       }
+    }
+    metafields(
+      identifiers: [
+        {key: "mintabprice", namespace: "custom"},
+      ]
+    ) {
+      key
+      value
     }
   }
 ` as const;

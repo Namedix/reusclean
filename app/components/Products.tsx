@@ -58,7 +58,16 @@ const Products = ({products, colCount}: PorductsProps) => {
                   {product.title}
                 </div>
                 <div className="text-center text-color-textLight font-semibold mt-2">
-                  {Number(product.priceRange.minVariantPrice.amount).toFixed(2)}
+                  {product.metafields?.find((m) => m?.key === 'mintabprice')
+                    ?.value && 'od '}
+                  {(product.metafields?.find((m) => m?.key === 'mintabprice')
+                    ?.value
+                    ? Number(
+                        product.metafields.find((m) => m?.key === 'mintabprice')
+                          ?.value,
+                      )
+                    : Number(product.priceRange.minVariantPrice.amount)
+                  ).toFixed(2)}
                   zł
                 </div>
               </div>

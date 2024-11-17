@@ -311,6 +311,11 @@ export type CollectionDetailsQuery = {
                 };
               }>;
             };
+            metafields: Array<
+              StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.Metafield, 'key' | 'value'>
+              >
+            >;
           };
         }>;
       };
@@ -330,6 +335,9 @@ export type ProductCardFragment = Pick<
       node: {image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>};
     }>;
   };
+  metafields: Array<
+    StorefrontAPI.Maybe<Pick<StorefrontAPI.Metafield, 'key' | 'value'>>
+  >;
 };
 
 export type GetAllProductsQueryVariables = StorefrontAPI.Exact<{
@@ -354,6 +362,9 @@ export type GetAllProductsQuery = {
             };
           }>;
         };
+        metafields: Array<
+          StorefrontAPI.Maybe<Pick<StorefrontAPI.Metafield, 'key' | 'value'>>
+        >;
       };
     }>;
     pageInfo: Pick<StorefrontAPI.PageInfo, 'hasNextPage' | 'endCursor'>;
@@ -798,11 +809,11 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  query CollectionDetails($id: ID!) {\n    collection(id: $id) {\n    id\n    title\n    products(first: 4) {\n      edges {\n        node {\n            id\n            title\n            handle\n            priceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            media(first: 10) {\n              edges {\n                node {\n                  ... on MediaImage {\n                    image {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  query CollectionDetails($id: ID!) {\n    collection(id: $id) {\n    id\n    title\n    products(first: 4) {\n      edges {\n        node {\n            id\n            title\n            handle\n            priceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            media(first: 10) {\n              edges {\n                node {\n                  ... on MediaImage {\n                    image {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n            metafields(\n              identifiers: [\n                {key: "mintabprice", namespace: "custom"},\n              ]\n            ) {\n              key\n              value\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: CollectionDetailsQuery;
     variables: CollectionDetailsQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment ProductCard on Product {\n    id\n    title\n    handle\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    media(first: 10) {\n      edges {\n        node {\n          ... on MediaImage {\n            image {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query getAllProducts($first: Int!, $after: String) {\n    products(first: $first, after: $after) {\n      edges {\n        node {\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        endCursor\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment ProductCard on Product {\n    id\n    title\n    handle\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    media(first: 10) {\n      edges {\n        node {\n          ... on MediaImage {\n            image {\n              url\n            }\n          }\n        }\n      }\n    }\n    metafields(\n      identifiers: [\n        {key: "mintabprice", namespace: "custom"},\n      ]\n    ) {\n      key\n      value\n    }\n  }\n\n  query getAllProducts($first: Int!, $after: String) {\n    products(first: $first, after: $after) {\n      edges {\n        node {\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        endCursor\n      }\n    }\n  }\n': {
     return: GetAllProductsQuery;
     variables: GetAllProductsQueryVariables;
   };
