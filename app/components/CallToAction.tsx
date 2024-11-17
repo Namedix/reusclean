@@ -55,15 +55,7 @@ const CallToAction = ({
     <AnimateOnAppear>
       <div className="flex flex-col items-center max-w-md mx-auto px-4">
         <img
-          src={`/assets/${
-            selectedVariant?.title === 'Kuchnia'
-              ? 'zestawStartowyKuchnia.png'
-              : selectedVariant?.title === 'Łazienka'
-              ? 'zestawStartowyŁazienka.png'
-              : selectedVariant?.title === 'Szyby'
-              ? 'zestawStartowySzyby.png'
-              : 'zestawStartowyUniversalny.png'
-          }`}
+          src={selectedVariant.image?.url}
           alt={`Zestaw startowy ${selectedVariant?.title}`}
           className="w-full max-w-[400px] h-auto mb-4 rounded-md"
         />

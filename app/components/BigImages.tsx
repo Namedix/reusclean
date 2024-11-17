@@ -28,14 +28,7 @@ const BigImages = () => {
         </AnimateOnAppear>
       </div>
       <div className="flex flex-col space-y-3">
-        <AnimateOnAppear>
-          <img
-            className="w-full mt-4 rounded-md h-full object-contain"
-            src="./assets/horizontal.gif"
-            alt="reusHorizontal"
-          />
-        </AnimateOnAppear>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-12">
           {[
             './assets/windowComposition.jpeg',
             './assets/allProducts.jpeg',
