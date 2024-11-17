@@ -124,7 +124,8 @@ export const BLOGS_QUERY = `#graphql
         first: $first,
         last: $last,
         before: $startCursor,
-        after: $endCursor
+        after: $endCursor,
+        reverse: true
       ) {
         nodes {
           ...ArticleItem
