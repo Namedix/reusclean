@@ -18,6 +18,8 @@ import {Suspense} from 'react';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import AnimatedPaymentMethods from '~/components/AnimatedPaymentMethods';
 import {useRootLoaderData} from '~/root';
+import {type FetcherWithComponents} from '@remix-run/react';
+import {FaSpinner} from 'react-icons/fa';
 
 export async function action({request, context}: ActionFunctionArgs) {
   const {cart} = context;
@@ -276,17 +278,28 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                                     )}
                                   </p>
                                 </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <div>
-                                    <label
-                                      htmlFor={`quantity-${line.id}`}
-                                      className="mr-2"
-                                    >
-                                      Ilość: {line.quantity}
-                                    </label>
+                                <div className="flex flex-1 items-center justify-between text-s mt-4">
+                                  <div className="flex items-center">
+                                    <div className="flex items-center space-x-2">
+                                      <CartLineUpdateButton
+                                        lineId={line.id}
+                                        quantity={line.quantity - 1}
+                                      >
+                                        -
+                                      </CartLineUpdateButton>
+                                      <span className="w-4 text-center">
+                                        {line.quantity}
+                                      </span>
+                                      <CartLineUpdateButton
+                                        lineId={line.id}
+                                        quantity={line.quantity + 1}
+                                      >
+                                        +
+                                      </CartLineUpdateButton>
+                                    </div>
                                   </div>
 
-                                  <div className="flex">
+                                  <div className="flex items-center">
                                     <CartLineDeleteButton lineIds={[line.id]} />
                                   </div>
                                 </div>
@@ -351,12 +364,53 @@ function CartLineDeleteButton({lineIds}: {lineIds: string[]}) {
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button
-        type="submit"
-        className="font-medium text-color-blue hover:text-color-blue/50"
-      >
-        Usuń
-      </button>
+      {(fetcher: FetcherWithComponents<any>) => (
+        <button
+          type="submit"
+          className="font-medium text-sm text-color-blue hover:text-color-blue/50"
+          disabled={fetcher.state !== 'idle'}
+        >
+          {fetcher.state === 'submitting' ? (
+            <FaSpinner className="animate-spin h-4 w-4" />
+          ) : (
+            'Usuń'
+          )}
+        </button>
+      )}
+    </CartForm>
+  );
+}
+
+function CartLineUpdateButton({
+  lineId,
+  quantity,
+  children,
+}: {
+  lineId: string;
+  quantity: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <CartForm
+      route="/cart"
+      action={CartForm.ACTIONS.LinesUpdate}
+      inputs={{
+        lines: [{id: lineId, quantity}],
+      }}
+    >
+      {(fetcher: FetcherWithComponents<any>) => (
+        <button
+          type="submit"
+          className="p-2 w-8 h-8 hover:bg-gray-100 rounded font-medium text-color-blue hover:text-color-blue/50 flex items-center justify-center"
+          disabled={quantity < 1 || fetcher.state !== 'idle'}
+        >
+          {fetcher.state === 'submitting' ? (
+            <FaSpinner className="animate-spin h-4 w-4" />
+          ) : (
+            children
+          )}
+        </button>
+      )}
     </CartForm>
   );
 }
