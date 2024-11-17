@@ -1,6 +1,6 @@
 import {Link} from '@remix-run/react';
-import {div} from 'framer-motion/client';
 import AnimateOnAppear from './AnimateOnAppear';
+import {paymentMethods} from '../models/PaymentMethods';
 
 const policyMap = {
   'privacy-policy': 'Polityka prywatności',
@@ -80,36 +80,14 @@ export const Footer = () => {
                 Bezpieczne płatności obsługuje Przelewy24
               </p>
               <div className="flex gap-4 items-center flex-wrap justify-center">
-                <img
-                  src="/assets/googlepay.png"
-                  alt="Visa"
-                  className="h-8 object-contain"
-                />
-                <img
-                  src="/assets/paypal.png"
-                  alt="Mastercard"
-                  className="h-8 object-contain"
-                />
-                <img
-                  src="/assets/maestro.png"
-                  alt="BLIK"
-                  className="h-8 object-contain"
-                />
-                <img
-                  src="/assets/mastercard.png"
-                  alt="BLIK"
-                  className="h-8 object-contain"
-                />
-                <img
-                  src="/assets/visa.png"
-                  alt="Przelewy24"
-                  className="h-8 object-contain"
-                />
-                <img
-                  src="/assets/applepay.png"
-                  alt="Przelewy24"
-                  className="h-8 object-contain"
-                />
+                {paymentMethods.map((method) => (
+                  <img
+                    key={method.name}
+                    src={method.src}
+                    alt={method.name}
+                    className="h-8 object-contain"
+                  />
+                ))}
               </div>
             </div>
           </div>

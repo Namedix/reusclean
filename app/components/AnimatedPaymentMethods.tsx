@@ -1,13 +1,6 @@
-const AnimatedPaymentMethods: React.FC = () => {
-  const paymentMethods = [
-    {name: 'Visa', src: '../assets/visa.png'},
-    {name: 'Mastercard', src: '../assets/mastercard.png'},
-    {name: 'Apple Pay', src: '../assets/applepay.png'},
-    {name: 'Maestro', src: '../assets/maestro.png'},
-    {name: 'Blik', src: '../assets/blik.png'},
-    {name: 'Przelewy24', src: '../assets/przelewy24.svg'},
-  ];
+import {paymentMethods} from '../models/PaymentMethods';
 
+const AnimatedPaymentMethods: React.FC = () => {
   return (
     <div className="relative w-full overflow-hidden">
       <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10"></div>
