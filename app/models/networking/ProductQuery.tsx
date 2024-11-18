@@ -36,7 +36,8 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       identifiers: [
         {key: "composition", namespace: "custom"},
         {key: "package_description", namespace: "custom"},
-        {key: "allegro", namespace: "custom"}
+        {key: "allegro", namespace: "custom"},
+        {key: "warning", namespace: "custom"},
       ]
     ) {
       key
@@ -79,7 +80,8 @@ export const PRODUCT_FRAGMENT = `#graphql
       identifiers: [
         {key: "composition", namespace: "custom"},
         {key: "package_description", namespace: "custom"},
-        {key: "allegro", namespace: "custom"}
+        {key: "allegro", namespace: "custom"},
+        {key: "warning", namespace: "custom"},
       ]
     ) {
       key
