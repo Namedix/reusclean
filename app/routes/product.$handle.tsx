@@ -19,7 +19,13 @@ import {opinions} from '~/models/opinion';
 import AnimateOnAppear from '~/components/AnimateOnAppear';
 import Products from '~/components/Products';
 import type {ProductCardFragment} from 'storefrontapi.generated';
-import {FaBox, FaChevronLeft, FaChevronRight, FaList} from 'react-icons/fa';
+import {
+  FaBox,
+  FaChevronLeft,
+  FaChevronRight,
+  FaList,
+  FaShieldAlt,
+} from 'react-icons/fa';
 import ExpandableCard from '~/components/ExpandableCard';
 import {Analytics, RichText} from '@shopify/hydrogen';
 
@@ -262,7 +268,7 @@ const ProductPage = () => {
                 </div>
               )}
             </div>
-            <div>
+            <div className="text-sm">
               {product?.metafields?.some(
                 (metafield) => metafield?.key === 'composition',
               ) && (
@@ -285,7 +291,7 @@ const ProductPage = () => {
                 (metafield) => metafield?.key === 'package_description',
               ) && (
                 <ExpandableCard
-                  className="animate-fade-in-up-delay-5 mt-4"
+                  className="animate-fade-in-up-delay-5 mt-2"
                   title="Zestaw zawiera"
                   icon={<FaBox />}
                 >
@@ -294,6 +300,24 @@ const ProductPage = () => {
                     data={
                       selectedVariant?.metafields?.find(
                         (metafield) => metafield?.key === 'package_description',
+                      )?.value ?? ''
+                    }
+                  />
+                </ExpandableCard>
+              )}
+              {product?.metafields?.some(
+                (metafield) => metafield?.key === 'warning',
+              ) && (
+                <ExpandableCard
+                  className="animate-fade-in-up-delay-6 mt-2"
+                  title="Ostrzeżenia"
+                  icon={<FaShieldAlt />}
+                >
+                  <RichText
+                    className="px-2"
+                    data={
+                      product?.metafields?.find(
+                        (metafield) => metafield?.key === 'warning',
                       )?.value ?? ''
                     }
                   />

@@ -281,6 +281,26 @@ const ProductView = ({
                 />
               </ExpandableCard>
             )}
+
+            {selectedVariant?.metafields?.some(
+              (metafield) => metafield?.key === 'warning',
+            ) && (
+              <ExpandableCard
+                className="animate-fade-in-up-delay-4"
+                title="Ostrzeżenia"
+                icon={<FaShieldAlt />}
+              >
+                <RichText
+                  className="px-2"
+                  data={
+                    selectedVariant?.metafields?.find(
+                      (metafield) => metafield?.key === 'warning',
+                    )?.value ?? ''
+                  }
+                />
+              </ExpandableCard>
+            )}
+
             <ExpandableCard
               className="animate-fade-in-up-delay-6"
               title="Dostawa i płatność"
