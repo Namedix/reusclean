@@ -18,7 +18,6 @@ import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
-import {html} from 'framer-motion/client';
 
 export type RootLoader = typeof loader;
 
@@ -79,9 +78,7 @@ export async function loader(args: LoaderFunctionArgs) {
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      withPrivacyBanner: false,
-      country: args.context.storefront.i18n.country,
-      language: args.context.storefront.i18n.language,
+      withPrivacyBanner: true,
     },
   });
 }
@@ -132,10 +129,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
             consent={data.consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
-            <CookieBanner
-              currentConsent={consent}
-              onConsentChange={handleConsentChange}
-            />
           </Analytics.Provider>
         ) : (
           children
