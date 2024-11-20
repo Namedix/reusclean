@@ -152,23 +152,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
     );
   };
 
-  useEffect(() => {
-    // Create and append GTM script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PJ4Z2CLX';
-    script.nonce = nonce;
-
-    // Initialize dataLayer
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js',
-    });
-
-    document.head.appendChild(script);
-  }, [nonce]);
-
   return (
     <html lang="en">
       <head>
@@ -176,6 +159,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <Script
+          waitForHydration
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-PJ4Z2CLX"
+        />
       </head>
       <body>
         <noscript>
