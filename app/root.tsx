@@ -78,7 +78,6 @@ export async function loader(args: LoaderFunctionArgs) {
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      withPrivacyBanner: true,
     },
   });
 }
@@ -129,6 +128,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
             consent={data.consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
+            <CookieBanner
+              currentConsent={consent}
+              onConsentChange={handleConsentChange}
+            />
           </Analytics.Provider>
         ) : (
           children
