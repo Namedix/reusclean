@@ -1,4 +1,9 @@
-import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
+import {
+  useNonce,
+  getShopAnalytics,
+  Analytics,
+  useAnalytics,
+} from '@shopify/hydrogen';
 import {defer, json} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
@@ -93,6 +98,8 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
+  const {register, customerPrivacy} = useAnalytics();
+  const {ready} = register('ThirdPartyConsent');
 
   const [consent, setConsent] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -105,12 +112,38 @@ export function Layout({children}: {children?: React.ReactNode}) {
   useEffect(() => {
     const savedConsent = localStorage.getItem('cookieConsent');
     if (savedConsent) setConsent(savedConsent === 'true');
+    updateAnalytics(savedConsent === 'true');
   }, []);
 
   const handleConsentChange = (userConsent: boolean) => {
     setConsent(userConsent);
     localStorage.setItem('cookieConsent', String(userConsent));
+    updateAnalytics(userConsent);
   };
+
+  const updateAnalytics = (userConsent: boolean) => {
+    const trackingConsent = {
+      marketing: userConsent,
+      analytics: userConsent,
+      preferences: userConsent,
+      sale_of_data: userConsent,
+    };
+    customerPrivacy?.setTrackingConsent(
+      trackingConsent,
+      (result: {error: string} | undefined) => {
+        if (result?.error) {
+          console.error(
+            'Error syncing ThirdParty with Shopify customer privacy',
+            result,
+          );
+          return;
+        }
+
+        ready();
+      },
+    );
+  };
+
   return (
     <html lang="en">
       <head>
@@ -122,7 +155,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
       <body>
         {data ? (
           <Analytics.Provider
-            canTrack={() => consent}
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
