@@ -35,10 +35,6 @@ export async function createAppLoadContext(
     cart: {
       queryFragment: CART_QUERY_FRAGMENT,
     },
-    storefront: {
-      headers: getStorefrontHeaders(request),
-      apiVersion: '2024-10',
-    },
   });
 
   return {
