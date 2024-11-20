@@ -74,7 +74,6 @@ export default function Homepage() {
       <Granties className="block md:hidden" />
       <BigImages />
       <AdvantagesSection />
-
       <SectionStarter
         id="how-it-work"
         tag="Jak to zrobić?"

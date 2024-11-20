@@ -1,4 +1,5 @@
 import {createHydrogenContext} from '@shopify/hydrogen';
+import {getStorefrontHeaders} from '@shopify/remix-oxygen';
 import {AppSession} from '~/lib/session';
 import {CART_QUERY_FRAGMENT} from '~/lib/fragments';
 
@@ -33,6 +34,10 @@ export async function createAppLoadContext(
     i18n: {language: 'PL', country: 'PL'},
     cart: {
       queryFragment: CART_QUERY_FRAGMENT,
+    },
+    storefront: {
+      headers: getStorefrontHeaders(request),
+      apiVersion: '2024-10',
     },
   });
 
