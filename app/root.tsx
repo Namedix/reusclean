@@ -4,7 +4,7 @@ import {
   Analytics,
   useAnalytics,
 } from '@shopify/hydrogen';
-import {defer, json} from '@shopify/remix-oxygen';
+import {defer} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
@@ -163,10 +163,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
         />
         <Meta />
         <Links />
-        <Script
-          waitForHydration
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-PJ4Z2CLX"
-        />
       </head>
       <body>
         <noscript
