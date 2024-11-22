@@ -3,7 +3,6 @@ import {
   getShopAnalytics,
   Analytics,
   useAnalytics,
-  Script,
 } from '@shopify/hydrogen';
 import {defer, json} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
@@ -24,13 +23,6 @@ import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
-
-// Add this type declaration at the top of the file, after the imports
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
 
 export type RootLoader = typeof loader;
 
@@ -152,11 +144,23 @@ export function Layout({children}: {children?: React.ReactNode}) {
     );
   };
 
+  // Add GTM script as a raw HTML string
+  const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PJ4Z2CLX');`;
+
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: gtmScript,
+          }}
+        />
         <Meta />
         <Links />
         <Script
@@ -165,15 +169,12 @@ export function Layout({children}: {children?: React.ReactNode}) {
         />
       </head>
       <body>
-        <noscript>
-          <iframe
-            title="Google Tag Manager"
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4Z2CLX"
-            height="0"
-            width="0"
-            style={{display: 'none', visibility: 'hidden'}}
-          />
-        </noscript>
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4Z2CLX"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+          }}
+        />
 
         {data ? (
           <Analytics.Provider
