@@ -3,6 +3,7 @@ import {
   getShopAnalytics,
   Analytics,
   useAnalytics,
+  Script,
 } from '@shopify/hydrogen';
 import {defer, json} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
