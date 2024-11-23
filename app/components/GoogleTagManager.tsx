@@ -12,9 +12,20 @@ export function GoogleTagManager() {
   const {ready} = register('Google Tag Manager');
 
   useEffect(() => {
-    subscribe('product_viewed', () => {
-      // Triggering a custom event in GTM when a product is viewed
+    subscribe('page_viewed', (data) => {
+      window.dataLayer.push({event: 'viewed-page'});
+    });
+    subscribe('product_viewed', (data) => {
       window.dataLayer.push({event: 'viewed-product'});
+    });
+    subscribe('collection_viewed', (data) => {
+      window.dataLayer.push({event: 'viewed-collection'});
+    });
+    subscribe('cart_viewed', (data) => {
+      window.dataLayer.push({event: 'viewed-cart'});
+    });
+    subscribe('cart_updated', (data) => {
+      window.dataLayer.push({event: 'updated-cart'});
     });
 
     ready();
