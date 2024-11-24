@@ -26,6 +26,13 @@ import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
 import {GoogleTagManager} from './components/GoogleTagManager';
 
+// Add this type declaration at the top of the file
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
 export type RootLoader = typeof loader;
 
 /**
@@ -130,6 +137,17 @@ export function Layout({children}: {children?: React.ReactNode}) {
       preferences: userConsent,
       sale_of_data: userConsent,
     };
+
+    // Update Google Analytics consent
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('consent', 'update', {
+        ad_user_data: userConsent ? 'granted' : 'denied',
+        ad_personalization: userConsent ? 'granted' : 'denied',
+        ad_storage: userConsent ? 'granted' : 'denied',
+        analytics_storage: userConsent ? 'granted' : 'denied',
+      });
+    }
+
     customerPrivacy?.setTrackingConsent(
       trackingConsent,
       (result: {error: string} | undefined) => {
@@ -179,6 +197,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
             }}
           ></iframe>
         </noscript>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-R10D2X8MV1"
+        />
         <script
           async
           id="gtag-init"
