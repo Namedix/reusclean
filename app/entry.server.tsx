@@ -20,18 +20,21 @@ export default async function handleRequest(
       "'self'",
       'https://cdn.shopify.com',
       'https://*.googletagmanager.com',
+      'https://analytics.tiktok.com',
     ],
     imgSrc: [
       "'self'",
       'https://cdn.shopify.com',
       'https://*.google-analytics.com',
       'https://*.googletagmanager.com',
+      'https://analytics.tiktok.com',
     ],
     connectSrc: [
       "'self'",
       'https://*.google-analytics.com',
       'https://*.analytics.google.com',
       'https://*.googletagmanager.com',
+      'https://analytics.tiktok.com',
     ],
   });
 
