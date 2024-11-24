@@ -153,6 +153,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Meta />
         <Links />
         <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-R10D2X8MV1"
+        />
+        <Script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -184,7 +188,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'GTM-PJ4Z2CLX', {
+                gtag('config', 'GTM-R10D2X8MV1', {
                   page_path: window.location.pathname,
                 });
               `,
