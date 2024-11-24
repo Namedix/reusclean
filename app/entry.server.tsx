@@ -21,6 +21,8 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://*.googletagmanager.com',
       'https://analytics.tiktok.com',
+      'https://analytics-ipv6.tiktokw.us',
+      'https://ads.tiktok.com',
     ],
     imgSrc: [
       "'self'",
@@ -28,6 +30,8 @@ export default async function handleRequest(
       'https://*.google-analytics.com',
       'https://*.googletagmanager.com',
       'https://analytics.tiktok.com',
+      'https://analytics-ipv6.tiktokw.us',
+      'https://ads.tiktok.com',
     ],
     connectSrc: [
       "'self'",
@@ -35,7 +39,10 @@ export default async function handleRequest(
       'https://*.analytics.google.com',
       'https://*.googletagmanager.com',
       'https://analytics.tiktok.com',
+      'https://analytics-ipv6.tiktokw.us',
+      'https://ads.tiktok.com',
     ],
+    frameSrc: ['bytedance:', 'sslocal:'],
   });
 
   const body = await renderToReadableStream(
