@@ -23,7 +23,7 @@ const Granties = ({className}: GrantiesProps) => {
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-2">
             <Grantie
               title="Prezent na start"
-              description="-10% od pierwszego zamówienia!"
+              description="Gratis do pierwszych zamówień!"
               image={SlPresent}
             />
           </AnimateOnAppear>

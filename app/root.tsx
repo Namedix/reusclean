@@ -25,6 +25,7 @@ import {PageLayout} from '~/components/PageLayout';
 import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
 import {GoogleTagManager} from './components/GoogleTagManager';
+import {BlackFridayBanner} from '~/components/BlackFridayBanner';
 
 // Add this type declaration at the top of the file
 declare global {
@@ -182,15 +183,15 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Script
           dangerouslySetInnerHTML={{
             __html: `
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+            !function (w, d, t) {
+              w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+            ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
 
-  ttq.load('CT1G33BC77UB52N3E4UG');
-  ttq.page();
-}(window, document, 'ttq');
+              ttq.load('CT1G33BC77UB52N3E4UG');
+              ttq.page();
+            }(window, document, 'ttq');
             `,
           }}
         />
@@ -235,10 +236,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
             <GoogleTagManager />
-            <CookieBanner
-              currentConsent={consent}
-              onConsentChange={handleConsentChange}
-            />
+            {consent ? (
+              <BlackFridayBanner />
+            ) : (
+              <CookieBanner
+                currentConsent={consent}
+                onConsentChange={handleConsentChange}
+              />
+            )}
           </Analytics.Provider>
         ) : (
           children
