@@ -39,7 +39,7 @@ export function BlackFridayBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-color-text text-white p-4 text-center z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-color-text text-white p-4 text-center z-50 animate-fade-in-up-delay-6">
       <button
         onClick={handleClose}
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200"
