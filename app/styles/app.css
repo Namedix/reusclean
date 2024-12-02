@@ -129,7 +129,7 @@
 }
 
 .ticker-container {
-  background-color: #2a2a2a;
+  background-color: #e6f3ff;
   overflow: hidden;
   width: 200px;
   height: 24px;
@@ -140,7 +140,7 @@
 .ticker-content {
   display: inline-flex;
   white-space: nowrap;
-  animation: ticker 40s linear infinite;
+  animation: ticker 60s linear infinite;
 }
 
 .checkout-ticker-container {
