@@ -1,5 +1,3 @@
-import {useState, useEffect} from 'react';
-import {motion, AnimatePresence} from 'framer-motion';
 import AnimateOnAppear from './AnimateOnAppear';
 
 interface Advantage {

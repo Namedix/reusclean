@@ -25,7 +25,6 @@ import {PageLayout} from '~/components/PageLayout';
 import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
 import {GoogleTagManager} from './components/GoogleTagManager';
-import {BlackFridayBanner} from '~/components/BlackFridayBanner';
 
 // Add this type declaration at the top of the file
 declare global {
@@ -236,9 +235,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
             <GoogleTagManager />
-            {consent ? (
-              <BlackFridayBanner />
-            ) : (
+            {!consent && (
               <CookieBanner
                 currentConsent={consent}
                 onConsentChange={handleConsentChange}
