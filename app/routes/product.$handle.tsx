@@ -321,6 +321,23 @@ const ProductPage = () => {
                       )?.value ?? ''
                     }
                   />
+                  {product?.metafields?.find(
+                    (metafield) => metafield?.key === 'characteristic_sheet',
+                  )?.value && (
+                    <a
+                      href={
+                        product?.metafields?.find(
+                          (metafield) =>
+                            metafield?.key === 'characteristic_sheet',
+                        )?.reference?.url
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block mt-2 text-color-blue hover:underline px-2"
+                    >
+                      Karta Charakterystyki
+                    </a>
+                  )}
                 </ExpandableCard>
               )}
             </div>

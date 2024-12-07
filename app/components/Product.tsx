@@ -135,7 +135,7 @@ const ProductView = ({
           <div className="flex items-center space-x-2 animate-fade-in-up-delay-1">
             <div className="flex -space-x-2">
               {[
-                './assets/Avatar.png',
+                './assets/Avatar1.png',
                 './assets/Avatar2.png',
                 './assets/Avatar3.png',
                 './assets/Avatar4.png',
@@ -298,6 +298,23 @@ const ProductView = ({
                     )?.value ?? ''
                   }
                 />
+                {selectedVariant?.metafields?.find(
+                  (metafield) => metafield?.key === 'characteristic_sheet',
+                )?.value && (
+                  <a
+                    href={
+                      selectedVariant?.metafields?.find(
+                        (metafield) =>
+                          metafield?.key === 'characteristic_sheet',
+                      )?.reference?.url
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 text-color-blue hover:underline px-2"
+                  >
+                    Karta Charakterystyki
+                  </a>
+                )}
               </ExpandableCard>
             )}
 

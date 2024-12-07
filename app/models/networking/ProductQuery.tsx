@@ -38,10 +38,17 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
         {key: "package_description", namespace: "custom"},
         {key: "allegro", namespace: "custom"},
         {key: "warning", namespace: "custom"},
+        {key: "characteristic_sheet", namespace: "custom"},
       ]
     ) {
       key
       value
+      reference {
+        ... on GenericFile {
+          id
+          url
+        }
+      }
     }
   }
 ` as const;
@@ -82,10 +89,17 @@ export const PRODUCT_FRAGMENT = `#graphql
         {key: "package_description", namespace: "custom"},
         {key: "allegro", namespace: "custom"},
         {key: "warning", namespace: "custom"},
+        {key: "characteristic_sheet", namespace: "custom"},
       ]
     ) {
       key
       value
+      reference {
+        ... on GenericFile {
+          id
+          url
+        }
+      }
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}

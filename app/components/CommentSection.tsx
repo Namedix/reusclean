@@ -11,7 +11,6 @@ const comments = [
       'Jestem mile zaskoczona płynem do kuchni. Bez problemu czyści tłuste plamy po smażeniu obiadu.',
     author: 'Basia',
     rating: '5/5',
-    avatarSrc: './assets/Avatar2.png',
   },
   {
     title: 'Sprytne rozwiązanie',
@@ -19,7 +18,6 @@ const comments = [
       'Mam małe mieszkanie i każde miejsce jest dla mnie na wagę złota. Fajnie, że komplet tabletek zajmuje mniej niż pudełko herbaty.',
     author: 'Artur',
     rating: '5/5',
-    avatarSrc: './assets/Avatar.png',
   },
   {
     title: 'Działa',
@@ -27,7 +25,6 @@ const comments = [
       'Jako świeża mama nie wyobrażam sobie czyścić domu duszącymi środkami. Reus to świetna, naturalna alternatywa dla popularnych detergentów.',
     author: 'Marta',
     rating: '5/5',
-    avatarSrc: './assets/Avatar3.png',
   },
 ];
 
@@ -51,11 +48,6 @@ const CommentSection: React.FC = () => {
               {comment.content}
             </p>
             <div className="flex items-center mt-4">
-              <img
-                src={comment.avatarSrc}
-                alt={comment.author}
-                className="w-10 h-10 rounded-full mr-3"
-              />
               <div>
                 <p className="font-semibold">{comment.author}</p>
                 <p className="text-sm text-gray-500">{comment.rating}</p>
