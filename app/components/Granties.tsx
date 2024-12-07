@@ -30,7 +30,7 @@ const Granties = ({className}: GrantiesProps) => {
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-3">
             <Grantie
               title="Darmowa dostawa"
-              description="Od zamówień powyej 79 zł."
+              description="Od zamówień powyżej 79 zł."
               image={CiReceipt}
             />
           </AnimateOnAppear>
