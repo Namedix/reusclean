@@ -135,7 +135,7 @@ const ProductView = ({
           <div className="flex items-center space-x-2 animate-fade-in-up-delay-1">
             <div className="flex -space-x-2">
               {[
-                './assets/Avatar.png',
+                './assets/Avatar1.png',
                 './assets/Avatar2.png',
                 './assets/Avatar3.png',
                 './assets/Avatar4.png',

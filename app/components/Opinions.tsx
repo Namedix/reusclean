@@ -6,7 +6,6 @@ interface Opinion {
   title?: string;
   description: string;
   profile: {
-    imageUrl: string;
     name: string;
   };
   rate: number;
@@ -48,11 +47,6 @@ const Opinions: React.FC<{opinions: Opinion[]}> = ({opinions}) => {
             )}
             <p className="text-gray-700 mb-4">{opinion.description}</p>
             <div className="mt-auto flex items-center">
-              <img
-                src={opinion.profile.imageUrl}
-                alt={opinion.profile.name}
-                className="w-10 h-10 rounded-full mr-3"
-              />
               <div className="flex flex-col">
                 <span className="font-semibold">{opinion.profile.name}</span>
               </div>

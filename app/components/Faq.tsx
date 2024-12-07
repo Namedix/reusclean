@@ -49,22 +49,22 @@ const Faq: React.FC = () => {
       question: 'Czy tabletki Reus są skuteczne w czyszczeniu?',
       answer:
         'Tak! Nasze tabletki zostały zaprojektowane, aby zapewniać efektywne czyszczenie bez szkodliwych chemikaliów. Nadają się do codziennego sprzątania kuchni, łazienki, szyb i wielu innych powierzchni.',
-      userAvatar: './assets/Avatar.png',
-      botAvatar: './assets/Avatar4.png',
+      userAvatar: './assets/Avatar4.png',
+      botAvatar: './assets/Avatar2.png',
     },
     {
       question: 'Czy butelka Reus jest wielokrotnego użytku?',
       answer:
         'Tak! Nasza butelka została zaprojektowana tak, abyś mógł używać jej wielokrotnie. Po rozpuszczeniu tabletki możesz napełniać butelkę i używać jej do różnych środków czystości dzięki dołączonym naklejkom (uniwersalny, łazienka, kuchnia, szyby), które pomagają oznaczyć zawartość.',
-      userAvatar: './assets/Avatar2.png',
-      botAvatar: './assets/Avatar4.png',
+      userAvatar: './assets/Avatar3.png',
+      botAvatar: './assets/Avatar2.png',
     },
     {
       question: 'Na jak długo starcza płyn Reus?',
       answer:
         'Jedna tabletka Reus rozpuszczona w 500 ml wody starcza na tyle samo co popularne środki czystości i zależy od intensywności użytkowania.',
-      userAvatar: './assets/Avatar.png',
-      botAvatar: './assets/Avatar4.png',
+      userAvatar: './assets/Avatar1.png',
+      botAvatar: './assets/Avatar2.png',
     },
   ];
 
