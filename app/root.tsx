@@ -25,6 +25,7 @@ import {PageLayout} from '~/components/PageLayout';
 import {useState, useEffect} from 'react';
 import {CookieBanner} from '~/components/CookieBanner';
 import {GoogleTagManager} from './components/GoogleTagManager';
+import SnowAnimation from '~/components/SnowAnimation';
 
 // Add this type declaration at the top of the file
 declare global {
@@ -196,6 +197,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
         />
       </head>
       <body>
+        <SnowAnimation />
         <noscript>
           <iframe
             title="Google Tag Manager"
