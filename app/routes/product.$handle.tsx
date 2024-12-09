@@ -248,23 +248,30 @@ const ProductPage = () => {
                     (metafield) => metafield?.key === 'allegro',
                   ))) && (
                 <div className="text-center mt-4 text-sm">
-                  lub{' '}
-                  <a
-                    href={
-                      selectedVariant
-                        ? selectedVariant?.metafields?.find(
-                            (metafield) => metafield?.key === 'allegro',
-                          )?.value
-                        : product?.metafields?.find(
-                            (metafield) => metafield?.key === 'allegro',
-                          )?.value
-                    }
-                    className="text-[#FF5A00] hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    kup na Allegro
-                  </a>
+                  <div className="flex items-center justify-center gap-1">
+                    lub{' '}
+                    <a
+                      href={
+                        selectedVariant
+                          ? selectedVariant?.metafields?.find(
+                              (metafield) => metafield?.key === 'allegro',
+                            )?.value
+                          : product?.metafields?.find(
+                              (metafield) => metafield?.key === 'allegro',
+                            )?.value
+                      }
+                      className="text-[#FF5A00] hover:underline flex items-center gap-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      kup na Allegro
+                      <img
+                        src="/assets/smart.webp"
+                        alt="Smart"
+                        className="h-4 w-auto pb-[1px]"
+                      />
+                    </a>
+                  </div>
                 </div>
               )}
             </div>
