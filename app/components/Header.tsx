@@ -5,6 +5,7 @@ import {ShoppingBagIcon, UsersIcon} from '@heroicons/react/24/outline';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {Await} from '@remix-run/react';
 import Cart from '~/routes/cart';
+import {Analytics, useAnalytics} from '@shopify/hydrogen';
 
 interface HeaderProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -14,6 +15,7 @@ const Header = ({cart}: HeaderProps) => {
   const [openNavigation, setOpenNavigation] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const scrollDirection = useScrollDirection();
+  const {publish, shop, cart: analyticsCart, prevCart} = useAnalytics();
 
   const toggleNavigation = () => {
     setOpenNavigation(!openNavigation);
@@ -25,6 +27,12 @@ const Header = ({cart}: HeaderProps) => {
 
   useEffect(() => {
     const handleOpenCart = () => setOpenCart(true);
+    publish('cart_viewed', {
+      analyticsCart,
+      prevCart,
+      shop,
+      url: window.location.href || '',
+    });
     window.addEventListener('openCart', handleOpenCart);
 
     return () => {

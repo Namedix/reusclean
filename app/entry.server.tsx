@@ -16,33 +16,16 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
-    scriptSrc: [
+    scriptSrc: ["'self'", 'https://cdn.shopify.com'],
+    imgSrc: ["'self'", 'https://cdn.shopify.com'],
+    connectSrc: ["'self'"],
+    styleSrc: [
       "'self'",
+      "'unsafe-inline'",
       'https://cdn.shopify.com',
-      'https://*.googletagmanager.com',
-      'https://analytics.tiktok.com',
-      'https://analytics-ipv6.tiktokw.us',
-      'https://ads.tiktok.com',
+      'https://cdn.jsdelivr.net',
     ],
-    imgSrc: [
-      "'self'",
-      'https://cdn.shopify.com',
-      'https://*.google-analytics.com',
-      'https://*.googletagmanager.com',
-      'https://analytics.tiktok.com',
-      'https://analytics-ipv6.tiktokw.us',
-      'https://ads.tiktok.com',
-    ],
-    connectSrc: [
-      "'self'",
-      'https://*.google-analytics.com',
-      'https://*.analytics.google.com',
-      'https://*.googletagmanager.com',
-      'https://analytics.tiktok.com',
-      'https://analytics-ipv6.tiktokw.us',
-      'https://ads.tiktok.com',
-    ],
-    frameSrc: ['bytedance:', 'sslocal:'],
+    fontSrc: ["'self'", 'data:', 'https://cdn.shopify.com'],
   });
 
   const body = await renderToReadableStream(

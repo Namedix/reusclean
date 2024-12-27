@@ -93,6 +93,7 @@ export async function loader(args: LoaderFunctionArgs) {
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
+      withPrivacyBanner: true,
     },
   });
 }
@@ -139,16 +140,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
       sale_of_data: userConsent,
     };
 
-    // Update Google Analytics consent
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('consent', 'update', {
-        ad_user_data: userConsent ? 'granted' : 'denied',
-        ad_personalization: userConsent ? 'granted' : 'denied',
-        ad_storage: userConsent ? 'granted' : 'denied',
-        analytics_storage: userConsent ? 'granted' : 'denied',
-      });
-    }
-
     customerPrivacy?.setTrackingConsent(
       trackingConsent,
       (result: {error: string} | undefined) => {
@@ -171,78 +162,23 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-PJ4Z2CLX');`,
-          }}
-        ></Script>
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `
-            !function (w, d, t) {
-              w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-            ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-              ttq.load('CT1G33BC77UB52N3E4UG');
-              ttq.page();
-            }(window, document, 'ttq');
-            `,
-          }}
-        />
       </head>
-      <body>
+      <body data-new-gr-c-s-check-loaded="" data-gr-ext-installed="">
         <SnowAnimation />
-        <noscript>
-          <iframe
-            title="Google Tag Manager"
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4Z2CLX"
-            height="0"
-            width="0"
-            style={{
-              display: 'none',
-              visibility: 'hidden',
-            }}
-          ></iframe>
-        </noscript>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-R10D2X8MV1"
-        />
-        <script
-          async
-          id="gtag-init"
-          dangerouslySetInnerHTML={{
-            __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'GTM-R10D2X8MV1', {
-                  page_path: window.location.pathname,
-                });
-              `,
-          }}
-        />
         {data ? (
           <Analytics.Provider
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
+            canTrack={() => consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
-            <GoogleTagManager />
-            {!consent && (
+            {/* {!consent && (
               <CookieBanner
                 currentConsent={consent}
                 onConsentChange={handleConsentChange}
               />
-            )}
+            )} */}
           </Analytics.Provider>
         ) : (
           children
