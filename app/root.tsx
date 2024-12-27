@@ -170,7 +170,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
-            canTrack={() => consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
             {/* {!consent && (
