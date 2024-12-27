@@ -31,6 +31,9 @@ export async function createAppLoadContext(
     cache,
     waitUntil,
     session,
+    storefront: {
+      headers: getStorefrontHeaders(request),
+    },
     i18n: {language: 'PL', country: 'PL'},
     cart: {
       queryFragment: CART_QUERY_FRAGMENT,
