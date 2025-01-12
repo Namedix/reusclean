@@ -82,10 +82,10 @@ export async function loader(args: LoaderFunctionArgs) {
 
   return defer({
     ...deferredData,
-    publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
+    publicStoreDomain: `${env.PUBLIC_STORE_DOMAIN}`,
     shop: getShopAnalytics({
       storefront,
-      publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
+      publicStorefrontId: `${env.PUBLIC_STOREFRONT_ID}`,
     }),
     consent: {
       checkoutDomain: `${env.PUBLIC_CHECKOUT_DOMAIN}`,
