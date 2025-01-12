@@ -14,11 +14,8 @@ export default async function handleRequest(
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
-      storeDomain: context.env.PUBLIC_STORE_DOMAIN,
+      storeDomain: 'reusclean.com',
     },
-    scriptSrc: ["'self'", 'https://cdn.shopify.com'],
-    imgSrc: ["'self'", 'https://cdn.shopify.com'],
-    connectSrc: ["'self'"],
     styleSrc: [
       "'self'",
       "'unsafe-inline'",

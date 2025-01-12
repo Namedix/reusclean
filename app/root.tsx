@@ -82,7 +82,7 @@ export async function loader(args: LoaderFunctionArgs) {
 
   return defer({
     ...deferredData,
-    publicStoreDomain: `${env.PUBLIC_STORE_DOMAIN}`,
+    publicStoreDomain: `reusclean.com`,
     shop: getShopAnalytics({
       storefront,
       publicStorefrontId: `${env.PUBLIC_STOREFRONT_ID}`,
