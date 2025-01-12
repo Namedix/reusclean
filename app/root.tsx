@@ -91,8 +91,8 @@ export async function loader(args: LoaderFunctionArgs) {
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
     }),
     consent: {
-      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
-      storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
+      checkoutDomain: `${env.PUBLIC_CHECKOUT_DOMAIN}`,
+      storefrontAccessToken: `${env.PUBLIC_STOREFRONT_API_TOKEN}`,
       withPrivacyBanner: true,
     },
   });
@@ -109,52 +109,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
-  const {register, customerPrivacy} = useAnalytics();
-  const {ready} = register('ThirdPartyConsent');
-
-  const [consent, setConsent] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedConsent = localStorage.getItem('cookieConsent');
-      return savedConsent === 'true';
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const savedConsent = localStorage.getItem('cookieConsent');
-    if (savedConsent) setConsent(savedConsent === 'true');
-    updateAnalytics(savedConsent === 'true');
-  }, []);
-
-  const handleConsentChange = (userConsent: boolean) => {
-    setConsent(userConsent);
-    localStorage.setItem('cookieConsent', String(userConsent));
-    updateAnalytics(userConsent);
-  };
-
-  const updateAnalytics = (userConsent: boolean) => {
-    const trackingConsent = {
-      marketing: userConsent,
-      analytics: userConsent,
-      preferences: userConsent,
-      sale_of_data: userConsent,
-    };
-
-    customerPrivacy?.setTrackingConsent(
-      trackingConsent,
-      (result: {error: string} | undefined) => {
-        if (result?.error) {
-          console.error(
-            'Error syncing ThirdParty with Shopify customer privacy',
-            result,
-          );
-          return;
-        }
-
-        ready();
-      },
-    );
-  };
   return (
     <html lang="en">
       <head>
@@ -172,12 +126,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
             consent={data.consent}
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
-            {/* {!consent && (
-              <CookieBanner
-                currentConsent={consent}
-                onConsentChange={handleConsentChange}
-              />
-            )} */}
           </Analytics.Provider>
         ) : (
           children
