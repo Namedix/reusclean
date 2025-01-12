@@ -123,6 +123,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
+            cookieDomain="reusclean.com"
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
           </Analytics.Provider>
