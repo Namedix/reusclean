@@ -22,7 +22,7 @@ const Header = ({cart}: HeaderProps) => {
   };
 
   const handleAccountClick = () => {
-    window.open('https://reusclean.com/account', '_blank');
+    window.open('https://account.reusclean.com', '_blank');
   };
 
   useEffect(() => {

@@ -22,9 +22,6 @@ import {
 } from '@remix-run/react';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
-import {useState, useEffect} from 'react';
-import {CookieBanner} from '~/components/CookieBanner';
-import {GoogleTagManager} from './components/GoogleTagManager';
 import SnowAnimation from '~/components/SnowAnimation';
 
 // Add this type declaration at the top of the file
@@ -94,6 +91,8 @@ export async function loader(args: LoaderFunctionArgs) {
       checkoutDomain: `${env.PUBLIC_CHECKOUT_DOMAIN}`,
       storefrontAccessToken: `${env.PUBLIC_STOREFRONT_API_TOKEN}`,
       withPrivacyBanner: true,
+      country: 'PL',
+      language: 'PL',
     },
   });
 }
