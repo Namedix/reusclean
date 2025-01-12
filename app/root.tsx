@@ -88,8 +88,8 @@ export async function loader(args: LoaderFunctionArgs) {
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
     }),
     consent: {
-      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
-      storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
+      checkoutDomain: `${env.PUBLIC_CHECKOUT_DOMAIN}`,
+      storefrontAccessToken: `${env.PUBLIC_STOREFRONT_API_TOKEN}`,
       withPrivacyBanner: true,
       country: 'PL',
       language: 'PL',
@@ -123,7 +123,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
-            cookieDomain="reusclean.com"
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
           </Analytics.Provider>
