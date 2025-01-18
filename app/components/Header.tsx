@@ -25,6 +25,15 @@ const Header = ({cart}: HeaderProps) => {
     window.open('https://account.reusclean.com', '_blank');
   };
 
+  const toggleCart = () => {
+    setOpenCart(!openCart);
+    window.dispatchEvent(
+      new CustomEvent('cartToggled', {
+        detail: {isOpen: !openCart},
+      }),
+    );
+  };
+
   useEffect(() => {
     const handleOpenCart = () => setOpenCart(true);
     publish('cart_viewed', {
@@ -101,7 +110,7 @@ const Header = ({cart}: HeaderProps) => {
                 <UsersIcon className="h-7 w-7 text-color-textLight" />
               </button>
               <button
-                onClick={() => setOpenCart(!openCart)}
+                onClick={toggleCart}
                 className="flex items-center text-color-textLight"
               >
                 <ShoppingBagIcon className="h-7 w-7 text-color-textLight" />

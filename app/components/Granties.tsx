@@ -3,6 +3,7 @@ import {LiaShippingFastSolid} from 'react-icons/lia';
 import {SlPresent} from 'react-icons/sl';
 import {CiReceipt} from 'react-icons/ci';
 import AnimateOnAppear from './AnimateOnAppear';
+import {FreeShippingPromo} from './FreeShippingPromo';
 
 interface GrantiesProps {
   className?: string;
@@ -11,8 +12,8 @@ interface GrantiesProps {
 const Granties = ({className}: GrantiesProps) => {
   return (
     <AnimateOnAppear>
-      <div className={`container mt-4 md:mt-8 ${className} overflow-hidden`}>
-        <div className="bg-color-gray grid grid-cols-1 md:grid-cols-3 justify-start rounded-md p-4 gap-4 md:px-8">
+      <div className={`container mt-4 md:mt-8 ${className}`}>
+        <div className="bg-color-gray grid grid-cols-1 md:grid-cols-3 justify-start rounded-md p-4 gap-4 md:px-8 relative">
           <AnimateOnAppear>
             <Grantie
               title="Ekspresowa wysyłka"
@@ -28,11 +29,14 @@ const Granties = ({className}: GrantiesProps) => {
             />
           </AnimateOnAppear>
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-3">
-            <Grantie
-              title="Darmowa dostawa"
-              description="Od zamówień powyżej 79 zł."
-              image={CiReceipt}
-            />
+            <div className="relative">
+              <FreeShippingPromo className="pr-8" />
+              <Grantie
+                title="Darmowa dostawa"
+                description="Od zamówień powyżej 79 zł."
+                image={CiReceipt}
+              />
+            </div>
           </AnimateOnAppear>
         </div>
       </div>

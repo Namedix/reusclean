@@ -36,6 +36,7 @@ export default defineConfig({
        * @see https://vitejs.dev/config/dep-optimization-options
        */
       include: [
+        'copy-to-clipboard',
         'react-headroom',
         '@remix-run/server-runtime/dist/single-fetch',
       ],

@@ -16,6 +16,7 @@ export function NewsletterModal() {
   const [isSliding, setIsSliding] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const fetcher = useFetcher<typeof action>();
   const isSuccess = fetcher.data?.success;
 
@@ -88,6 +89,29 @@ export function NewsletterModal() {
       window.removeEventListener('newsletterSubscribed', handleSubscription);
   }, []);
 
+  // Add event listener for cart toggle
+  useEffect(() => {
+    const handleCartToggle = (event: CustomEvent) => {
+      const {isOpen} = event.detail;
+      if (isOpen) {
+        setIsCartOpen(true);
+      } else {
+        setTimeout(() => {
+          setIsCartOpen(false);
+        }, 500);
+      }
+    };
+
+    window.addEventListener('cartToggled', handleCartToggle as EventListener);
+
+    return () => {
+      window.removeEventListener(
+        'cartToggled',
+        handleCartToggle as EventListener,
+      );
+    };
+  }, []);
+
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsSliding(true);
@@ -97,7 +121,7 @@ export function NewsletterModal() {
     }, 300); // Match this with the transition duration
   };
 
-  if (isHidden || isMinimizedHidden) return null;
+  if (isHidden || isMinimizedHidden || isCartOpen) return null;
 
   return (
     <>
