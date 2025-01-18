@@ -23,6 +23,7 @@ import {
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import SnowAnimation from '~/components/SnowAnimation';
+import {NewsletterModal} from './components/NewsletterModal';
 
 // Add this type declaration at the top of the file
 declare global {
@@ -118,6 +119,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
       </head>
       <body data-new-gr-c-s-check-loaded="" data-gr-ext-installed="">
         <SnowAnimation />
+        <NewsletterModal />
         {data ? (
           <Analytics.Provider
             cart={data.cart}

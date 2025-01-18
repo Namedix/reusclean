@@ -44,6 +44,10 @@ export default {
           '0%': {transform: 'translateX(100%)'},
           '100%': {transform: 'translateX(0%)'},
         },
+        slideUp: {
+          '0%': {transform: 'translateY(100%)', opacity: '0'},
+          '100%': {transform: 'translateY(0)', opacity: '1'},
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 1s cubic-bezier(0.67, 0.01, 0.18, 1)',
@@ -65,6 +69,7 @@ export default {
         advantagesScroll: 'advantagesScroll 10s linear infinite',
         marquee: 'marquee 25s linear infinite',
         marquee2: 'marquee2 40s linear infinite',
+        slideUp: 'slideUp 0.3s ease-out',
       },
       transitionTimingFunction: {
         'custom-ease': 'cubic-bezier(0.67, 0.01, 0.18, 1)',

@@ -1,6 +1,8 @@
 import {Link} from '@remix-run/react';
 import AnimateOnAppear from './AnimateOnAppear';
 import {paymentMethods} from '../models/PaymentMethods';
+import {EmailSubscribeForm} from './EmailSubscribeForm';
+import {useEffect, useState} from 'react';
 
 const policyMap = {
   'privacy-policy': 'Polityka prywatności',
@@ -8,14 +10,31 @@ const policyMap = {
   'refund-policy': 'Polityka zwrotów',
 };
 
-export const Footer = () => {
+export function Footer() {
+  const [hasSubscribed, setHasSubscribed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('hasSubscribedNewsletter') === 'true';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleSubscription = () => {
+      setHasSubscribed(true);
+    };
+
+    window.addEventListener('newsletterSubscribed', handleSubscription);
+    return () =>
+      window.removeEventListener('newsletterSubscribed', handleSubscription);
+  }, []);
+
   return (
     <AnimateOnAppear>
       <footer className="text-center text-neutral-600 lg:text-left container mt-8">
         {/* <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. --> */}
         <div className="w-full py-6 md:py-10 text-center md:text-left">
           <div className="flex flex-col md:flex-row items-start gap-12 md:gap-0 justify-between pb-12 text-start">
-            <div className="grow hidden md:block">
+            <div className={`hidden md:block ${hasSubscribed ? 'grow' : ''}`}>
               <img src="/assets/reus.svg" alt="reus" height={60} width={60} />
               <p className="mt-4 mb-2 text-color-text">Znajdziesz nas</p>
               <SocialIcons className="hidden md:flex gap-4" />
@@ -27,6 +46,11 @@ export const Footer = () => {
                 info@reusclean.com
               </a>
             </div>
+            {!hasSubscribed && (
+              <div className="grow md:mx-12">
+                <EmailSubscribeForm />
+              </div>
+            )}
             <div className="flex flex-col gap-8 md:w-[250px]">
               <div className="text-color-text text-lg font-semibold">Reus</div>
               <div className="flex flex-col text-color-blue gap-2">
@@ -95,7 +119,7 @@ export const Footer = () => {
       </footer>
     </AnimateOnAppear>
   );
-};
+}
 
 const SocialIcons = ({className}: {className?: string}) => {
   return (
