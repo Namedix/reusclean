@@ -179,169 +179,164 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
             className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
           >
             <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-              <div className="h-full  overflow-x-hidden">
-                <div className="flex-1 px-4 py-6 sm:px-6">
-                  <div className="flex items-start justify-between">
-                    <DialogTitle className="text-lg font-medium text-color-text">
-                      Koszyk {!isCartEmpty && `• ${cart?.totalQuantity}`}
-                    </DialogTitle>
-                    <div className="ml-3 flex h-7 items-center">
-                      <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        className="relative -m-2 p-2 text-color-textLight hover:text-gray-500"
-                      >
-                        <span className="absolute -inset-0.5" />
-                        <span className="sr-only">Close panel</span>
-                        <XMarkIcon aria-hidden="true" className="h-6 w-6" />
-                      </button>
-                    </div>
+              <div className="flex-1 overflow-x-hidden px-4 py-6 sm:px-6">
+                <div className="flex items-start justify-between">
+                  <DialogTitle className="text-lg font-medium text-color-text">
+                    Koszyk {!isCartEmpty && `• ${cart?.totalQuantity}`}
+                  </DialogTitle>
+                  <div className="ml-3 flex h-7 items-center">
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      className="relative -m-2 p-2 text-color-textLight hover:text-gray-500"
+                    >
+                      <span className="absolute -inset-0.5" />
+                      <span className="sr-only">Close panel</span>
+                      <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                    </button>
                   </div>
+                </div>
 
-                  {isCartEmpty ? (
-                    <div className="flex flex-col items-center justify-center h-full text-center">
-                      <ShoppingBagIcon className="h-16 w-16 text-color-textLight mb-4" />
-                      <h2 className="text-lg font-medium text-gray-900 mb-2">
-                        Twój koszyk jest pusty
-                      </h2>
-                      <p className="text-sm text-color-textLight mb-6">
-                        Wygląda na to, że nie dodałeś jeszcze żadnych produktów
-                        do koszyka.
-                      </p>
-                      <button
-                        onClick={() => setOpen(false)}
-                        className="rounded-md bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50"
-                      >
-                        Kontynuuj zakupy
-                      </button>
+                {isCartEmpty ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <ShoppingBagIcon className="h-16 w-16 text-color-textLight mb-4" />
+                    <h2 className="text-lg font-medium text-gray-900 mb-2">
+                      Twój koszyk jest pusty
+                    </h2>
+                    <p className="text-sm text-color-textLight mb-6">
+                      Wygląda na to, że nie dodałeś jeszcze żadnych produktów do
+                      koszyka.
+                    </p>
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="rounded-md bg-color-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-color-blue/50"
+                    >
+                      Kontynuuj zakupy
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="checkout-ticker-container rounded-md flex items-center mt-4 max-w-full">
+                      <div className="checkout-ticker-content flex items-center space-x-4">
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                        <span className="text-color-blue">
+                          Ekspresowa wysyłka
+                        </span>
+                      </div>
                     </div>
-                  ) : (
-                    <>
-                      <div className="checkout-ticker-container rounded-md flex items-center mt-4 max-w-full">
-                        <div className="checkout-ticker-content flex items-center space-x-4">
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                          <span className="text-color-blue">
-                            Ekspresowa wysyłka
-                          </span>
-                        </div>
+                    <div className="mt-4 relative">
+                      <FreeShippingPromo className="pr-16" />
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-color-text">
+                          Postęp do darmowej wysyłki
+                        </span>
+                        <span className="text-sm font-medium text-color-text">
+                          {subtotal.toFixed(2)} / {freeShippingThreshold} PLN
+                        </span>
                       </div>
-                      <div className="mt-4 relative">
-                        <FreeShippingPromo className="pr-16" />
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-color-text">
-                            Postęp do darmowej wysyłki
-                          </span>
-                          <span className="text-sm font-medium text-color-text">
-                            {subtotal.toFixed(2)} / {freeShippingThreshold} PLN
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
-                          <div
-                            className="bg-color-blue h-2.5 rounded-full"
-                            style={{width: `${progressPercentage}%`}}
-                          ></div>
-                        </div>
-                        <div className="flex items-center justify-end mt-2">
-                          <TruckIcon className="h-5 w-5 text-color-textLight mr-1" />
-                          <span className="text-sm text-color-textLight">
-                            {subtotal >= freeShippingThreshold
-                              ? 'Darmowa wysyłka!'
-                              : `Dodaj jeszcze ${(
-                                  freeShippingThreshold - subtotal
-                                ).toFixed(2)} PLN dla darmowej wysyłki`}
-                          </span>
-                        </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          className="bg-color-blue h-2.5 rounded-full"
+                          style={{width: `${progressPercentage}%`}}
+                        ></div>
                       </div>
-                      <div className="mt-8">
-                        <div className="flow-root">
-                          <ul className="-my-6 divide-y divide-gray-200">
-                            {cart?.lines.nodes.map((line) => (
-                              <li key={line.id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={line.merchandise.image?.url}
-                                    alt={line.merchandise.product?.title}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
+                      <div className="flex items-center justify-end mt-2">
+                        <TruckIcon className="h-5 w-5 text-color-textLight mr-1" />
+                        <span className="text-sm text-color-textLight">
+                          {subtotal >= freeShippingThreshold
+                            ? 'Darmowa wysyłka!'
+                            : `Dodaj jeszcze ${(
+                                freeShippingThreshold - subtotal
+                              ).toFixed(2)} PLN dla darmowej wysyłki`}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-8">
+                      <div className="flow-root">
+                        <ul className="-my-6 divide-y divide-gray-200">
+                          {cart?.lines.nodes.map((line) => (
+                            <li key={line.id} className="flex py-6">
+                              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                <img
+                                  src={line.merchandise.image?.url}
+                                  alt={line.merchandise.product?.title}
+                                  className="h-full w-full object-cover object-center"
+                                />
+                              </div>
 
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>{line.merchandise.product?.title}</h3>
-                                      <p className="ml-4">
-                                        {(
-                                          Number(
-                                            line.merchandise.price.amount,
-                                          ) * line.quantity
-                                        ).toFixed(2)}{' '}
-                                        PLN
-                                      </p>
-                                    </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {line.merchandise.selectedOptions[0]
-                                        .name !== 'Title' && (
-                                        <>
-                                          {
-                                            line.merchandise.selectedOptions[0]
-                                              .name
-                                          }
-                                          :&nbsp;
-                                          {line.merchandise.title}
-                                        </>
-                                      )}
+                              <div className="ml-4 flex flex-1 flex-col">
+                                <div>
+                                  <div className="flex justify-between text-base font-medium text-gray-900">
+                                    <h3>{line.merchandise.product?.title}</h3>
+                                    <p className="ml-4">
+                                      {(
+                                        Number(line.merchandise.price.amount) *
+                                        line.quantity
+                                      ).toFixed(2)}{' '}
+                                      PLN
                                     </p>
                                   </div>
-                                  <div className="flex flex-1 items-center justify-between text-s mt-4">
-                                    <div className="flex items-center">
-                                      <div className="flex items-center space-x-2">
-                                        <CartLineUpdateButton
-                                          lineId={line.id}
-                                          quantity={line.quantity - 1}
-                                        >
-                                          -
-                                        </CartLineUpdateButton>
-                                        <span className="w-4 text-center">
-                                          {line.quantity}
-                                        </span>
-                                        <CartLineUpdateButton
-                                          lineId={line.id}
-                                          quantity={line.quantity + 1}
-                                        >
-                                          +
-                                        </CartLineUpdateButton>
-                                      </div>
-                                    </div>
-
-                                    <div className="flex items-center">
-                                      <CartLineDeleteButton
-                                        lineIds={[line.id]}
-                                      />
+                                  <p className="mt-1 text-sm text-gray-500">
+                                    {line.merchandise.selectedOptions[0]
+                                      .name !== 'Title' && (
+                                      <>
+                                        {
+                                          line.merchandise.selectedOptions[0]
+                                            .name
+                                        }
+                                        :&nbsp;
+                                        {line.merchandise.title}
+                                      </>
+                                    )}
+                                  </p>
+                                </div>
+                                <div className="flex flex-1 items-center justify-between text-s mt-4">
+                                  <div className="flex items-center">
+                                    <div className="flex items-center space-x-2">
+                                      <CartLineUpdateButton
+                                        lineId={line.id}
+                                        quantity={line.quantity - 1}
+                                      >
+                                        -
+                                      </CartLineUpdateButton>
+                                      <span className="w-4 text-center">
+                                        {line.quantity}
+                                      </span>
+                                      <CartLineUpdateButton
+                                        lineId={line.id}
+                                        quantity={line.quantity + 1}
+                                      >
+                                        +
+                                      </CartLineUpdateButton>
                                     </div>
                                   </div>
+
+                                  <div className="flex items-center">
+                                    <CartLineDeleteButton lineIds={[line.id]} />
+                                  </div>
                                 </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    </>
-                  )}
-                </div>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="relative p-3 bg-red-500 m-2">
                 <div className="absolute -left-1 -top-1 w-8 h-4 bg-gray-300/30 rotate-[5deg]"></div>
