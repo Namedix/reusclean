@@ -1,10 +1,4 @@
-import {
-  useNonce,
-  getShopAnalytics,
-  Analytics,
-  useAnalytics,
-  Script,
-} from '@shopify/hydrogen';
+import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import type {SerializeFrom, LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
@@ -24,6 +18,7 @@ import appStyles from '~/styles/app.css?url';
 import {PageLayout} from '~/components/PageLayout';
 import SnowAnimation from '~/components/SnowAnimation';
 import {NewsletterModal} from './components/NewsletterModal';
+import {CustomAnalytics} from './components/CustomAnalytics';
 
 // Add this type declaration at the top of the file
 declare global {
@@ -128,6 +123,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
             cookieDomain="reusclean.com"
           >
             <PageLayout cart={data.cart}>{children}</PageLayout>
+            <CustomAnalytics />
           </Analytics.Provider>
         ) : (
           children

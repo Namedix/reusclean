@@ -16,12 +16,18 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    defaultSrc: [
+      '*.google.com',
+      '*.google-analytics.com',
+      '*.googletagmanager.com',
+    ],
     styleSrc: [
       "'self'",
       "'unsafe-inline'",
       'https://cdn.shopify.com',
       'https://cdn.jsdelivr.net',
     ],
+    connectSrc: ['*.google-analytics.com'],
     fontSrc: ["'self'", 'data:', 'https://cdn.shopify.com'],
   });
 
