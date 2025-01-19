@@ -166,8 +166,8 @@ export function NewsletterModal() {
                       Dziękujemy za zapisanie się!
                     </h2>
                     <p className="text-gray-600 mb-4">
-                      Sprawdź swoją skrzynkę email. Kod rabatowy -20% został
-                      wysłany na podany adres.
+                      Za chwilę otrzymasz kod rabatowy -20% na podany adres
+                      email.
                     </p>
                     <button
                       onClick={handleModalClose}

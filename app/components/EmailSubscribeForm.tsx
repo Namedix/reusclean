@@ -31,8 +31,7 @@ export const EmailSubscribeForm = () => {
         ) : (
           <>
             <p className="mt-2 text-sm text-color-textLight">
-              Zapisz się do newslettera i odbierz 20% zniżki na pierwsze
-              zamówienie
+              Za chwilę otrzymasz kod rabatowy -20% na podany adres email.
             </p>
             <fetcher.Form
               method="post"
