@@ -33,7 +33,12 @@ export default async function handleRequest(
       'https://www.googletagmanager.com',
       'http://localhost:*',
     ],
-    fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
+    fontSrc: [
+      "'self'",
+      'data:',
+      'https://fonts.gstatic.com',
+      'https://cdn.shopify.com',
+    ],
     imgSrc: [
       "'self'",
       'data:',
