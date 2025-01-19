@@ -17,27 +17,34 @@ export default async function handleRequest(
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
     defaultSrc: [
+      "'self'",
       '*.google.com',
       '*.google-analytics.com',
       '*.googletagmanager.com',
       '*.facebook.net',
       '*.facebook.com',
     ],
-    scriptSrc: [
-      "'self'",
-      "'unsafe-inline'",
-      'https://www.googletagmanager.com',
-      'https://www.google-analytics.com',
-      'https://connect.facebook.net',
-    ],
     styleSrc: [
       "'self'",
       "'unsafe-inline'",
       'https://cdn.shopify.com',
       'https://cdn.jsdelivr.net',
+      'https://fonts.googleapis.com',
+      'https://www.googletagmanager.com',
+      'http://localhost:*',
+    ],
+    fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
+    imgSrc: [
+      "'self'",
+      'data:',
+      'https://fonts.gstatic.com',
+      '*.google-analytics.com',
+      '*.googletagmanager.com',
+      'https://cdn.shopify.com',
+      '*.facebook.com',
+      '*.facebook.net',
     ],
     connectSrc: ['*.google-analytics.com', '*.facebook.com', '*.facebook.net'],
-    fontSrc: ["'self'", 'data:', 'https://cdn.shopify.com'],
   });
 
   const body = await renderToReadableStream(
