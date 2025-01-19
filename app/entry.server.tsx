@@ -20,6 +20,15 @@ export default async function handleRequest(
       '*.google.com',
       '*.google-analytics.com',
       '*.googletagmanager.com',
+      '*.facebook.net',
+      '*.facebook.com',
+    ],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      'https://www.googletagmanager.com',
+      'https://www.google-analytics.com',
+      'https://connect.facebook.net',
     ],
     styleSrc: [
       "'self'",
@@ -27,7 +36,7 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://cdn.jsdelivr.net',
     ],
-    connectSrc: ['*.google-analytics.com'],
+    connectSrc: ['*.google-analytics.com', '*.facebook.com', '*.facebook.net'],
     fontSrc: ["'self'", 'data:', 'https://cdn.shopify.com'],
   });
 
