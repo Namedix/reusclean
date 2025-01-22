@@ -21,7 +21,7 @@ const Products = ({products, colCount}: PorductsProps) => {
         >
           {products.map((product) => (
             <Link
-              to={`/product/${product.handle}`}
+              to={`/products/${product.handle}`}
               key={product.id}
               onMouseEnter={() => setHoveredId(product.id)}
               onMouseLeave={() => setHoveredId(null)}
