@@ -28,9 +28,17 @@ export default async function handleRequest(
     scriptSrc: [
       "'self'",
       "'unsafe-eval'",
-      // Common hashes for GTM scripts
+      // GTM hashes
       "'sha256-gWbSRfGJ0+yafMNT6N5gD6CEruuJA2+BKXyonAfEdWk='",
       "'sha256-4QJrQe4+LFWxGtRfZPHoqRvJtxKoVNL0m8bGGPMhYBA='",
+      // TikTok hashes
+      "'sha256-7dVsiofF2A8d0lF/HFDZeTv0FQzvgTI6w/Yp7cRsI2s='",
+      "'sha256-hZKSAOwkn6f9OxORLyn2AGic5JUI2BUnlafm2WIbOFM='",
+      "'sha256-Dm7sXjAb3eTty8W1ey8OV82SaJQpOuVZMX3NrawwLVQ='",
+      "'sha256-lRPlIcD46bu1POsKLBdKbeFIA8ujYAS3w+n8vTtrnIk='",
+      "'sha256-U7nFvOxibhV5E6F1YOJxCDmCwXK8Jkx1dy37NaSRqG8='",
+      // Allow unsafe-inline as fallback for dynamic scripts
+      "'unsafe-inline'",
       'https://cdn.shopify.com',
       'https://www.googletagmanager.com',
       '*.google-analytics.com',
