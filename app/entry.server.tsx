@@ -23,6 +23,21 @@ export default async function handleRequest(
       '*.googletagmanager.com',
       '*.facebook.net',
       '*.facebook.com',
+      '*.tiktok.com',
+    ],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-eval'",
+      // Common hashes for GTM scripts
+      "'sha256-gWbSRfGJ0+yafMNT6N5gD6CEruuJA2+BKXyonAfEdWk='",
+      "'sha256-4QJrQe4+LFWxGtRfZPHoqRvJtxKoVNL0m8bGGPMhYBA='",
+      'https://cdn.shopify.com',
+      'https://www.googletagmanager.com',
+      '*.google-analytics.com',
+      '*.googletagmanager.com',
+      '*.facebook.net',
+      '*.facebook.com',
+      '*.tiktok.com',
     ],
     styleSrc: [
       "'self'",
@@ -49,7 +64,20 @@ export default async function handleRequest(
       '*.facebook.com',
       '*.facebook.net',
     ],
-    connectSrc: ['*.google-analytics.com', '*.facebook.com', '*.facebook.net'],
+    connectSrc: [
+      "'self'",
+      '*.google-analytics.com',
+      '*.facebook.com',
+      '*.facebook.net',
+      '*.tiktok.com',
+      'analytics.tiktok.com',
+      'https://monorail-edge.shopifysvc.com',
+      'https://www.reusclean.com',
+      'https://b8a61a-d7.myshopify.com',
+      'http://localhost:*',
+      'ws://localhost:*',
+      'ws://*.tryhydrogen.dev:*',
+    ],
   });
 
   const body = await renderToReadableStream(
