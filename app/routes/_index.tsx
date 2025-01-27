@@ -19,6 +19,12 @@ import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
 import {useState, useEffect} from 'react';
 import {Analytics} from '@shopify/hydrogen';
 import AdvantagesSection from '~/components/AdvantagesSection';
+import CompareProduct from '~/components/CompareProduct';
+import TabletDetails from '~/components/TabletDetails';
+import Consequences from '~/components/Consequences';
+import ReusDetails from '~/components/ReusDetails';
+import Promises from '~/components/Promises';
+import AnimatedCompanies from '~/components/AnimatedCompanies';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -72,8 +78,16 @@ export default function Homepage() {
         />
       )}
       <Granties className="block md:hidden" />
-      <BigImages />
-      <AdvantagesSection />
+      <TabletDetails />
+      <ReusDetails />
+      <Promises />
+      <SectionStarter
+        id="consequences"
+        tag="Co się stanie, jeśli nie zaczniesz?"
+        title="Konsekwencje zdrowotne ekspozycji na toksyny"
+        description=""
+      />
+      <Consequences />
       <SectionStarter
         id="how-it-work"
         tag="Jak to zrobić?"
@@ -81,6 +95,7 @@ export default function Homepage() {
         description="Jedna butelka starczy Ci na całe życie, a dzięki wygodnym tabletkom zaoszczędzisz miejsce w szafie!"
       />
       <HowToUse />
+      <CompareProduct />
       <SectionStarter
         id="products"
         tag="Tabletki czyszczące"

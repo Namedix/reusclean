@@ -311,3 +311,11 @@
 .snow:nth-child(4n) {
   animation-duration: 9s;
 }
+
+.clip-right-40 {
+  clip-path: inset(0 40px 0 0);
+}
+
+.clip-none {
+  clip-path: none;
+}
