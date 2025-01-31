@@ -29,14 +29,11 @@ const Granties = ({className}: GrantiesProps) => {
             />
           </AnimateOnAppear>
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-3">
-            <div className="relative">
-              <FreeShippingPromo className="pr-8" />
-              <Grantie
-                title="Darmowa dostawa"
-                description="Od zamówień powyżej 79 zł."
-                image={CiReceipt}
-              />
-            </div>
+            <Grantie
+              title="Darmowa dostawa"
+              description="Od zamówień powyżej 79 zł."
+              image={CiReceipt}
+            />
           </AnimateOnAppear>
         </div>
       </div>

@@ -239,7 +239,6 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                       </div>
                     </div>
                     <div className="mt-4 relative">
-                      <FreeShippingPromo className="pr-16" />
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-sm font-medium text-color-text">
                           Postęp do darmowej wysyłki
@@ -337,35 +336,6 @@ const CartContent = ({cart, setOpen}: CartContentProps) => {
                     </div>
                   </>
                 )}
-              </div>
-              <div className="relative p-3 bg-red-500 m-2">
-                <div className="absolute -left-1 -top-1 w-8 h-4 bg-gray-300/30 rotate-[5deg]"></div>
-                <div className="absolute -right-1 -top-1 w-8 h-4 bg-gray-300/30 -rotate-[5deg]"></div>
-                <div className="absolute -left-1 -bottom-1 w-8 h-4 bg-gray-300/30 -rotate-[5deg]"></div>
-                <div className="absolute -right-1 -bottom-1 w-8 h-4 bg-gray-300/30 rotate-[5deg]"></div>
-
-                <div className="flex gap-2 items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <TruckIcon className="h-5 w-5 text-white" />
-                    <p className="text-xs md:text-sm text-white font-medium">
-                      Darmowa dostawa z kodem:
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    className="flex items-center gap-2 bg-white px-2 py-1.5 rounded-md border cursor-pointer hover:bg-gray-50"
-                    onClick={handleCopyToClipboard}
-                  >
-                    <span className="text-xs text-color-text">
-                      DARMOWYSTYCZEN
-                    </span>
-                    {isCopied ? (
-                      <CheckIcon className="h-4 w-4 text-green-500" />
-                    ) : (
-                      <ClipboardDocumentIcon className="h-4 w-4 text-color-textLight" />
-                    )}
-                  </button>
-                </div>
               </div>
               {!isCartEmpty && (
                 <div className="border-t border-gray-200 px-4 pt-4 pb-2 sm:px-6">
