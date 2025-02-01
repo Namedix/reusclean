@@ -78,16 +78,18 @@ export default function Homepage() {
         />
       )}
       <Granties className="block md:hidden" />
-      <TabletDetails />
-      <ReusDetails />
-      <Promises />
-      <SectionStarter
+      <BigImages />
+      <AdvantagesSection />
+      {/* <TabletDetails />
+      <ReusDetails /> */}
+      {/* <Promises /> */}
+      {/* <SectionStarter
         id="consequences"
         tag="Co się stanie, jeśli nie zaczniesz?"
         title="Konsekwencje zdrowotne ekspozycji na toksyny"
         description=""
-      />
-      <Consequences />
+      /> */}
+      {/* <Consequences /> */}
       <SectionStarter
         id="how-it-work"
         tag="Jak to zrobić?"
@@ -95,7 +97,7 @@ export default function Homepage() {
         description="Jedna butelka starczy Ci na całe życie, a dzięki wygodnym tabletkom zaoszczędzisz miejsce w szafie!"
       />
       <HowToUse />
-      <CompareProduct />
+      {/* <CompareProduct /> */}
       <SectionStarter
         id="products"
         tag="Tabletki czyszczące"
