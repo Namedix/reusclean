@@ -29,7 +29,7 @@ const CompareProduct = () => {
                 />
                 <div className="relative z-10">Wybróbuj Reus bez ryzyka</div>
               </button>
-              <div className="flex items-center justify-center gap-1 mt-2">
+              <div className="hidden md:flex items-center justify-center gap-1 mt-2">
                 <ShieldCheckIcon className="w-4 h-4 text-color-textLight" />
                 <p className="text-xs text-color-textLight mt-1">
                   Bezpieczne płatności gwarantują Przelewy24
@@ -140,7 +140,7 @@ const CompareProduct = () => {
               />
               <div className="relative z-10">Wybróbuj Reus bez ryzyka</div>
             </button>
-            <div className="flex items-center justify-center gap-1 mt-2">
+            <div className="flex items-center justify-center gap-1 mt-2 md:hidden">
               <ShieldCheckIcon className="w-4 h-4 text-color-textLight" />
               <p className="text-xs text-color-textLight mt-1">
                 Bezpieczne płatności gwarantują Przelewy24
