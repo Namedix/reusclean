@@ -59,9 +59,19 @@ const Ingredience = () => {
             </div>
             <button
               onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-              className="hidden md:flex py-3 md:py-4 md:px-16 h-12 md:h-14 bg-[#137B43] mt-8 text-white text-sm rounded-lg shadow-lg shadow-[#137B43]/20 items-center justify-center space-x-4 relative overflow-hidden"
+              className="hidden md:flex py-4 px-24 h-14 bg-[#137B43] mt-8 text-white text-sm rounded-lg shadow-lg shadow-[#137B43]/20 items-center justify-center space-x-4 relative overflow-hidden"
             >
-              Wybróbuj Reus
+              <img
+                src="/assets/foamLeft.png"
+                alt=""
+                className="absolute left-0 bottom-0 z-0 pointer-events-none -translate-x-12 w-40 opacity-50"
+              />
+              <img
+                src="/assets/foamRight.png"
+                alt=""
+                className="absolute right-0 top-0 z-0 pointer-events-none w-40 opacity-50 translate-x-20"
+              />
+              <div className="relative z-10">Wybróbuj Reus</div>
             </button>
           </div>
 
@@ -102,7 +112,17 @@ const Ingredience = () => {
             onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
             className="flex md:hidden py-3 md:py-4 md:px-16 h-14 bg-[#137B43] my-4 text-white text-sm rounded-lg shadow-lg shadow-[#137B43]/20 items-center justify-center space-x-4 relative overflow-hidden"
           >
-            Wybróbuj Reus
+            <img
+              src="/assets/foamLeft.png"
+              alt=""
+              className="absolute left-0 bottom-0 z-0 pointer-events-none -translate-x-10 md:translate-x-0 w-40 opacity-50"
+            />
+            <img
+              src="/assets/foamRight.png"
+              alt=""
+              className="absolute right-0 top-0 z-0 pointer-events-none w-40 opacity-50 translate-x-10 md:translate-x-0"
+            />
+            <div className="relative z-10">Wybróbuj Reus</div>
           </button>
 
           <div className="hidden md:block absolute left-0 bottom-0 w-[600px] h-[500px] overflow-hidden pointer-events-none">

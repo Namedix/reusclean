@@ -51,14 +51,26 @@ export function AddToCartButton({
               type="submit"
               disabled={disabled ?? fetcher.state !== 'idle'}
             >
-              {fetcher.state === 'submitting' ? (
-                <FaSpinner className="animate-spin" />
-              ) : (
-                <>
-                  <FaShoppingCart className="text-xl" />
-                  <span className="font-semibold">Dodaj do koszyka</span>
-                </>
-              )}
+              <img
+                src="/assets/foamLeft.png"
+                alt=""
+                className="absolute left-0 bottom-0 z-0 pointer-events-none -translate-x-10 md:translate-x-0 w-40 opacity-50"
+              />
+              <img
+                src="/assets/foamRight.png"
+                alt=""
+                className="absolute right-0 top-0 z-0 pointer-events-none w-40 opacity-50 translate-x-10"
+              />
+              <div className="relative z-10 flex items-center justify-center space-x-4">
+                {fetcher.state === 'submitting' ? (
+                  <FaSpinner className="animate-spin" />
+                ) : (
+                  <>
+                    <FaShoppingCart className="text-xl" />
+                    <span className="font-semibold">Dodaj do koszyka</span>
+                  </>
+                )}
+              </div>
             </button>
           </>
         );

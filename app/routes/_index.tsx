@@ -106,7 +106,7 @@ export default function Homepage() {
         description="Jedna butelka starczy Ci na całe życie, a dzięki wygodnym tabletkom zaoszczędzisz miejsce w szafie!"
       />
       <HowToUse />
-      {/* <CompareProduct /> */}
+      <CompareProduct />
       <SectionStarter
         id="products"
         tag="Tabletki czyszczące"

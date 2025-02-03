@@ -1,4 +1,4 @@
-import {CheckBadgeIcon} from '@heroicons/react/24/solid';
+import {CheckBadgeIcon, ShieldCheckIcon} from '@heroicons/react/24/solid';
 import AnimateOnAppear from './AnimateOnAppear';
 
 const CompareProduct = () => {
@@ -12,13 +12,30 @@ const CompareProduct = () => {
               <span className="text-color-blue">#1</span> markę ekologicznych
               środków czystości
             </h1>
-
-            <button
-              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-              className="w-full py-4 px-4 h-14 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 hidden items-center justify-center space-x-4 relative overflow-hidden md:flex"
-            >
-              Wybróbuj Reus bez ryzyka
-            </button>
+            <div>
+              <button
+                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+                className="w-full py-4 px-4 h-14 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 hidden items-center justify-center space-x-4 relative overflow-hidden md:flex"
+              >
+                <img
+                  src="/assets/foamLeft.png"
+                  alt=""
+                  className="absolute left-0 bottom-0 z-0 pointer-events-none -translate-x-20 w-40 opacity-50"
+                />
+                <img
+                  src="/assets/foamRight.png"
+                  alt=""
+                  className="absolute right-0 top-0 z-0 pointer-events-none w-40 opacity-50 translate-x-15"
+                />
+                <div className="relative z-10">Wybróbuj Reus bez ryzyka</div>
+              </button>
+              <div className="flex items-center justify-center gap-1 mt-2">
+                <ShieldCheckIcon className="w-4 h-4 text-color-textLight" />
+                <p className="text-xs text-color-textLight mt-1">
+                  Bezpieczne płatności gwarantują Przelewy24
+                </p>
+              </div>
+            </div>
           </div>
           <div className="flex flex-row mt-12 md:mt-0 md:gap-4">
             <div className="bg-color-lightBlue md:rounded-3xl p-4 md:p-8 w-1/2 relative pt-12 md:pt-12">
@@ -111,8 +128,24 @@ const CompareProduct = () => {
               onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
               className="w-full py-4 px-4 h-14 bg-color-blue text-white text-sm rounded-lg shadow-lg shadow-color-blue/20 flex items-center justify-center space-x-4 relative overflow-hidden"
             >
-              Wybróbuj Reus bez ryzyka
+              <img
+                src="/assets/foamLeft.png"
+                alt=""
+                className="absolute left-0 bottom-0 z-0 pointer-events-none -translate-x-10 w-40 opacity-50"
+              />
+              <img
+                src="/assets/foamRight.png"
+                alt=""
+                className="absolute right-0 top-0 z-0 pointer-events-none w-40 opacity-50 translate-x-10"
+              />
+              <div className="relative z-10">Wybróbuj Reus bez ryzyka</div>
             </button>
+            <div className="flex items-center justify-center gap-1 mt-2">
+              <ShieldCheckIcon className="w-4 h-4 text-color-textLight" />
+              <p className="text-xs text-color-textLight mt-1">
+                Bezpieczne płatności gwarantują Przelewy24
+              </p>
+            </div>
           </div>
         </div>
       </div>
