@@ -163,11 +163,10 @@ export function NewsletterModal() {
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">
-                      Dziękujemy za zapisanie się!
+                      Wysłaliśmy Ci emaila z potwierdzeniem subskrypcji.
                     </h2>
                     <p className="text-gray-600 mb-4">
-                      Za chwilę otrzymasz kod rabatowy -20% na podany adres
-                      email.
+                      Potwierdź go, aby otrzymać powitalny kod rabatowy.
                     </p>
                     <button
                       onClick={handleModalClose}

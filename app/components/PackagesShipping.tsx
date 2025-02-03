@@ -65,7 +65,7 @@ const PackagesShipping = () => {
               ))}
             </div>
           </div>
-          <div className="w-full md:w-1/2 md:p-16">
+          <div className="w-full md:w-1/2 md:p-16 mt-8 md:mt-0">
             <AnimateOnAppear animation="animate-fade-in-up-delay-5">
               <img
                 src="/assets/1opakowania.png"

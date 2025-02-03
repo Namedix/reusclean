@@ -5,7 +5,6 @@ import type {
   ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import Granties from '~/components/Granties';
-import BigImages from '~/components/BigImages';
 import SectionStarter from '~/components/SectionStarter';
 import HowToUse from '~/components/HowToUse';
 import Faq from '~/components/Faq';
@@ -18,15 +17,11 @@ import {PRODUCT_QUERY} from '~/models/networking/ProductQuery';
 import {COLLECTION_QUERY} from '~/models/networking/CollectionQuery';
 import {useState, useEffect} from 'react';
 import {Analytics} from '@shopify/hydrogen';
-import AdvantagesSection from '~/components/AdvantagesSection';
 import CompareProduct from '~/components/CompareProduct';
-import TabletDetails from '~/components/TabletDetails';
-import Consequences from '~/components/Consequences';
 import ReusDetails from '~/components/ReusDetails';
-import Promises from '~/components/Promises';
-import AnimatedCompanies from '~/components/AnimatedCompanies';
 import Ingredience from '~/components/Ingredience';
 import PackagesShipping from '~/components/PackagesShipping';
+import AnimateOnAppear from '~/components/AnimateOnAppear';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -80,6 +75,28 @@ export default function Homepage() {
         />
       )}
       <Granties className="block md:hidden" />
+      <AnimateOnAppear>
+        <div className="md:grid-cols-2 gap-8 items-center grid md:hidden px-4 pt-8 pb-2">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <p className="text-sm text-color-textLight">
+              Projekt współfinansowany ze środków Unii Europejskiej w ramach
+              Funduszu Europejskiego.
+            </p>
+            <div className="flex gap-6 items-center">
+              <img
+                src="/assets/coofinanceWithEU.png"
+                alt="Współfinansowane przez Unię Europejską"
+                className="h-12 object-contain"
+              />
+              <img
+                src="/assets/europeanFundsLogo.jpg"
+                alt="Fundusze Europejskie"
+                className="h-12 object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </AnimateOnAppear>
       <ReusDetails />
       <Ingredience />
       <SectionStarter

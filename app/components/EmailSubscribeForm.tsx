@@ -2,6 +2,7 @@ import {useFetcher} from '@remix-run/react';
 import type {action} from '~/routes/klaviyo.submit';
 import {klaviyoListIds} from '~/utilities/constants';
 import {useEffect} from 'react';
+import {p} from 'framer-motion/client';
 
 export const EmailSubscribeForm = () => {
   const fetcher = useFetcher<typeof action>();
@@ -21,17 +22,17 @@ export const EmailSubscribeForm = () => {
         {isSuccess ? (
           <>
             <h2 className="text-color-text text-md mt-2">
-              Dziękujemy za zapisanie się!
+              Wysłaliśmy Ci emaila z potwierdzeniem subskrypcji.
             </h2>
             <p className="mt-2 text-sm text-color-textLight">
-              Sprawdź swoją skrzynkę email. Kod rabatowy -20% został wysłany na
-              podany adres.
+              Potwierdź go, aby otrzymać powitalny kod rabatowy.
             </p>
           </>
         ) : (
           <>
             <p className="mt-2 text-sm text-color-textLight">
-              Za chwilę otrzymasz kod rabatowy -20% na podany adres email.
+              Zapisz się do newslettera i odbierz 20% zniżki na pierwsze
+              zamówienie
             </p>
             <fetcher.Form
               method="post"

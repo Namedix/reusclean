@@ -47,7 +47,7 @@ const Ingredience = () => {
         >
           <div className="max-w-2xl md:w-1/2">
             <div className="flex flex-row gap-10">
-              <h1 className="text-left md:text-left text-xl font-bold md:text-4xl mb-2 mt-4 md:mt-0 pr-12 md:pr-0 ml-4">
+              <h1 className="text-left md:text-left text-xl font-bold md:text-4xl mb-2 mt-4 md:mt-0 pr-16 md:pr-0 ml-4">
                 Poznaj Główne Składniki Aktywne Tabletek Reus
               </h1>
               <img
@@ -111,7 +111,7 @@ const Ingredience = () => {
               alt="greenBackground"
               className="absolute w-[1000px] h-[800px] object-cover"
               style={{
-                left: '-10%',
+                left: '-15%',
                 top: '15%',
               }}
             />
