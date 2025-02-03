@@ -25,6 +25,8 @@ import Consequences from '~/components/Consequences';
 import ReusDetails from '~/components/ReusDetails';
 import Promises from '~/components/Promises';
 import AnimatedCompanies from '~/components/AnimatedCompanies';
+import Ingredience from '~/components/Ingredience';
+import PackagesShipping from '~/components/PackagesShipping';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Reus | Zestaw startowy'}];
@@ -78,16 +80,8 @@ export default function Homepage() {
         />
       )}
       <Granties className="block md:hidden" />
-      <TabletDetails />
       <ReusDetails />
-      <Promises />
-      <SectionStarter
-        id="consequences"
-        tag="Co się stanie, jeśli nie zaczniesz?"
-        title="Konsekwencje zdrowotne ekspozycji na toksyny"
-        description=""
-      />
-      <Consequences />
+      <Ingredience />
       <SectionStarter
         id="how-it-work"
         tag="Jak to zrobić?"
@@ -115,6 +109,7 @@ export default function Homepage() {
         description="Uczciwe opinie zadowolonych użytkowników"
       />
       <Opinions opinions={opinions} />
+      <PackagesShipping />
       <SectionStarter
         id="faq"
         tag="Dla ciekawych"

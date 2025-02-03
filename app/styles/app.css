@@ -319,3 +319,7 @@
 .clip-none {
   clip-path: none;
 }
+
+.delay-opacity {
+  transition-delay: opacity 0.15s;
+}

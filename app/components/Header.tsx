@@ -52,7 +52,7 @@ const Header = ({cart}: HeaderProps) => {
   return (
     <header
       className={`
-        w-full z-10 bg-white fixed transition-all duration-300
+        w-full z-40 bg-white fixed transition-all duration-300
         ${scrollDirection === 'down' ? '-top-full' : 'top-0'}
       `}
     >
