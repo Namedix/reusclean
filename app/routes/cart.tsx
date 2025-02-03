@@ -124,7 +124,7 @@ export default function Cart({open, setOpen}: CartProps) {
   }, [open]);
 
   return (
-    <Dialog open={open} onClose={handleClose} className="relative z-20">
+    <Dialog open={open} onClose={handleClose} className="relative z-50">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"

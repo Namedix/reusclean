@@ -114,7 +114,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
       </head>
       <body data-new-gr-c-s-check-loaded="" data-gr-ext-installed="">
         <SnowAnimation />
-        {/* <NewsletterModal /> */}
+        <NewsletterModal />
         {data ? (
           <Analytics.Provider
             cart={data.cart}

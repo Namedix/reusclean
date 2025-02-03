@@ -1,6 +1,6 @@
 const AnimatedTicker: React.FC = () => {
   const message =
-    '• Prezent na start - Gratis do pierwszych zamówień! • Prezent na start - Gratis do pierwszych zamówień!';
+    '• Darmowa dostawa od 79 zł! • Zamówienia złożone do 12:00 wysyłamy w ten sam dzień!';
 
   return (
     <div className="ticker-container grow rounded-md flex items-center justify-center">

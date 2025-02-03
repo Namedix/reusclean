@@ -1,9 +1,8 @@
 import type {IconType} from 'react-icons';
 import {LiaShippingFastSolid} from 'react-icons/lia';
-import {SlPresent} from 'react-icons/sl';
 import {CiReceipt} from 'react-icons/ci';
+import {PiShieldCheck} from 'react-icons/pi';
 import AnimateOnAppear from './AnimateOnAppear';
-import {FreeShippingPromo} from './FreeShippingPromo';
 
 interface GrantiesProps {
   className?: string;
@@ -23,9 +22,9 @@ const Granties = ({className}: GrantiesProps) => {
           </AnimateOnAppear>
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-2">
             <Grantie
-              title="Prezent na start"
-              description="Gratis do pierwszych zamówień!"
-              image={SlPresent}
+              title="Bezpieczne zakupy"
+              description="14 dni na zwrot produktu."
+              image={PiShieldCheck}
             />
           </AnimateOnAppear>
           <AnimateOnAppear animation="animate-fade-in-up md:animate-fade-in-up-delay-3">

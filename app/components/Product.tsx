@@ -149,7 +149,7 @@ const ProductView = ({
               ))}
             </div>
             <Link className="text-color-blue text-xs" to="/#opinions">
-              +17 pozytywnych opinii
+              +47 pozytywnych opinii
             </Link>
           </div>
 
