@@ -46,11 +46,6 @@ export function Footer() {
                 info@reusclean.com
               </a>
             </div>
-            {!hasSubscribed && (
-              <div className="grow md:mx-12">
-                <EmailSubscribeForm />
-              </div>
-            )}
             <div className="flex flex-col gap-8 md:w-[250px]">
               <div className="text-color-text text-lg font-semibold">Reus</div>
               <div className="flex flex-col text-color-blue gap-2">
